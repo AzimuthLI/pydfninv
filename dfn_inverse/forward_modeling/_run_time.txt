@@ -1,7 +1,0 @@
-Runs times for /Volumes/SD_Card/Thesis_project/pydfninv/dfn_inverse/forward_modeling/
-Function: lagrit2pflotran :  1.149500 seconds
-Function: pflotran :  16.478340 seconds
-Function: parse_pflotran_vtk :  3.828089 seconds
-Function: parse_cleanup :  0.281261 seconds
-Process: dfnFlow :  21.751645 seconds
-/Volumes/SD_Card/Thesis_project/pydfninv/dfn_inverse/forward_modeling/ :  59.808579 seconds

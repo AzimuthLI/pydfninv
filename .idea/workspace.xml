@@ -2,21 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="718b2e3d-ee63-4e84-817f-291e05b529b4" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dfn_forwards.py" beforeDir="false" afterPath="$PROJECT_DIR$/dfn_forwards.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dfn_inversion.py" beforeDir="false" afterPath="$PROJECT_DIR$/dfn_inversion.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_creat_dfn/forward_model/LaGriT/boundary_output.txt" beforeDir="false" afterPath="$PROJECT_DIR$/test_creat_dfn/forward_model/LaGriT/boundary_output.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_creat_dfn/forward_model/LaGriT/lagrit_logs/log_lagrit_1" beforeDir="false" afterPath="$PROJECT_DIR$/test_creat_dfn/forward_model/LaGriT/lagrit_logs/log_lagrit_1" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_creat_dfn/forward_model/LaGriT/lagrit_logs/log_lagrit_2" beforeDir="false" afterPath="$PROJECT_DIR$/test_creat_dfn/forward_model/LaGriT/lagrit_logs/log_lagrit_2" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_creat_dfn/forward_model/LaGriT/lagrit_logs/log_lagrit_3" beforeDir="false" afterPath="$PROJECT_DIR$/test_creat_dfn/forward_model/LaGriT/lagrit_logs/log_lagrit_3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_creat_dfn/forward_model/LaGriT/lagrit_logs/log_lagrit_4" beforeDir="false" afterPath="$PROJECT_DIR$/test_creat_dfn/forward_model/LaGriT/lagrit_logs/log_lagrit_4" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_creat_dfn/forward_model/LaGriT/lagrit_logs/log_lagrit_5" beforeDir="false" afterPath="$PROJECT_DIR$/test_creat_dfn/forward_model/LaGriT/lagrit_logs/log_lagrit_5" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_creat_dfn/forward_model/LaGriT/outx3dgen" beforeDir="false" afterPath="$PROJECT_DIR$/test_creat_dfn/forward_model/LaGriT/outx3dgen" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_creat_dfn/forward_model/PFLOTRAN/dfn_explicit.out" beforeDir="false" afterPath="$PROJECT_DIR$/test_creat_dfn/forward_model/PFLOTRAN/dfn_explicit.out" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_creat_dfn/forward_model/PFLOTRAN/dfn_properties.h5" beforeDir="false" afterPath="$PROJECT_DIR$/test_creat_dfn/forward_model/PFLOTRAN/dfn_properties.h5" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_creat_dfn/forward_model/run_time_log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/test_creat_dfn/forward_model/run_time_log.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_creat_dfn/forward_model/tri_fracture.stor" beforeDir="false" afterPath="$PROJECT_DIR$/test_creat_dfn/forward_model/tri_fracture.stor" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -33,8 +20,8 @@
       <file leaf-file-name="dfn_inversion.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dfn_inversion.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="111">
-              <caret line="125" selection-start-line="125" selection-end-line="125" />
+            <state relative-caret-position="119">
+              <caret line="138" lean-forward="true" selection-start-line="138" selection-end-line="138" />
               <folding>
                 <element signature="e#109#131#0" expanded="true" />
                 <element signature="e#267#957#1" />
@@ -50,7 +37,7 @@
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="30">
-              <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
+              <caret line="2" column="12" lean-forward="true" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
             </state>
           </provider>
         </entry>
@@ -239,8 +226,8 @@
       <window_info anchor="bottom" id="Database Changes" order="1" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Python Console" order="9" weight="0.2662069" />
-      <window_info anchor="bottom" id="Run" order="4" visible="true" weight="0.47172415" />
-      <window_info anchor="bottom" id="Terminal" order="10" weight="0.3287483" />
+      <window_info anchor="bottom" id="Run" order="4" weight="0.47172415" />
+      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.63310343" />
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.30048466" />
       <window_info anchor="bottom" id="Docker" order="0" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="5" />
@@ -700,8 +687,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/dfn_inversion.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="111">
-          <caret line="125" selection-start-line="125" selection-end-line="125" />
+        <state relative-caret-position="119">
+          <caret line="138" lean-forward="true" selection-start-line="138" selection-end-line="138" />
           <folding>
             <element signature="e#109#131#0" expanded="true" />
             <element signature="e#267#957#1" />
@@ -715,7 +702,7 @@
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
-          <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
+          <caret line="2" column="12" lean-forward="true" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
         </state>
       </provider>
     </entry>

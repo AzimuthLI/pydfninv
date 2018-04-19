@@ -1,6 +1,0 @@
-Format: xRadius yRadius Family# Removed (-1 = userRectangle, 0 = userEllipse, > 0 is family in order of famProb)
-0.85000002 0.85000002 0
-0.60000002 0.39000002 0
-0.69999999 0.69999999 0
-0.60000002 0.60000002 0
-0.60000002 0.39000002 0
