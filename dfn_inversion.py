@@ -3,11 +3,8 @@ __version__ = "1.0"
 __maintainer__ = "Shiyi LI"
 __email__ = "lishi@student.ethz.ch"
 
-import os, shutil
-from pydfnworks.legal import legal
-from pydfnworks import define_paths
-import vtk
-from dfn_forwards import DFNWORKS
+import os, shutil, vtk
+from dfn_forwards import create_dfn
 
 class DFN_INVERSE:
     """
@@ -121,57 +118,11 @@ class DFN_INVERSE:
         writer.Update()
 
 
-def create_dfn(options):
-
-    '''
-    Create dfnworks object
-    :param options:
-        options = {'jobname': the forward modeling folder path
-                    'ncpu': number of cpu cores to run forward modelling
-                    'input_file': input file path ('*.txt')
-                    'cell': True or False, Binary For Cell Based Apereture / Perm
-                    }
-    :return: DFNWORKS object
-    '''
-
-    dfn = DFNWORKS(jobname=options['jobname'], ncpu=options['ncpu'])
-    with open(options['input_file']) as f:
-        for line in f:
-            line=line.rstrip('\n')
-            line=line.split()
-
-            if line[0].find("dfnGen") == 0:
-                dfn._dfnGen_file = line[1]
-                dfn._local_dfnGen_file = line[1].split('/')[-1]
-
-            elif line[0].find("dfnFlow") == 0:
-                dfn._dfnFlow_file = line[1]
-                dfn._local_dfnFlow_file = line[1].split('/')[-1]
-
-            elif line[0].find("dfnTrans") == 0:
-                dfn._dfnTrans_file = line[1]
-                dfn._local_dfnTrans_file = line[1].split('/')[-1]
-
-    if options['cell'] is True:
-        dfn._aper_cell_file = 'aper_node.dat'
-        dfn._perm_cell_file = 'perm_node.dat'
-    else:
-        dfn._aper_file = 'aperture.dat'
-        dfn._perm_file = 'perm.dat'
-
-    if options['cell'] is True:
-        print '--> Expecting Cell Based Aperture and Permeability'
-    print("="*80+"\n")
-
-    return dfn
-
-
-
 if __name__ == "__main__":
     dfninv = DFN_INVERSE(project_path=os.getcwd()+'/test_creat_dfn', field_obs=os.getcwd() + '/test_fieldobs.txt')#,
                          #prior_setting='/Volumes/SD_Card/Thesis_project/pydfninv/test_priorsetting.txt')
 
-    # dfninv.run_forward()
+    dfninv.run_forward()
 
     # Define observation points and get the id of obs_points in meshgrid
     obs_points = [(0.4, 0.4, 0.2),

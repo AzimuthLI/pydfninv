@@ -1,7 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="718b2e3d-ee63-4e84-817f-291e05b529b4" name="Default" comment="" />
+    <list default="true" id="718b2e3d-ee63-4e84-817f-291e05b529b4" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dfn_forwards.py" beforeDir="false" afterPath="$PROJECT_DIR$/dfn_forwards.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dfn_inversion.py" beforeDir="false" afterPath="$PROJECT_DIR$/dfn_inversion.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_creat_dfn/forward_model/LaGriT/boundary_output.txt" beforeDir="false" afterPath="$PROJECT_DIR$/test_creat_dfn/forward_model/LaGriT/boundary_output.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_creat_dfn/forward_model/LaGriT/lagrit_logs/log_lagrit_1" beforeDir="false" afterPath="$PROJECT_DIR$/test_creat_dfn/forward_model/LaGriT/lagrit_logs/log_lagrit_1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_creat_dfn/forward_model/LaGriT/lagrit_logs/log_lagrit_2" beforeDir="false" afterPath="$PROJECT_DIR$/test_creat_dfn/forward_model/LaGriT/lagrit_logs/log_lagrit_2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_creat_dfn/forward_model/LaGriT/lagrit_logs/log_lagrit_3" beforeDir="false" afterPath="$PROJECT_DIR$/test_creat_dfn/forward_model/LaGriT/lagrit_logs/log_lagrit_3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_creat_dfn/forward_model/LaGriT/lagrit_logs/log_lagrit_4" beforeDir="false" afterPath="$PROJECT_DIR$/test_creat_dfn/forward_model/LaGriT/lagrit_logs/log_lagrit_4" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_creat_dfn/forward_model/LaGriT/lagrit_logs/log_lagrit_5" beforeDir="false" afterPath="$PROJECT_DIR$/test_creat_dfn/forward_model/LaGriT/lagrit_logs/log_lagrit_5" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_creat_dfn/forward_model/LaGriT/outx3dgen" beforeDir="false" afterPath="$PROJECT_DIR$/test_creat_dfn/forward_model/LaGriT/outx3dgen" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_creat_dfn/forward_model/PFLOTRAN/dfn_explicit.out" beforeDir="false" afterPath="$PROJECT_DIR$/test_creat_dfn/forward_model/PFLOTRAN/dfn_explicit.out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_creat_dfn/forward_model/PFLOTRAN/dfn_properties.h5" beforeDir="false" afterPath="$PROJECT_DIR$/test_creat_dfn/forward_model/PFLOTRAN/dfn_properties.h5" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_creat_dfn/forward_model/run_time_log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/test_creat_dfn/forward_model/run_time_log.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_creat_dfn/forward_model/tri_fracture.stor" beforeDir="false" afterPath="$PROJECT_DIR$/test_creat_dfn/forward_model/tri_fracture.stor" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -10,18 +26,31 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/pydfninv$dfn_inversion.coverage" NAME="dfn_inversion Coverage Results" MODIFIED="1524140632610" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/pydfninv$dfn_inversion.coverage" NAME="dfn_inversion Coverage Results" MODIFIED="1524161253289" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="dfn_inversion.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="dfn_inversion.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dfn_inversion.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="332">
-              <caret line="169" column="26" lean-forward="true" selection-start-line="169" selection-start-column="26" selection-end-line="169" selection-end-column="26" />
+            <state relative-caret-position="111">
+              <caret line="125" selection-start-line="125" selection-end-line="125" />
               <folding>
-                <element signature="e#109#126#0" expanded="true" />
+                <element signature="e#109#131#0" expanded="true" />
+                <element signature="e#267#957#1" />
+                <element signature="e#1139#2721#0" />
+                <element signature="e#2759#3754#0" />
+                <element signature="e#3815#4418#0" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="30">
+              <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
             </state>
           </provider>
         </entry>
@@ -65,10 +94,12 @@
       <file leaf-file-name="dfn_forwards.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dfn_forwards.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1575">
-              <caret line="108" column="86" selection-start-line="108" selection-start-column="86" selection-end-line="108" selection-end-column="86" />
+            <state relative-caret-position="285">
+              <caret line="174" column="14" selection-start-line="174" selection-start-column="14" selection-end-line="174" selection-end-column="14" />
               <folding>
                 <element signature="e#109#126#0" expanded="true" />
+                <element signature="e#458#5817#0" />
+                <element signature="e#5857#7264#0" />
               </folding>
             </state>
           </provider>
@@ -83,6 +114,9 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
@@ -92,9 +126,10 @@
         <option value="$PROJECT_DIR$/run_forward.py" />
         <option value="$PROJECT_DIR$/dfnWorks_input_templates/gen_user_ellipses.dat" />
         <option value="$PROJECT_DIR$/flow.py" />
-        <option value="$PROJECT_DIR$/dfn_forwards.py" />
         <option value="$PROJECT_DIR$/obs_reading.py" />
+        <option value="$PROJECT_DIR$/dfn_forwards.py" />
         <option value="$PROJECT_DIR$/dfn_inversion.py" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -111,12 +146,12 @@
     <option name="width" value="1280" />
     <option name="height" value="800" />
   </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -128,6 +163,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -201,17 +237,17 @@
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="right" x="0" y="0" width="270" height="600" id="Documentation" order="6" side_tool="true" weight="0.32956383" />
       <window_info anchor="bottom" id="Database Changes" order="1" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Run" order="4" weight="0.47172415" />
-      <window_info anchor="bottom" id="Version Control" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Python Console" order="9" weight="0.2662069" />
+      <window_info anchor="bottom" id="Run" order="4" visible="true" weight="0.47172415" />
       <window_info anchor="bottom" id="Terminal" order="10" weight="0.3287483" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2956381" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.30048466" />
       <window_info anchor="bottom" id="Docker" order="0" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="5" />
       <window_info anchor="right" id="SciView" order="0" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Debug" order="5" weight="0.3986207" />
       <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Debug" order="5" weight="0.3986207" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="3" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="7" weight="0.4" />
       <window_info anchor="right" id="Commander" order="1" weight="0.4" />
@@ -237,16 +273,20 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="1" />
+      <option name="time" value="2" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/dfn_inversion.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2775">
-          <caret line="189" lean-forward="true" selection-start-line="189" selection-end-line="189" />
+        <state relative-caret-position="2535">
+          <caret line="169" column="26" lean-forward="true" selection-start-line="169" selection-start-column="26" selection-end-line="169" selection-end-column="26" />
           <folding>
-            <element signature="e#109#126#0" expanded="true" />
+            <element signature="e#109#131#0" expanded="true" />
+            <element signature="e#267#957#1" />
+            <element signature="e#1139#2721#0" />
+            <element signature="e#2759#3754#0" />
+            <element signature="e#3815#4418#0" />
           </folding>
         </state>
       </provider>
@@ -287,16 +327,32 @@
           <caret line="108" column="86" selection-start-line="108" selection-start-column="86" selection-end-line="108" selection-end-column="86" />
           <folding>
             <element signature="e#109#126#0" expanded="true" />
+            <element signature="e#458#5817#0" />
+            <element signature="e#5857#7264#0" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/dfn_inversion.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2295">
-          <caret line="157" column="39" selection-start-line="157" selection-start-column="39" selection-end-line="157" selection-end-column="39" />
+        <state relative-caret-position="2775">
+          <caret line="189" lean-forward="true" selection-start-line="189" selection-end-line="189" />
           <folding>
-            <element signature="e#109#126#0" expanded="true" />
+            <element signature="e#109#131#0" expanded="true" />
+            <element signature="e#267#957#1" />
+            <element signature="e#1139#2721#0" />
+            <element signature="e#2759#3754#0" />
+            <element signature="e#3815#4418#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/obs_reading.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="15" column="59" selection-start-line="15" selection-start-column="21" selection-end-line="15" selection-end-column="59" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -327,6 +383,54 @@
           <caret line="108" column="86" selection-start-line="108" selection-start-column="86" selection-end-line="108" selection-end-column="86" />
           <folding>
             <element signature="e#109#126#0" expanded="true" />
+            <element signature="e#458#5817#0" />
+            <element signature="e#5857#7264#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dfn_inversion.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2295">
+          <caret line="157" column="39" selection-start-line="157" selection-start-column="39" selection-end-line="157" selection-end-column="39" />
+          <folding>
+            <element signature="e#109#131#0" expanded="true" />
+            <element signature="e#267#957#1" />
+            <element signature="e#1139#2721#0" />
+            <element signature="e#2759#3754#0" />
+            <element signature="e#3815#4418#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flow.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="525">
+          <caret line="42" column="80" selection-start-line="42" selection-start-column="80" selection-end-line="42" selection-end-column="80" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/run.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="23" column="17" selection-start-line="23" selection-start-column="17" selection-end-line="23" selection-end-column="17" />
+          <folding>
+            <element signature="e#177#191#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dfn_forwards.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1575">
+          <caret line="108" column="86" selection-start-line="108" selection-start-column="86" selection-end-line="108" selection-end-column="86" />
+          <folding>
+            <element signature="e#109#126#0" expanded="true" />
+            <element signature="e#458#5817#0" />
+            <element signature="e#5857#7264#0" />
           </folding>
         </state>
       </provider>
@@ -346,7 +450,11 @@
         <state relative-caret-position="1425">
           <caret line="95" column="8" selection-start-line="95" selection-start-column="8" selection-end-line="95" selection-end-column="8" />
           <folding>
-            <element signature="e#109#126#0" expanded="true" />
+            <element signature="e#109#131#0" expanded="true" />
+            <element signature="e#267#957#1" />
+            <element signature="e#1139#2721#0" />
+            <element signature="e#2759#3754#0" />
+            <element signature="e#3815#4418#0" />
           </folding>
         </state>
       </provider>
@@ -377,6 +485,8 @@
           <caret line="108" column="86" selection-start-line="108" selection-start-column="86" selection-end-line="108" selection-end-column="86" />
           <folding>
             <element signature="e#109#126#0" expanded="true" />
+            <element signature="e#458#5817#0" />
+            <element signature="e#5857#7264#0" />
           </folding>
         </state>
       </provider>
@@ -386,7 +496,11 @@
         <state relative-caret-position="2415">
           <caret line="165" column="38" selection-start-line="165" selection-start-column="38" selection-end-line="165" selection-end-column="38" />
           <folding>
-            <element signature="e#109#126#0" expanded="true" />
+            <element signature="e#109#131#0" expanded="true" />
+            <element signature="e#267#957#1" />
+            <element signature="e#1139#2721#0" />
+            <element signature="e#2759#3754#0" />
+            <element signature="e#3815#4418#0" />
           </folding>
         </state>
       </provider>
@@ -417,6 +531,8 @@
           <caret line="5" column="6" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="6" />
           <folding>
             <element signature="e#109#126#0" expanded="true" />
+            <element signature="e#458#5817#0" />
+            <element signature="e#5857#7264#0" />
           </folding>
         </state>
       </provider>
@@ -426,7 +542,11 @@
         <state relative-caret-position="960">
           <caret line="64" lean-forward="true" selection-start-line="64" selection-end-line="64" />
           <folding>
-            <element signature="e#109#126#0" expanded="true" />
+            <element signature="e#109#131#0" expanded="true" />
+            <element signature="e#267#957#1" />
+            <element signature="e#1139#2721#0" />
+            <element signature="e#2759#3754#0" />
+            <element signature="e#3815#4418#0" />
           </folding>
         </state>
       </provider>
@@ -447,6 +567,8 @@
           <caret line="90" selection-start-line="90" selection-end-line="90" />
           <folding>
             <element signature="e#109#126#0" expanded="true" />
+            <element signature="e#458#5817#0" />
+            <element signature="e#5857#7264#0" />
           </folding>
         </state>
       </provider>
@@ -456,7 +578,11 @@
         <state relative-caret-position="1110">
           <caret line="74" lean-forward="true" selection-start-line="74" selection-end-line="74" />
           <folding>
-            <element signature="e#109#126#0" expanded="true" />
+            <element signature="e#109#131#0" expanded="true" />
+            <element signature="e#267#957#1" />
+            <element signature="e#1139#2721#0" />
+            <element signature="e#2759#3754#0" />
+            <element signature="e#3815#4418#0" />
           </folding>
         </state>
       </provider>
@@ -482,7 +608,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <folding>
-            <element signature="e#109#126#0" expanded="true" />
+            <element signature="e#109#131#0" expanded="true" />
+            <element signature="e#267#957#1" />
+            <element signature="e#1139#2721#0" />
+            <element signature="e#2759#3754#0" />
+            <element signature="e#3815#4418#0" />
           </folding>
         </state>
       </provider>
@@ -491,7 +621,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <folding>
-            <element signature="e#109#126#0" expanded="true" />
+            <element signature="e#109#131#0" expanded="true" />
+            <element signature="e#267#957#1" />
+            <element signature="e#1139#2721#0" />
+            <element signature="e#2759#3754#0" />
+            <element signature="e#3815#4418#0" />
           </folding>
         </state>
       </provider>
@@ -501,7 +635,11 @@
         <state relative-caret-position="795">
           <caret line="53" lean-forward="true" selection-start-line="53" selection-end-line="53" />
           <folding>
-            <element signature="e#109#126#0" expanded="true" />
+            <element signature="e#109#131#0" expanded="true" />
+            <element signature="e#267#957#1" />
+            <element signature="e#1139#2721#0" />
+            <element signature="e#2759#3754#0" />
+            <element signature="e#3815#4418#0" />
           </folding>
         </state>
       </provider>
@@ -538,16 +676,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dfn_forwards.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1575">
-          <caret line="108" column="86" selection-start-line="108" selection-start-column="86" selection-end-line="108" selection-end-column="86" />
-          <folding>
-            <element signature="e#109#126#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/obs_reading.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
@@ -558,13 +686,36 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dfn_inversion.py">
+    <entry file="file://$PROJECT_DIR$/dfn_forwards.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="332">
-          <caret line="169" column="26" lean-forward="true" selection-start-line="169" selection-start-column="26" selection-end-line="169" selection-end-column="26" />
+        <state relative-caret-position="285">
+          <caret line="174" column="14" selection-start-line="174" selection-start-column="14" selection-end-line="174" selection-end-column="14" />
           <folding>
             <element signature="e#109#126#0" expanded="true" />
+            <element signature="e#458#5817#0" />
+            <element signature="e#5857#7264#0" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dfn_inversion.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="111">
+          <caret line="125" selection-start-line="125" selection-end-line="125" />
+          <folding>
+            <element signature="e#109#131#0" expanded="true" />
+            <element signature="e#267#957#1" />
+            <element signature="e#1139#2721#0" />
+            <element signature="e#2759#3754#0" />
+            <element signature="e#3815#4418#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
         </state>
       </provider>
     </entry>

@@ -130,6 +130,50 @@ class DFNWORKS:
         move_files(lagrit_list, 'LaGriT')
         move_files(pflotran_list, 'PFLOTRAN')
 
+def create_dfn(options):
+
+    '''
+    Create dfnworks object
+    :param options:
+        options = {'jobname': the forward modeling folder path
+                    'ncpu': number of cpu cores to run forward modelling
+                    'input_file': input file path ('*.txt')
+                    'cell': True or False, Binary For Cell Based Apereture / Perm
+                    }
+    :return: DFNWORKS object
+    '''
+
+    dfn = DFNWORKS(jobname=options['jobname'], ncpu=options['ncpu'])
+    with open(options['input_file']) as f:
+        for line in f:
+            line=line.rstrip('\n')
+            line=line.split()
+
+            if line[0].find("dfnGen") == 0:
+                dfn._dfnGen_file = line[1]
+                dfn._local_dfnGen_file = line[1].split('/')[-1]
+
+            elif line[0].find("dfnFlow") == 0:
+                dfn._dfnFlow_file = line[1]
+                dfn._local_dfnFlow_file = line[1].split('/')[-1]
+
+            elif line[0].find("dfnTrans") == 0:
+                dfn._dfnTrans_file = line[1]
+                dfn._local_dfnTrans_file = line[1].split('/')[-1]
+
+    if options['cell'] is True:
+        dfn._aper_cell_file = 'aper_node.dat'
+        dfn._perm_cell_file = 'perm_node.dat'
+    else:
+        dfn._aper_file = 'aperture.dat'
+        dfn._perm_file = 'perm.dat'
+
+    if options['cell'] is True:
+        print '--> Expecting Cell Based Aperture and Permeability'
+    print("="*80+"\n")
+
+    return dfn
+
 
 
 
