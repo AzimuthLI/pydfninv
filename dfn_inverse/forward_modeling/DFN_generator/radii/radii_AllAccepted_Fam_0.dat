@@ -1,0 +1,7 @@
+Fracture Radii List Before Isolated Fracture and Cluster Removal (Family 0)
+Format: xRadius yRadius Distrubution# (-1 = userRectangle, 0 = userEllipse, > 0 is family in order of famProb)
+0.85 0.85 0
+0.6 0.39 0
+0.7 0.7 0
+0.6 0.6 0
+0.6 0.39 0

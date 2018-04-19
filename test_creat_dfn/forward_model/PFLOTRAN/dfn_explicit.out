@@ -1,0 +1,186 @@
+
+ *GRAV
+  gravity    =  [m/s^2]     0.0000E+00  0.0000E+00  0.0000E+00
+ Extent of Gridded Domain
+  X: -0.50000000000000000 - 0.50000000000000000
+  Y: -0.50000000000000000 - 0.50000000000000000
+  Z: -0.50000000815339996 - 0.49999998601160001
+
+
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
+
+  Initial Condition
+
+--------------------------------------------------------------------------------
+          Flow Condition:   initial
+                  Region:   All
+--------------------------------------------------------------------------------
+
+  Flow Condition: initial
+    Synchronize time with update: no
+    Time units: yr
+    Length units: m
+      Datum:
+
+    Sub Condition: pressure
+      Type: dirichlet
+      Gradient:
+      Data:
+        Dataset: Unnamed Ascii Dataset
+          Type: dataset_ascii_type
+          Transient: no
+          Array Rank:  1
+
+--------------------------------------------------------------------------------
+
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
+
+  Boundary Condition
+
+--------------------------------------------------------------------------------
+          Flow Condition:   inflow
+                  Region:   inflow
+--------------------------------------------------------------------------------
+
+  Flow Condition: inflow
+    Synchronize time with update: no
+    Time units: yr
+    Length units: m
+      Datum:
+
+    Sub Condition: pressure
+      Type: dirichlet
+      Gradient:
+      Data:
+        Dataset: Unnamed Ascii Dataset
+          Type: dataset_ascii_type
+          Transient: no
+          Array Rank:  1
+
+--------------------------------------------------------------------------------
+
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
+
+  Boundary Condition
+
+--------------------------------------------------------------------------------
+          Flow Condition:   outflow
+                  Region:   outflow
+--------------------------------------------------------------------------------
+
+  Flow Condition: outflow
+    Synchronize time with update: no
+    Time units: yr
+    Length units: m
+      Datum:
+
+    Sub Condition: pressure
+      Type: dirichlet
+      Gradient:
+      Data:
+        Dataset: Unnamed Ascii Dataset
+          Type: dataset_ascii_type
+          Transient: no
+          Array Rank:  1
+
+--------------------------------------------------------------------------------
+
+ Requested processors =     1
+
+FLOW Time Stepper
+max steps: 999999
+max constant cumulative time steps: 5
+max cuts: 16
+ts reduction factor: 0.50000000000000000
+ts maximum growth factor: 2.0000000000000000
+
+FLOW Newton Solver
+        atol:  1.0000E-50
+        rtol:  1.0000E-08
+        stol:  1.0000E-08
+        dtol:  1.0000E+20
+     maxnorm:  1.0000E+20
+   inftolres: -9.9900E+02
+   inftolupd: -9.9900E+02
+inftolrelupd: -9.9900E+02
+inftolsclres: -9.9900E+02
+    max iter:    50
+    min iter:     1
+        maxf: 10000
+
+matrix type:baij                
+precond. matrix type:baij                
+inexact newton: off
+print convergence: on
+print detailed convergence: off
+check infinity norm: on
+
+FLOW Linear Solver
+   solver:  bcgs
+  precond:  ilu
+     atol:  1.0000E-50
+     rtol:  1.0000E-05
+     dtol:  1.0000E+04
+ max iter:  10000
+ Step      1 Time=  1.00000E-02 Dt=  1.00000E-02 [s] snes_conv_reason:    3
+  newton =   2 [       2] linear =   109 [       109] cuts =  0 [   0]
+  --> max chng: dpmx=   9.8675E+05
+ Step      2 Time=  5.00000E-02 Dt=  4.00000E-02 [s] snes_conv_reason:    4
+  newton =   3 [       5] linear =   192 [       301] cuts =  0 [   0]
+  --> max chng: dpmx=   2.2172E+05
+ Step      3 Time=  1.00000E-01 Dt=  5.00000E-02 [s] snes_conv_reason:    4
+  newton =   3 [       8] linear =   203 [       504] cuts =  0 [   0]
+  --> max chng: dpmx=   7.5356E+04
+ Step      4 Time=  2.00000E-01 Dt=  1.00000E-01 [s] snes_conv_reason:    4
+  newton =   3 [      11] linear =   199 [       703] cuts =  0 [   0]
+  --> max chng: dpmx=   2.9431E+04
+ Step      5 Time=  5.00000E-01 Dt=  3.00000E-01 [s] snes_conv_reason:    4
+  newton =   2 [      13] linear =   149 [       852] cuts =  0 [   0]
+  --> max chng: dpmx=   6.5793E+03
+ Step      6 Time=  1.00000E+00 Dt=  5.00000E-01 [s] snes_conv_reason:    4
+  newton =   2 [      15] linear =   138 [       990] cuts =  0 [   0]
+  --> max chng: dpmx=   5.3914E+02
+ Step      7 Time=  2.00000E+00 Dt=  1.00000E+00 [s] snes_conv_reason:    4
+  newton =   2 [      17] linear =   141 [      1131] cuts =  0 [   0]
+  --> max chng: dpmx=   2.7160E+01
+ Step      8 Time=  4.00000E+00 Dt=  2.00000E+00 [s] snes_conv_reason:    4
+  newton =   2 [      19] linear =   124 [      1255] cuts =  0 [   0]
+  --> max chng: dpmx=   6.8739E-01
+ Step      9 Time=  8.00000E+00 Dt=  4.00000E+00 [s] snes_conv_reason:    4
+  newton =   1 [      20] linear =    73 [      1328] cuts =  0 [   0]
+  --> max chng: dpmx=   8.7238E-03
+ Step     10 Time=  1.00000E+01 Dt=  2.00000E+00 [s] snes_conv_reason:    4
+  newton =   1 [      21] linear =    74 [      1402] cuts =  0 [   0]
+  --> max chng: dpmx=   5.4892E-05
+ Step     11 Time=  1.80000E+01 Dt=  8.00000E+00 [s] snes_conv_reason:    4
+  newton =   1 [      22] linear =    70 [      1472] cuts =  0 [   0]
+  --> max chng: dpmx=   6.9733E-07
+ Step     12 Time=  2.00000E+01 Dt=  2.00000E+00 [s] snes_conv_reason:    4
+  newton =   1 [      23] linear =    70 [      1542] cuts =  0 [   0]
+  --> max chng: dpmx=   2.3283E-09
+ Step     13 Time=  3.00000E+01 Dt=  1.00000E+01 [s] snes_conv_reason:    4
+  newton =   1 [      24] linear =    60 [      1602] cuts =  0 [   0]
+  --> max chng: dpmx=   2.3283E-10
+ Step     14 Time=  4.00000E+01 Dt=  1.00000E+01 [s] snes_conv_reason:    4
+  newton =   1 [      25] linear =    55 [      1657] cuts =  0 [   0]
+  --> max chng: dpmx=   2.3283E-10
+ Step     15 Time=  5.00000E+01 Dt=  1.00000E+01 [s] snes_conv_reason:    4
+  newton =   1 [      26] linear =    55 [      1712] cuts =  0 [   0]
+  --> max chng: dpmx=   2.3283E-10
+ Step     16 Time=  6.00000E+01 Dt=  1.00000E+01 [s] snes_conv_reason:    4
+  newton =   1 [      27] linear =    57 [      1769] cuts =  0 [   0]
+  --> max chng: dpmx=   2.3283E-10
+ Step     17 Time=  7.00000E+01 Dt=  1.00000E+01 [s] snes_conv_reason:    4
+  newton =   1 [      28] linear =    57 [      1826] cuts =  0 [   0]
+  --> max chng: dpmx=   2.3283E-10
+ Step     18 Time=  8.00000E+01 Dt=  1.00000E+01 [s] snes_conv_reason:    4
+  newton =   1 [      29] linear =    48 [      1874] cuts =  0 [   0]
+  --> max chng: dpmx=   2.3283E-10
+ Step     19 Time=  9.00000E+01 Dt=  1.00000E+01 [s] snes_conv_reason:    4
+  newton =   1 [      30] linear =    43 [      1917] cuts =  0 [   0]
+  --> max chng: dpmx=   2.3283E-10
+ Step     20 Time=  1.00000E+02 Dt=  1.00000E+01 [s] snes_conv_reason:    4
+  newton =   1 [      31] linear =    60 [      1977] cuts =  0 [   0]
+  --> max chng: dpmx=   2.3283E-10
+
+ Wall Clock Time:  1.4731E+01 [sec]   2.4552E-01 [min]   4.0919E-03 [hr]

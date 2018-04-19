@@ -1,0 +1,15 @@
+read/lagrit/full_mesh.lg/mo_all/binary                                          
+define/XMAX/4.999900e-01                                                        
+define/XMIN/-4.999900e-01                                                       
+define/YMAX/4.999900e-01                                                        
+define/YMIN/-4.999900e-01                                                       
+define/ZMAX/4.999900e-01                                                        
+define/ZMIN/-4.999900e-01                                                       
+pset/top/attribute/zic/1,0,0/gt/ZMAX                                            
+pset/bottom/attribute/zic/1,0,0/lt/ZMIN                                         
+pset/left_w/attribute/xic/1,0,0/lt/XMIN                                         
+pset/front_s/attribute/yic/1,0,0/gt/YMAX                                        
+pset/right_e/attribute/xic/1,0,0/gt/XMAX                                        
+pset/back_n/attribute/yic/1,0,0/lt/YMIN                                         
+pset/-all-/zone/boundary/ascii                                                  
+finish                                                                          

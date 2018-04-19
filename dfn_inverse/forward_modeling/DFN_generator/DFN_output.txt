@@ -1,0 +1,75 @@
+
+========================================================
+            Network Generation Complete
+========================================================
+
+________________________________________________________
+
+Statistics Before Isolated Fractures Removed:
+
+Fractures: 5
+Truncated: 5
+
+Total Surface Area:     5.8095 m^2
+Total Fractures Volume: 2.90475e-05 m^3
+Total Fracture Density   (P30): 5
+Total Fracture Intensity (P32): 5.8095
+Total Fracture Porosity  (P33): 2.90475e-05
+
+User Defined: 
+    Surface Area: 5.8095 m^2
+    Volume: 2.90475e-05 m^3
+    Fracture Intensity (P32): 5.8095
+
+
+________________________________________________________
+
+Statistics After Isolated Fractures Removed:
+Final Number of Fractures: 5
+Isolated Fractures Removed: 0
+Fractures before isolated fractures removed:: 5
+
+Total Surface Area:     5.8095 m^2
+Total Fractures Volume: 2.90475e-05 m^3
+Total Fracture Density   (P30): 5
+Total Fracture Intensity (P32): 5.8095
+Total Fracture Porosity  (P33): 2.90475e-05
+
+User Defined Shapes: 
+    Surface Area: 5.8095 m^2
+    Volume: 2.90475e-05 m^3
+    Fracture Intensity (P32): 5.8095
+
+
+________________________________________________________
+
+
+5 Fractures Accepted (Before Isolated Fracture Removal)
+5 Final Fractures (After Isolated Fracture Removal)
+
+Total Fractures Rejected: 0
+Total Fractures Re-translated: 0
+
+Number of Triple Intersection Points (Before Isolated Fracture Removal): 0
+
+Intersection Statistics:
+    2 of 5 Intersections Shortened
+    Original Intersection (Before Intersection Shrinking) Length: 2.83407m
+    Intersection Length Discarded: 0.0595767m
+    Final Intersection Length: 2.77449m
+
+Rejection Statistics: 
+    0 Short Intersections 
+    0 Close to Node
+    0 Close to Edge
+    0 Vertice Close to Edge
+    0 Outside of Domain
+    0 Triple intersection Rejections
+    0 Intersections Close to Other Intersections
+
+
+________________________________________________________
+
+Seed: 92731535
+
+Lagrit Should Remove 562 Nodes (1124/2 - 0)

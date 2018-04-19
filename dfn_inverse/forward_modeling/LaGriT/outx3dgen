@@ -1,0 +1,87 @@
+ 
+ 
+*               * * * * * * * * * * * * * * * * * * * * * * * *                 
+*               *                                             *                 
+*               *    Program:  LaGriT V3.300   macOS          *                 
+*               *    date_compile: 2018/03/13 Release         *                 
+*               *    Run Time: 2018/Apr 17  17:32:02          *                 
+*               *    Manual:   http://lagrit.lanl.gov         *                 
+*               *                                             *                 
+*               * * * * * * * * * * * * * * * * * * * * * * * *                 
+ 
+                               -----oOo-----                                    
+             LaGriT V3 LA-CC-15-069  https://github.com/lanl/LaGriT             
+Copyright 2015. Los Alamos National Security, LLC.  This software was produced  
+under U.S. Government contract DE-AC52-06NA25396 for Los Alamos National        
+Laboratory (LANL), which is operated by Los Alamos National Security, LLC       
+for the U.S. Department of Energy. The U.S. Government has rights to use,       
+reproduce, and distribute this software. Neither the  government nor Los Alamos 
+National Security, LLC makes any warranty, express or  implied, or assumes any  
+liability for the use of this software. If software is modified to produce      
+derivative works, such modified software should be  clearly marked, so as not   
+to confuse it with the version available from LANL.                             
+                               -----oOo-----                                    
+ 
+ 
+Output log file: outx3dgen                                                      
+Command log file: logx3dgen                                                     
+ 
+read/lagrit/full_mesh.lg/mo_all/binary                                          
+cmo/addatt/mo_all/dfield/VDOUBLE/scalar/nnodes/linear/permanent/agltn           
+finish                                                                          
+cmo/addatt/mo_all/b_a/VINT/scalar/nnodes/linear/permanent/gxaf                  
+finish                                                                          
+cmo/addatt/mo_all/transauto/VDOUBLE/scalar/vector/user/permanent/x              
+finish                                                                          
+cmo/addatt/mo_all/family_id/VINT/scalar/nelements/linear/temporary/agltn        
+finish                                                                          
+cmo/addatt/mo_all/evol_onen/VDOUBLE/scalar/nelements/linear/temporary/agltn     
+finish                                                                          
+cmo/addatt/mo_all/jtet_cycle_max/INT/scalar/scalar/constant/temporary/x         
+finish                                                                          
+cmo/addatt/mo_all/numbnd/VINT/scalar/nnodes/linear/permanent/afgx               
+finish                                                                          
+cmo/addatt/mo_all/id_numb/VINT/scalar/nnodes/linear/permanent/afgx              
+finish                                                                          
+define/XMAX/4.999900e-01                                                        
+define/XMIN/-4.999900e-01                                                       
+define/YMAX/4.999900e-01                                                        
+define/YMIN/-4.999900e-01                                                       
+define/ZMAX/4.999900e-01                                                        
+define/ZMIN/-4.999900e-01                                                       
+pset/top/attribute/zic/1,0,0/gt/ZMAX                                            
+ 
+ THE PSET  top  HAS         17 POINTS                                           
+pset/bottom/attribute/zic/1,0,0/lt/ZMIN                                         
+ 
+ THE PSET  bottom  HAS         17 POINTS                                        
+pset/left_w/attribute/xic/1,0,0/lt/XMIN                                         
+ 
+ THE PSET  left_w  HAS         18 POINTS                                        
+pset/front_s/attribute/yic/1,0,0/gt/YMAX                                        
+ 
+ THE PSET  front_s  HAS         30 POINTS                                       
+pset/right_e/attribute/xic/1,0,0/gt/XMAX                                        
+ 
+ THE PSET  right_e  HAS         40 POINTS                                       
+pset/back_n/attribute/yic/1,0,0/lt/YMIN                                         
+ 
+ THE PSET  back_n  HAS         30 POINTS                                        
+pset/-all-/zone/boundary/ascii                                                  
+PSET: THERE ARE  6 PSETS DEFINED                                                
+  top               bottom            left_w            front_s                 
+  right_e           back_n                                                      
+PSET: Appended .zone to the file name                                           
+PSET: OUTPUT top    1 PSETS TO FILE                                             
+PSET: Appended .zone to the file name                                           
+PSET: OUTPUT bottom    1 PSETS TO FILE                                          
+PSET: Appended .zone to the file name                                           
+PSET: OUTPUT left_w    1 PSETS TO FILE                                          
+PSET: Appended .zone to the file name                                           
+PSET: OUTPUT front_s    1 PSETS TO FILE                                         
+PSET: Appended .zone to the file name                                           
+PSET: OUTPUT right_e    1 PSETS TO FILE                                         
+PSET: Appended .zone to the file name                                           
+PSET: OUTPUT back_n    1 PSETS TO FILE                                          
+finish                                                                          
+LaGriT successfully completed                                                   

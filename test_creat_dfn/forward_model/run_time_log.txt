@@ -1,0 +1,9 @@
+Function: dfnGen: 1.65713691711 seconds
+Function: dfn_mesh: 28.1444029808 seconds
+Process: dfnGen: 29.8047540188 seconds
+
+Function: lagrit2pflotran: 0.777447223663 seconds
+Function: pflotran: 14.8746170998 seconds
+Function: parse_pflotran_vtk: 5.05464601517 seconds
+Function: parse_cleanup: 0.372658014297 seconds
+Process: dfnFlow: 21.1873531342 seconds
