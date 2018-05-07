@@ -32,9 +32,6 @@ def read_observation(self, obs_points, variable_name):
 
     return df_scalar
 
-
-
-
 # Get the id of observation points in mesh file
 def get_observation_ids(mesh_file, obs_points):
 
@@ -85,11 +82,33 @@ def get_observation_scalars(flow_files, obs_ids, var_name):
 
     return obs_scalars
 
+def gen_3d_obs_points_plot(self, obs_points):
+
+    sphere = vtk.vtkSphereSource()
+    sphere.SetPhiResolution(21)
+    sphere.SetThetaResolution(21)
+    sphere.SetRadius(.01)
+
+    filter = vtk.vtkAppendPolyData()
+
+    for pt in obs_points:
+
+        sphere.SetCenter(pt)
+        sphere.Update()
+
+        input = vtk.vtkPolyData()
+        input.ShallowCopy(sphere.GetOutput())
+
+        filter.AddInputData(input)
+
+    filter.Update()
+
+    writer = vtk.vtkPolyDataWriter()
+    writer.SetInputData(filter.GetOutput())
+    writer.SetFileName(self._forward_model+'/obs_points.vtk')
+    writer.Update()
 
 
 
 
 
-
-
-# gen_3d_mesh_plot(mesh_file_path, obs_points)

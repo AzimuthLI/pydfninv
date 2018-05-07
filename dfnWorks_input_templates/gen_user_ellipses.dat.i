@@ -53,7 +53,7 @@ outputAcceptedRadiiPerFamily: 1
 eExpMin: {1}
 rbetaDistribution: {1, 1}
 stdAperture: 0.8
-UserEll_Input_File_Path: /Volumes/SD_Card/Thesis_project/pydfninv/dfnWorks_input_templates/define_user_ellipses.dat
+UserEll_Input_File_Path: $UserEll_Input_File_Path
 rExpMin: {1}
 disableFram: 0
 ekappa: {8, 8}
