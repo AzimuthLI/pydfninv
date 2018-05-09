@@ -3,8 +3,8 @@ __version__ = "1.0"
 __maintainer__ = "Shiyi LI"
 __email__ = "lishi@student.ethz.ch"
 
-import os, shutil, vtk
-from dfn_forwards import create_dfn
+import os
+from deprecated.dfn_forwards import create_dfn
 
 class DFN_INVERSE:
     """
@@ -22,9 +22,8 @@ class DFN_INVERSE:
 
     """
 
-    from obs_reading import read_observation, gen_3d_obs_points_plot
-    from fracture_generator import fracture_update
-    from helper import write_template_file, write_forward_simulation_options, make_direcories
+    from deprecated.fracture_generator import fracture_update
+    from deprecated.helper import write_forward_simulation_options, make_direcories
 
     os.environ['PYDFNINV_PATH'] = '/Volumes/SD_Card/Thesis_project/pydfninv/'
 

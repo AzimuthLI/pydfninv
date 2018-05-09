@@ -10,7 +10,7 @@ from time import time
 def valid(name):
     if not (os.path.isfile(os.path.abspath(os.environ[name])) or os.path.isdir(os.path.abspath(os.environ[name]))):
         error_msg = "ERROR: " + name + " has an invalid path name: " + os.environ[name]
-        print error_msg
+        print(error_msg)
         exit()
 
 def define_paths():
@@ -22,7 +22,7 @@ def define_paths():
     os.environ['DFNWORKS_PATH'] = '/Users/shiyili/projects/dfnWorks/dfnWorks-Version2.0/'
     valid('DFNWORKS_PATH')
     if not (os.path.isdir(os.path.abspath(os.environ['DFNWORKS_PATH'] + 'tests/'))):
-        print "INVALID VERSION OF DFNWORKS - does not have tests folder of official release 2.0"
+        print("INVALID VERSION OF DFNWORKS - does not have tests folder of official release 2.0")
         exit()
 
     # PETSC paths
@@ -86,10 +86,7 @@ class DFNWORKS:
         of inp to vtk conversion
     """
 
-    from meshdfn import mesh_network
-    from flow import dfn_flow, lagrit2pflotran, pflotran, \
-        parse_pflotran_vtk, inp2vtk_python, parse_pflotran_vtk_python, \
-        pflotran_cleanup, write_perms_and_correct_volumes_areas, zone2ex
+    from deprecated.meshdfn import mesh_network
 
     def __init__(self, jobname='',dfnGen_file='', ncpu='',
                  dfnFlow_file = '', dfnTrans_file = '',
@@ -147,8 +144,8 @@ class DFNWORKS:
         run_time_log.close()
 
         if os.path.isfile("params.txt") is False:
-            print '--> Generation Failed'
-            print '--> Exiting Program'
+            print('--> Generation Failed')
+            print('--> Exiting Program')
             exit()
         else:
             print('-' * 80)
@@ -222,7 +219,7 @@ def create_dfn(options):
         dfn._perm_file = 'perm.dat'
 
     if options['cell'] is True:
-        print '--> Expecting Cell Based Aperture and Permeability'
+        print('--> Expecting Cell Based Aperture and Permeability')
     print("="*80+"\n")
 
     return dfn

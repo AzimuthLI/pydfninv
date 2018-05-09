@@ -7,9 +7,10 @@
 
 import os
 from shutil import copy, rmtree
-from numpy import genfromtxt, sqrt, cos, arcsin
+from numpy import genfromtxt, sqrt, cos, arcsin, arange
 
-def create_parameter_mlgi_file(num_poly, h, slope = 2, refine_dist = 0.5):
+
+def create_parameter_mlgi_file(num_poly, h, slope=2, refine_dist=0.5):
     """create parameter_mgli_files
     Outputs parameteri.mlgi files used in running LaGriT Scripts
     
@@ -20,13 +21,13 @@ def create_parameter_mlgi_file(num_poly, h, slope = 2, refine_dist = 0.5):
     	  set to 0 for uniform mesh resolution
         * refine_dist: distance used in coarsing function, default = 0.5,
     """
-    
+
     print("\nCreating parameter*.mlgi files")
     try:
-    	os.mkdir('parameters')
+        os.mkdir('parameters')
     except OSError:
-    	rmtree('parameters')	
-    	os.mkdir('parameters')
+        rmtree('parameters')
+        os.mkdir('parameters')
 
     # Extrude and Translate computation
     # Parameters, delta: buffer zone, amount of h/2 we remove from around line
@@ -35,79 +36,79 @@ def create_parameter_mlgi_file(num_poly, h, slope = 2, refine_dist = 0.5):
     # h_trans : amount needed to translate to create delta buffer
     # It's  just a little trig! 
     delta = 0.75
-    h_extrude = 0.5*h # upper limit on spacing of points on interssction line
-    h_radius = sqrt((0.5*h_extrude)**2 + (0.5*h_extrude)**2)
-    h_trans = -0.5*h_extrude + h_radius*cos(arcsin(delta))
+    h_extrude = 0.5 * h  # upper limit on spacing of points on interssction line
+    h_radius = sqrt((0.5 * h_extrude) ** 2 + (0.5 * h_extrude) ** 2)
+    h_trans = -0.5 * h_extrude + h_radius * cos(arcsin(delta))
 
-    #Go through the list and write out parameter file for each polygon
-    #to be an input file for LaGriT
+    # Go through the list and write out parameter file for each polygon
+    # to be an input file for LaGriT
     data = genfromtxt('poly_info.dat')
     for i in range(num_poly):
-    	
-    	frac_id = str(int(data[i,0]))
-    	long_name = str(int(data[i,0]))  	
-    	theta = data[i,2]	
-    	x1 = data[i,3]	
-    	y1 = data[i,4]	
-    	z1 = data[i,5]	
-    	x2 = data[i,6]	
-    	y2 = data[i,7]	
-    	z2 = data[i,8]	
-    	family = data[i,1]
+        frac_id = str(int(data[i, 0]))
+        long_name = str(int(data[i, 0]))
+        theta = data[i, 2]
+        x1 = data[i, 3]
+        y1 = data[i, 4]
+        z1 = data[i, 5]
+        x2 = data[i, 6]
+        y2 = data[i, 7]
+        z2 = data[i, 8]
+        family = data[i, 1]
 
-    	fparameter_name = 'parameters/parameters_' + long_name + '.mlgi'
-    	f = open(fparameter_name, 'w')
-    	f.write('define / ID / ' + frac_id + '\n')
-    	f.write('define / OUTFILE_GMV / mesh_' + long_name + '.gmv\n')
-    	f.write('define / OUTFILE_AVS / mesh_' + long_name + '.inp\n')
-    	f.write('define / OUTFILE_LG / mesh_' + long_name + '.lg\n')
-    	f.write('define / POLY_FILE / poly_' + long_name + '.inp\n')
-    	f.write('define / QUAD_FILE / tmp_quad_' + frac_id + '.inp\n')
-    	f.write('define / EXCAVATE_FILE / tmp_excavate_' + frac_id + '.inp\n')
-    	f.write('define / PRE_FINAL_FILE / tmp_pre_final_'+frac_id + '.inp\n')
-    	f.write('define / PRE_FINAL_MASSAGE / tmp_pre_final_massage_' + frac_id +'.gmv\n')
-    	
-    	f.write('define / H_SCALE / ' + str(h) + '\n')
-    	f.write('define / H_EPS / ' + str(h*10**-7) + '\n')
-    	f.write('define / H_SCALE2 / ' + str(1.5*h) + '\n')
+        fparameter_name = 'parameters/parameters_' + long_name + '.mlgi'
+        f = open(fparameter_name, 'w')
+        f.write('define / ID / ' + frac_id + '\n')
+        f.write('define / OUTFILE_GMV / mesh_' + long_name + '.gmv\n')
+        f.write('define / OUTFILE_AVS / mesh_' + long_name + '.inp\n')
+        f.write('define / OUTFILE_LG / mesh_' + long_name + '.lg\n')
+        f.write('define / POLY_FILE / poly_' + long_name + '.inp\n')
+        f.write('define / QUAD_FILE / tmp_quad_' + frac_id + '.inp\n')
+        f.write('define / EXCAVATE_FILE / tmp_excavate_' + frac_id + '.inp\n')
+        f.write('define / PRE_FINAL_FILE / tmp_pre_final_' + frac_id + '.inp\n')
+        f.write('define / PRE_FINAL_MASSAGE / tmp_pre_final_massage_' + frac_id + '.gmv\n')
 
-    	f.write('define / H_EXTRUDE / ' + str(h_extrude) + '\n')
-    	f.write('define / H_TRANS / ' + str(h_trans) + '\n')
+        f.write('define / H_SCALE / ' + str(h) + '\n')
+        f.write('define / H_EPS / ' + str(h * 10 ** -7) + '\n')
+        f.write('define / H_SCALE2 / ' + str(1.5 * h) + '\n')
 
-    	f.write('define / H_PRIME / ' + str(0.8*h) + '\n')
-    	f.write('define / H_PRIME2 / ' + str(0.3*h) + '\n')
-    	
-    	f.write('define / H_SCALE3 / ' + str(3*h) + '\n')
-    	f.write('define / H_SCALE8 / ' + str(8*h) + '\n')
-    	f.write('define / H_SCALE16 / ' + str(16*h) + '\n')
-    	f.write('define / H_SCALE32 / ' + str(32*h) + '\n')
-    	f.write('define / H_SCALE64 / ' + str(64*h) + '\n')
+        f.write('define / H_EXTRUDE / ' + str(h_extrude) + '\n')
+        f.write('define / H_TRANS / ' + str(h_trans) + '\n')
 
-    	f.write('define / PURTURB8 / ' + str(8*0.05*h) + '\n')
-    	f.write('define / PURTURB16 / ' + str(16*0.05*h) + '\n')
-    	f.write('define / PURTURB32 / ' + str(32*0.05*h) + '\n')
-    	f.write('define / PURTURB64 / ' + str(64*0.05*h) + '\n')
+        f.write('define / H_PRIME / ' + str(0.8 * h) + '\n')
+        f.write('define / H_PRIME2 / ' + str(0.3 * h) + '\n')
 
-    	f.write('define / PARAM_A / '+str(slope)+'\n')	
-    	f.write('define / PARAM_B / '+str(h*(1-slope*refine_dist))+'\n')	
+        f.write('define / H_SCALE3 / ' + str(3 * h) + '\n')
+        f.write('define / H_SCALE8 / ' + str(8 * h) + '\n')
+        f.write('define / H_SCALE16 / ' + str(16 * h) + '\n')
+        f.write('define / H_SCALE32 / ' + str(32 * h) + '\n')
+        f.write('define / H_SCALE64 / ' + str(64 * h) + '\n')
 
-    	f.write('define / PARAM_A2 / '+str(0.5*slope)+'\n')	
-    	f.write('define / PARAM_B2 / '+str(h*(1 - 0.5*slope*refine_dist))+'\n')	
-    	
-    	f.write('define / THETA  / '+str(theta)+'\n')
-    	f.write('define / X1 / '+str(x1)+'\n')
-    	f.write('define / Y1 / '+str(y1)+'\n')
-    	f.write('define / Z1 / '+str(z1)+'\n')
-    	f.write('define / X2 / '+str(x2)+'\n')
-    	f.write('define / Y2 / '+str(y2)+'\n')
-    	f.write('define / Z2 / '+str(z2)+'\n')
-    	f.write('define / family / '+str(family)+'\n')
-    	f.write('finish \n')
-    	f.flush()
-    	f.close()
+        f.write('define / PURTURB8 / ' + str(8 * 0.05 * h) + '\n')
+        f.write('define / PURTURB16 / ' + str(16 * 0.05 * h) + '\n')
+        f.write('define / PURTURB32 / ' + str(32 * 0.05 * h) + '\n')
+        f.write('define / PURTURB64 / ' + str(64 * 0.05 * h) + '\n')
+
+        f.write('define / PARAM_A / ' + str(slope) + '\n')
+        f.write('define / PARAM_B / ' + str(h * (1 - slope * refine_dist)) + '\n')
+
+        f.write('define / PARAM_A2 / ' + str(0.5 * slope) + '\n')
+        f.write('define / PARAM_B2 / ' + str(h * (1 - 0.5 * slope * refine_dist)) + '\n')
+
+        f.write('define / THETA  / ' + str(theta) + '\n')
+        f.write('define / X1 / ' + str(x1) + '\n')
+        f.write('define / Y1 / ' + str(y1) + '\n')
+        f.write('define / Z1 / ' + str(z1) + '\n')
+        f.write('define / X2 / ' + str(x2) + '\n')
+        f.write('define / Y2 / ' + str(y2) + '\n')
+        f.write('define / Z2 / ' + str(z2) + '\n')
+        f.write('define / family / ' + str(family) + '\n')
+        f.write('finish \n')
+        f.flush()
+        f.close()
     print("Creating parameter*.mlgi files: Complete\n")
 
-def create_lagrit_scripts(visual_mode, ncpu, refine_factor=1, production_mode=True): 
+
+def create_lagrit_scripts(visual_mode, ncpu, refine_factor=1, production_mode=True):
     """ Creates LaGriT script to be run for each polygon
     
     Inputs: 
@@ -117,16 +118,16 @@ def create_lagrit_scripts(visual_mode, ncpu, refine_factor=1, production_mode=Tr
         * production_mode (True/False)
     """
 
-    #Section 2 : Creates LaGriT script to be run for each polygon
-    #Switches to control the LaGriT output
-    #Network visualization mode True ouputs the triangulated mesh
-    #for each fracture without any refinement. The goal is to visualize
-    #the network structure instead of outputing the appropriate values
-    #for computation
+    # Section 2 : Creates LaGriT script to be run for each polygon
+    # Switches to control the LaGriT output
+    # Network visualization mode True ouputs the triangulated mesh
+    # for each fracture without any refinement. The goal is to visualize
+    # the network structure instead of outputing the appropriate values
+    # for computation
 
     print("Writing LaGriT Control Files")
-    #Go through the list and write out parameter file for each polygon
-    #to be an input file for LaGriT
+    # Go through the list and write out parameter file for each polygon
+    # to be an input file for LaGriT
 
     lagrit_input = """infile %s 
 #LaGriT Script
@@ -143,29 +144,29 @@ define / OUTPUT_INTER_ID_SSINT / id_tri_node_CPU%d.list
 
 # Read in line and polygon files  
 read / POLY_FILE / mo_poly_work
-""" 
+"""
     if not visual_mode:
-    	lagrit_input += """
+        lagrit_input += """
 read / LINE_FILE / mo_line_work 
 """
     #
     # START: Refine the point distribution
     #
-    if(refine_factor > 1):
-    	lagrit_input += 'extrude / mo_quad_work / mo_line_work / const / H_SCALE8 / volume / 0. 0. 1.  \n'
-    	if (refine_factor == 2):
-    		lagrit_input += 'refine/constant/imt1/linear/element/1 0 0 /-1.,0.,0./inclusive amr 2  \n'
+    if (refine_factor > 1):
+        lagrit_input += 'extrude / mo_quad_work / mo_line_work / const / H_SCALE8 / volume / 0. 0. 1.  \n'
+        if (refine_factor == 2):
+            lagrit_input += 'refine/constant/imt1/linear/element/1 0 0 /-1.,0.,0./inclusive amr 2  \n'
 
-    	if (refine_factor == 4):
-    		lagrit_input += 'refine/constant/imt1/linear/element/1 0 0 /-1.,0.,0./inclusive amr 2  \n'
-    		lagrit_input += 'refine/constant/imt1/linear/element/1 0 0 /-1.,0.,0./inclusive amr 2  \n'
-    		
-    	if (refine_factor == 8):
-    		lagrit_input +='refine/constant/imt1/linear/element/1 0 0 /-1.,0.,0./inclusive amr 2  \n'
-    		lagrit_input +='refine/constant/imt1/linear/element/1 0 0 /-1.,0.,0./inclusive amr 2  \n'
-    		lagrit_input +='refine/constant/imt1/linear/element/1 0 0 /-1.,0.,0./inclusive amr 2  \n'
-    		
-    	lagrit_input += """ 
+        if (refine_factor == 4):
+            lagrit_input += 'refine/constant/imt1/linear/element/1 0 0 /-1.,0.,0./inclusive amr 2  \n'
+            lagrit_input += 'refine/constant/imt1/linear/element/1 0 0 /-1.,0.,0./inclusive amr 2  \n'
+
+        if (refine_factor == 8):
+            lagrit_input += 'refine/constant/imt1/linear/element/1 0 0 /-1.,0.,0./inclusive amr 2  \n'
+            lagrit_input += 'refine/constant/imt1/linear/element/1 0 0 /-1.,0.,0./inclusive amr 2  \n'
+            lagrit_input += 'refine/constant/imt1/linear/element/1 0 0 /-1.,0.,0./inclusive amr 2  \n'
+
+        lagrit_input += """ 
 grid2grid / tree_to_fe / mo_quad_work / mo_quad_work  
 extract/surfmesh/1,0,0/mo_ext_work/mo_quad_work/external 
 compute / distance_field / mo_ext_work / mo_line_work / dfield 
@@ -177,9 +178,9 @@ cmo / delete / mo_quad_work
 cmo / delete / mo_line_work
 cmo / move / mo_line_work / mo_ext_work 
 rmpoint / compress  
-"""    
-    	# END: Refine the point distribution
-    	#
+"""
+    # END: Refine the point distribution
+    #
     lagrit_input += """
 ## Triangulate Fracture without point addition 
 cmo / create / mo_pts / / / triplane 
@@ -195,7 +196,7 @@ cmo / select / mo_pts
 
 """
     if not visual_mode:
-    	lagrit_input += """
+        lagrit_input += """
 # Creates a Coarse Mesh and then refines it using the distance field from intersections
 massage / H_SCALE64 / H_EPS  / H_EPS
 recon 0; smooth;recon 0;smooth;recon 0;smooth;recon 0
@@ -245,16 +246,16 @@ cmo / select / mo_line_work
 
 extrude / mo_quad / mo_line_work / const / H_EXTRUDE / volume / 0. 0. 1. 
 """
-    	if not production_mode:
-    		lagrit_input += """
+        if not production_mode:
+            lagrit_input += """
 dump / avs / QUAD_FILE / mo_quad 
 cmo / delete / mo_quad 
 read / QUAD_FILE / mo_quad 
 """
-    	else:
-    		lagrit_input += 'cmo / select / mo_quad \n'
-    	
-    	lagrit_input += """
+        else:
+            lagrit_input += 'cmo / select / mo_quad \n'
+
+        lagrit_input += """
 # Translate extruced lines of intersectino down slightly to excavate 
 # nearby points from the mesh 
 
@@ -305,10 +306,10 @@ cmo / select / mo_final
 resetpts / itp 
 
 """
-    	if not production_mode:
-    		lagrit_input += 'dump / gmv / PRE_FINAL_MASSAGE / mo_final \n'
-    	
-    	lagrit_input += """
+        if not production_mode:
+            lagrit_input += 'dump / gmv / PRE_FINAL_MASSAGE / mo_final \n'
+
+        lagrit_input += """
 ## Massage Mesh Away from Intersection 
 pset / pref / attribute / dfield / 1,0,0 / lt / H_EPS 
 pset / pregion / attribute / dfield / 1,0,0 / gt / H_SCALE2 
@@ -389,9 +390,9 @@ cmo / addatt / mo_final / scalar / xnorm ynorm znorm / vnorm
 cmo / DELATT / mo_final / vnorm 
 
 """
-    	# Clean up before output to GMV/AVS
-    	if production_mode:
-    		lagrit_input += """
+        # Clean up before output to GMV/AVS
+        if production_mode:
+            lagrit_input += """
 cmo / DELATT / mo_final / x_four 
 cmo / DELATT / mo_final / fac_n 
 cmo / DELATT / mo_final / rf_field_name 
@@ -408,12 +409,12 @@ cmo / addatt / mo_final / family_id / vint / scalar / nelements
 cmo / setatt / mo_final / family_id / 1 0 0 / family
     
 """
-    	lagrit_input += """
+        lagrit_input += """
 dump / OUTFILE_AVS / mo_final
 dump / lagrit / OUTFILE_LG / mo_final
-""" 
+"""
     else:
-    	lagrit_input += """
+        lagrit_input += """
 cmo / setatt / mo_pts / imt / 1 0 0 / ID 
 cmo / setatt / mo_pts / itetclr / 1 0 0 / ID 
 resetpts / itp 
@@ -447,18 +448,19 @@ finish
 """
 
     # Create a different Run file for each CPU
-    for i in range(1,ncpu+1):
-    	file_name = 'mesh_poly_CPU%d.lgi'%i
-    	f = open(file_name, 'w')
-    	#Name of parameter Input File
-    	fparameter_name = 'parameters_CPU%d.mlgi'%i 
-    	fintersection_name = 'intersections_CPU%d.inp'%i
-    	fpoly_name = 'poly_CPU%d.inp'%i
-    	parameters = (fparameter_name, fpoly_name, fintersection_name, i)
-    	f.write(lagrit_input%parameters)
-    	f.flush()
-    	f.close()
-    print 'Writing LaGriT Control Files: Complete'
+    for i in range(1, ncpu + 1):
+        file_name = 'mesh_poly_CPU%d.lgi' % i
+        f = open(file_name, 'w')
+        # Name of parameter Input File
+        fparameter_name = 'parameters_CPU%d.mlgi' % i
+        fintersection_name = 'intersections_CPU%d.inp' % i
+        fpoly_name = 'poly_CPU%d.inp' % i
+        parameters = (fparameter_name, fpoly_name, fintersection_name, i)
+        f.write(lagrit_input % parameters)
+        f.flush()
+        f.close()
+    print('Writing LaGriT Control Files: Complete')
+
 
 def create_user_functions():
     """ Create user_function.lgi files for meshing"""
@@ -490,7 +492,6 @@ finish
     f.close()
 
 
-
 def create_merge_poly_files(ncpu, num_poly, h, visual_mode):
     """
     Section 4 : Create merge_poly file
@@ -499,13 +500,12 @@ def create_merge_poly_files(ncpu, num_poly, h, visual_mode):
      The points are compressed, and then written in the files full_mesh.gmv, full_mesh.inp, and an FEHM dump is preformed.
     """
 
-
-    # This needs to be re-written using PyLaGriT so we can check 
+    # This needs to be re-written using PyLaGriT so we can check
     # that the number of dudded points is that which we expect
-    print "Writing : merge_poly.lgi"
+    print("Writing : merge_poly.lgi")
 
-    part_size = num_poly/ncpu + 1 ###v number of fractures in each part
-    endis = range(part_size, num_poly + part_size, part_size) 
+    part_size = num_poly / ncpu + 1  ###v number of fractures in each part
+    endis = arange(part_size, num_poly + part_size, part_size)
     endis[-1] = num_poly
 
     lagrit_input = """
@@ -515,17 +515,17 @@ cmo / move / mo_%d / mo_final
 define / MO_NAME_FRAC / mo_%d
 """
     if not visual_mode:
-    	lagrit_input += """
+        lagrit_input += """
 cmo / addatt / MO_NAME_FRAC / volume / evol_onen
 math / sum / MO_NAME_FRAC / evol_sum / 1 0 0 / MO_NAME_FRAC / evol_one 
-""" 
+"""
     lagrit_input += """
 addmesh / merge / cmo_tmp / cmo_tmp / mo_%d
 cmo / delete / mo_%d
 """
-    lagrit_input_2 = '#Writing out merged fractures\n' 
+    lagrit_input_2 = '#Writing out merged fractures\n'
     if not visual_mode:
-    	lagrit_input_2 += """
+        lagrit_input_2 += """
 mo / addatt/ cmo_tmp / volume / evol_all
 math / sum / cmo_tmp / evol_sum / 1 0 0 / cmo_tmp / evol_all """
     lagrit_input_2 += """ 
@@ -534,39 +534,39 @@ dump lagrit part%d.lg cmo_tmp
 finish \n 
 """
 
-    j = 0 # Counter for cpus 
+    j = 0  # Counter for cpus
     fout = 'merge_poly_part_1.lgi'
     f = open(fout, 'w')
-    for i in range(1,num_poly+1):
-    	tmp = 'mesh_'+str(i) +'.lg'
+    for i in range(1, num_poly + 1):
+        tmp = 'mesh_' + str(i) + '.lg'
 
-    	f.write(lagrit_input%(tmp,i,i,i,i,i))
-    	# if i is the last fracture in the cpu set
-    	# move to the next cpu set	
-    	if i == endis[j]:
-    		f.write(lagrit_input_2%(j+1))
-    		f.flush()
-    		f.close()
-    		
-    		j += 1
-    		fout = 'merge_poly_part_'+str(j+1)+'.lgi'
-    		f = open(fout,'w') 
+        f.write(lagrit_input % (tmp, i, i, i, i, i))
+        # if i is the last fracture in the cpu set
+        # move to the next cpu set
+        if i == endis[j]:
+            f.write(lagrit_input_2 % (j + 1))
+            f.flush()
+            f.close()
 
-    f.flush() 
-    f.close() 
-    os.remove(fout) ###
+            j += 1
+            fout = 'merge_poly_part_' + str(j + 1) + '.lgi'
+            f = open(fout, 'w')
+
+    f.flush()
+    f.close()
+    os.remove(fout)  ###
 
     ## Write LaGriT file for merge parts of the mesh and remove duplicate points 
 
-    lagrit_input  = """
+    lagrit_input = """
 read / lagrit / part%d.lg / junk / binary
 addmesh / merge / mo_all / mo_all / cmo_tmp 
 cmo / delete / cmo_tmp 
 
     """
-    f = open('merge_rmpts.lgi','w')
-    for j in range(1,len(endis)+1):
-    	f.write(lagrit_input%(j))
+    f = open('merge_rmpts.lgi', 'w')
+    for j in range(1, len(endis) + 1):
+        f.write(lagrit_input % (j))
 
     # Append meshes complete
     lagrit_input = """ 
@@ -584,10 +584,10 @@ rmpoint / compress
 sort / mo_all / index / ascending / ikey / imt xic yic zic 
 reorder / mo_all / ikey 
 cmo / DELATT / mo_all / ikey
-"""%(h*10**-5, h*10**-3)
-     
-    if not visual_mode: 
-    	lagrit_input += """
+""" % (h * 10 ** -5, h * 10 ** -3)
+
+    if not visual_mode:
+        lagrit_input += """
 resetpts / itp 
 boundary_components 
 dump / full_mesh.gmv / mo_all
@@ -629,7 +629,7 @@ cmo / modatt / mo_all / evol_onen / ioflag / l
 dump / full_mesh_viz.inp / mo_all
 """
     else:
-    	lagrit_input += """
+        lagrit_input += """
 cmo / modatt / mo_all / icr1 / ioflag / l
 cmo / modatt / mo_all / isn1 / ioflag / l
 cmo / modatt / mo_all / itp1 / ioflag / l
@@ -646,14 +646,15 @@ finish
 
     return len(endis)
 
+
 def define_zones(h, domain):
     """	
     Creates and runs LaGriT script to define domain size
-    """	
-    eps = h*10**-3
-    parameters = (0.5*domain['x'] - eps, -0.5*domain['x'] + eps, \
-    	0.5*domain['y'] - eps, -0.5*domain['y'] + eps, \
-    	0.5*domain['z'] - eps, -0.5*domain['z'] + eps)
+    """
+    eps = h * 10 ** -3
+    parameters = (0.5 * domain['x'] - eps, -0.5 * domain['x'] + eps, \
+                  0.5 * domain['y'] - eps, -0.5 * domain['y'] + eps, \
+                  0.5 * domain['z'] - eps, -0.5 * domain['z'] + eps)
 
     lagrit_input = '''
 read / lagrit / full_mesh.lg / mo_all / binary 
@@ -674,39 +675,39 @@ pset/-all-/ zone / boundary / ascii
 finish
 '''
 
-    f=open('bound_zones.lgi','w')
-    f.write(lagrit_input%parameters)
+    f = open('bound_zones.lgi', 'w')
+    f.write(lagrit_input % parameters)
     f.flush()
     f.close()
-    os.system(os.environ['lagrit_dfn']+ " < bound_zones.lgi > boundary_output.txt ")
-    
+    os.system(os.environ['lagrit_dfn'] + " < bound_zones.lgi > boundary_output.txt ")
+
     # copies boundary zone files for PFLOTRAN 
-    copy('boundary_bottom.zone','pboundary_bottom.zone')
-    copy('boundary_left_w.zone','pboundary_left_w.zone')
-    copy('boundary_front_s.zone','pboundary_front_s.zone')
-    copy('boundary_right_e.zone','pboundary_right_e.zone')
-    copy('boundary_back_n.zone','pboundary_back_n.zone')
-    copy('boundary_top.zone','pboundary_top.zone')
-    
-    fall=open("allboundaries.zone","w")
-    #copy all but last 2 lines of boundary_top.zone in allboundaries.zone
-    fzone=open("boundary_top.zone","rb")
-    lines=fzone.readlines()
-    lines=lines[:-2]
-    fzone.close() 
+    copy('boundary_bottom.zone', 'pboundary_bottom.zone')
+    copy('boundary_left_w.zone', 'pboundary_left_w.zone')
+    copy('boundary_front_s.zone', 'pboundary_front_s.zone')
+    copy('boundary_right_e.zone', 'pboundary_right_e.zone')
+    copy('boundary_back_n.zone', 'pboundary_back_n.zone')
+    copy('boundary_top.zone', 'pboundary_top.zone')
+
+    fall = open("allboundaries.zone", "wb")
+    # copy all but last 2 lines of boundary_top.zone in allboundaries.zone
+    fzone = open("boundary_top.zone", "rb")
+    lines = fzone.readlines()
+    lines = lines[:-2]
+    fzone.close()
     fall.writelines(lines)
-    #copy all but frist and last 2 lines of boundary_bottom.zone in allboundaries.zone
-    files=['bottom','left_w','front_s','right_e']
+    # copy all but frist and last 2 lines of boundary_bottom.zone in allboundaries.zone
+    files = ['bottom', 'left_w', 'front_s', 'right_e']
     for f in files:
-            fzone=open("boundary_%s.zone"%f,"rb")
-            lines=fzone.readlines()
-            lines=lines[1:-2]
-            fzone.close() 
-            fall.writelines(lines)
-    fzone=open("boundary_back_n.zone","rb")
-    lines=fzone.readlines()
-    lines=lines[1:]
-    fzone.close() 
+        fzone = open("boundary_%s.zone" % f, "rb")
+        lines = fzone.readlines()
+        lines = lines[1:-2]
+        fzone.close()
+        fall.writelines(lines)
+    fzone = open("boundary_back_n.zone", "rb")
+    lines = fzone.readlines()
+    lines = lines[1:]
+    fzone.close()
     fall.writelines(lines)
     fall.close()
 
@@ -718,25 +719,25 @@ finish
     os.remove('boundary_front_s.zone')
     os.remove('boundary_back_n.zone')
 
-def edit_intersection_files(num_poly, keep_list):
 
-    pull_list = list(set(range(1,num_poly+ 1)) - set(keep_list))
+def edit_intersection_files(num_poly, keep_list):
+    pull_list = list(set(range(1, num_poly + 1)) - set(keep_list))
     os.chdir('intersections')
     for i in keep_list:
-    	filename = 'intersections_%s.inp'%str(i)
-    	print '--> Working on: ', filename
-    	lagrit_script = 'read / %s / mo1'%filename
-    	lagrit_script += '''
+        filename = 'intersections_%s.inp' % str(i)
+        print('--> Working on: ', filename)
+        lagrit_script = 'read / %s / mo1' % filename
+        lagrit_script += '''
 pset / pset2remove / attribute / b_a / 1,0,0 / eq / %d
-'''%pull_list[0]    
-    	for j in pull_list[1:]:
-    		lagrit_script += '''
+''' % pull_list[0]
+        for j in pull_list[1:]:
+            lagrit_script += '''
 pset / prune / attribute / b_a / 1,0,0 / eq / %d
 pset / pset2remove / union / pset2remove, prune
 #rmpoint / pset, get, prune
 pset / prune / delete
- '''%j
-    	lagrit_script += '''
+ ''' % j
+        lagrit_script += '''
 rmpoint / pset, get, pset2remove 
 rmpoint / compress
 
@@ -748,12 +749,11 @@ cmo / modatt / mo1 / icr / ioflag / l
 cmo / status / brief
 dump / intersections_%d_prune.inp / mo1
 finish
-'''%i
-    	
-    	file_name = 'prune_intersection.lgi'
-    	f = open(file_name, 'w')
-    	f.write(lagrit_script)
-    	f.flush()
-    	f.close()
-    	os.system(lagrit_path +  '< prune_intersection.lgi > out.txt')
+''' % i
 
+        file_name = 'prune_intersection.lgi'
+        f = open(file_name, 'w')
+        f.write(lagrit_script)
+        f.flush()
+        f.close()
+        os.system(lagrit_path + '< prune_intersection.lgi > out.txt')

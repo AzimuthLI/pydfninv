@@ -57,12 +57,12 @@ def mesh_network(self, production_mode=True, refine_factor=1, slope=2):
 if __name__ == "__main__":
     print ('='*80)
     os.system("date")
-    print '''Python Script to parse DFNGEN output and mesh it using LaGriT 
+    print('''Python Script to parse DFNGEN output and mesh it using LaGriT 
 
     Last Update August 1 2016 by Jeffrey Hyman
     EES - 16, LANL
     jhyman@lanl.gov
-    '''
+    ''')
     #Production mode "ON" outputs the final results for computation, 
     #cleaning up all the temporary attributes needed during refinement.
     #Note that the visualization mode must be "OFF" in order to run
@@ -88,7 +88,7 @@ if __name__ == "__main__":
         python_path = os.environ['python_dfn']
         #python_path = '/n/swdev/packages/Ubuntu-14.04-x86_64/anaconda-python/2.4.1/bin/python'
     except KeyError:
-        print 'python_dfn not defined'
+        print('python_dfn not defined')
         sys.exit(1)    
     try:    
         connectivity_test = os.environ['connect_test']
@@ -98,19 +98,19 @@ if __name__ == "__main__":
     
     if (len(sys.argv) == 1):
         filename = 'params.txt'
-        print "Number of CPU's to use (default):", ncpu
-        print "Reading in file (default):", filename 
+        print("Number of CPU's to use (default):", ncpu)
+        print("Reading in file (default):", filename)
 
     elif (len(sys.argv) == 2):
         filename = sys.argv[1] 
-        print "Reading in file:", filename 
-        print "Number of CPU's to use (default):", ncpu
+        print("Reading in file:", filename)
+        print("Number of CPU's to use (default):", ncpu)
         
     elif (len(sys.argv) == 3):
         filename = sys.argv[1] 
         ncpu = int(sys.argv[2])
-        print "Reading in file:", filename 
-        print "Number of CPU's to use:", ncpu
+        print("Reading in file:", filename )
+        print("Number of CPU's to use:", ncpu)
         
 
      ## input checking over

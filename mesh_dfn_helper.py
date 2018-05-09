@@ -63,23 +63,23 @@ def check_dudded_points(dudded):
         * True if the number of dudded points is correct 
         * False if the number of dudded points is incorrect 
     """
-    print "Checking that number of Dudded points is correct"
-    datafile = file('log_merge_all.txt')
+    print("Checking that number of Dudded points is correct")
+    datafile = open('log_merge_all.txt')
     for line in datafile:
         if 'Dudding' in line:
-            print 'From LaGriT: '
-            print line
+            print('From LaGriT: ')
+            print(line)
             break
     try:
         pts = int(line.split()[1])
     except:
         pts = int(line.split()[-1])
     if pts == dudded:
-        print '--> Correct Number of points removed \n'
+        print('--> Correct Number of points removed \n')
         return True
     else:
-        print 'ERROR! Incorrect Number of points removed'
-        print 'Expected Number ', dudded
+        print('ERROR! Incorrect Number of points removed')
+        print('Expected Number ', dudded)
         return False
     
 
@@ -98,12 +98,12 @@ def output_meshing_report(visual_mode):
     f = open('finalmesh.txt','w')
     f.write('The final mesh of DFN consists of: \n')
     if not visual_mode: 
-        print "Output files for flow calculations are written in :"
-        print "--> full_mesh.gmv"
-        print "--> full_mesh.inp"
-        print "--> full_mesh.lg"
-        print "--> full_mesh.uge"
-        print "--> tri_fracture.stor"
+        print("Output files for flow calculations are written in :")
+        print("--> full_mesh.gmv")
+        print("--> full_mesh.inp")
+        print("--> full_mesh.lg")
+        print("--> full_mesh.uge")
+        print("--> tri_fracture.stor")
 
         finp=open('full_mesh.inp','r')
         g = finp.readline()
@@ -123,9 +123,9 @@ def output_meshing_report(visual_mode):
         f.write(str(NumCoeff)+' geometrical coefficients / control volume faces. \n')
         fstor.close()
     else:
-        print "Output files for visualization are written in :"
-        print "--> reduced_mesh.gmv"
-        print "--> reduced_mesh.inp"
+        print("Output files for visualization are written in :")
+        print("--> reduced_mesh.gmv")
+        print("--> reduced_mesh.inp")
         finp=open('reduced_mesh.inp','r')
         g = finp.readline()
         g = g.split()
