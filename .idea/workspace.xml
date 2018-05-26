@@ -2,16 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="718b2e3d-ee63-4e84-817f-291e05b529b4" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/dfnworks.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model_generator.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run_mcmc.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/state.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/deprecated/drrjmcmc.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dfnWorks_input_templates/._define_user_ellipses.i" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dfnWorks_input_templates/define_user_ellipses.i" beforeDir="false" afterPath="$PROJECT_DIR$/dfnWorks_input_templates/define_user_ellipses.i" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pydfninv.py" beforeDir="false" afterPath="$PROJECT_DIR$/dfninverse.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -48,10 +39,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="dfninverse.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="dfninverse.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dfninverse.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="559">
+            <state relative-caret-position="4485">
               <caret line="283" column="31" selection-start-line="283" selection-start-column="31" selection-end-line="283" selection-end-column="31" />
             </state>
           </provider>
@@ -60,13 +51,22 @@
       <file leaf-file-name="model.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/model.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="290">
+            <state relative-caret-position="1395">
               <caret line="138" column="25" lean-forward="true" selection-start-line="138" selection-start-column="25" selection-end-line="138" selection-end-column="25" />
               <folding>
                 <element signature="e#0#33#0" expanded="true" />
                 <element signature="e#184#1620#0" />
                 <element signature="e#1650#2216#0" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="45">
+              <caret line="3" column="5" selection-start-line="3" selection-start-column="5" selection-end-line="3" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -131,7 +131,6 @@
         <option value="$PROJECT_DIR$/DRMCMC.py" />
         <option value="$PROJECT_DIR$/dfn_inversion.py" />
         <option value="$PROJECT_DIR$/distribution.py" />
-        <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/dfn_forwards.py" />
         <option value="$PROJECT_DIR$/meshdfn.py" />
         <option value="$PROJECT_DIR$/helper.py" />
@@ -150,6 +149,7 @@
         <option value="$PROJECT_DIR$/playground.py" />
         <option value="$PROJECT_DIR$/model.py" />
         <option value="$PROJECT_DIR$/dfninverse.py" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -395,8 +395,8 @@
       <window_info anchor="right" id="Run" order="8" visible="true" weight="0.45101172" />
       <window_info anchor="bottom" id="Version Control" order="6" weight="0.32935324" />
       <window_info anchor="bottom" id="Python Console" order="7" weight="0.49154228" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.5880597" />
-      <window_info content_ui="combo" id="Project" order="0" weight="0.19861555" />
+      <window_info anchor="bottom" id="Terminal" order="8" visible="true" weight="0.5880597" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19861555" />
       <window_info anchor="bottom" id="Docker" order="0" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="5" weight="0.32960597" />
       <window_info anchor="right" id="SciView" order="0" sideWeight="0.49931034" weight="0.31363153" />
@@ -623,13 +623,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/deprecated/drrjmcmc.py" />
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" selection-start-line="3" selection-end-line="3" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/dfnWorks_input_templates/define_user_ellipses.i">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
@@ -676,9 +669,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/deprecated/state.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="461">
+          <caret line="37" column="41" lean-forward="true" selection-start-line="37" selection-start-column="41" selection-end-line="40" selection-end-column="73" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/deprecated/run_mcmc.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1726">
+          <caret line="115" lean-forward="true" selection-start-line="115" selection-end-line="115" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dfninverse.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4485">
+          <caret line="283" column="31" selection-start-line="283" selection-start-column="31" selection-end-line="283" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/model.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="290">
+        <state relative-caret-position="1395">
           <caret line="138" column="25" lean-forward="true" selection-start-line="138" selection-start-column="25" selection-end-line="138" selection-end-column="25" />
           <folding>
             <element signature="e#0#33#0" expanded="true" />
@@ -688,24 +702,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/state.py">
+    <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="461">
-          <caret line="37" column="41" lean-forward="true" selection-start-line="37" selection-start-column="41" selection-end-line="40" selection-end-column="73" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/run_mcmc.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1770">
-          <caret line="115" lean-forward="true" selection-start-line="115" selection-end-line="115" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dfninverse.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="559">
-          <caret line="283" column="31" selection-start-line="283" selection-start-column="31" selection-end-line="283" selection-end-column="31" />
+        <state relative-caret-position="45">
+          <caret line="3" column="5" selection-start-line="3" selection-start-column="5" selection-end-line="3" selection-end-column="5" />
         </state>
       </provider>
     </entry>
