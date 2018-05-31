@@ -91,8 +91,14 @@ if __name__ == '__main__':
 
     input_file_path = '/Volumes/SD_Card/Thesis_project/synthetic_model/inputs'
 
-    run_dfnworks_command = 'python3 dfnworks.py -j {0} -i {1} -n {2}'.format(syn_model_path, input_file_path, ncpu)
-    subprocess.call(run_dfnworks_command, shell=True)
+    run_dfnworks_command = ['python3', 'dfnworks.py',
+                            '-j', syn_model_path,
+                            '-i', input_file_path,
+                            '-n', str(ncpu)
+                           ]
+
+    p = subprocess.Popen(run_dfnworks_command)
+    p.wait()
 
     # Read pressure data from the outputs
     mesh_file_path = syn_model_path + '/full_mesh.vtk'

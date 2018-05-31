@@ -146,7 +146,7 @@ FLOW_CONDITION inflow
   TYPE
     PRESSURE dirichlet
   /
-  PRESSURE 2.d6
+  PRESSURE 5.d6
 END
 
 #=========================== condition couplers ===============================

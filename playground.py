@@ -1,28 +1,17 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
+# import vtk
+import vtk
+from vtk.util.misc import vtkGetDataRoot
 
-def exp_normal(x, mu, std):
+def test(**kwargs):
+    a, b, c = kwargs.get('arg', [10, 20, 30])
+    print(a, b, c)
 
-    y = np.exp(-0.5*(x-mu)**2/std)
-
-    return y#/(np.sqrt(2*np.pi)*std)
-
-def log_normal(y):
-
-    return np.log(y)
 
 if __name__ == '__main__':
 
-    df = pd.read_csv('/Volumes/SD_Card/Thesis_project/synthetic_model/output/obs_readings.csv', index_col=0).values / 1e6
-    print(df)
+    test(arg=[3,4,5])
 
-    df += np.random.normal(0, 0.01, df.shape)
-    print(df[:, 1])
 
-    plt.plot(df[:, 0])
-    plt.plot(df[:, 1])
-    plt.plot(df[:, 2])
-    plt.plot(df[:, 3])
-    plt.plot(df[:, 4])
-    plt.show()

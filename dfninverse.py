@@ -4,12 +4,14 @@ from time import time
 import pandas as pd
 import numpy as np
 from subprocess import DEVNULL, STDOUT, Popen
-
+from path import define_paths
 class DFNINVERSE:
 
-    os.environ['PYDFNINV_PATH'] = '/Volumes/SD_Card/Thesis_project/pydfninv'
+
 
     def __init__(self, project_path, observation_data_path, observe_points, ncpu=1):
+
+        define_paths()
 
         self.project = project_path
         self.forward_project = self.project + '/forward_simulation'
@@ -21,7 +23,7 @@ class DFNINVERSE:
         self.mesh_file_path = self.forward_project + '/full_mesh.vtk'
         self.flow_files_path = self.forward_project + '/PFLOTRAN/parsed_vtk/'
         self.sim_results = self.forward_project + "/forward_results.csv"
-        self.mcmc_log = self.project + "/mcmc_log.csv"
+        self.mcmc_log = self.project + "/mcmc_log.txt"
         self.__make_project_dir()
 
     def __make_project_dir(self):
@@ -54,9 +56,6 @@ class DFNINVERSE:
                      self.forward_input_file + '/dfn_explicit.in')
         shutil.copy2(self.template_files + '/PTDFN_control.dat',
                      self.forward_input_file + '/PTDFN_control.dat')
-
-        df_log = pd.DataFrame(columns=['center_x', 'center_y', 'center_z', 'phi', 'psi', 'radius'])
-        df_log.to_csv(self.mcmc_log)
 
     def run_forward_simulation(self, input_parameters):
 
@@ -257,31 +256,28 @@ class DFNINVERSE:
     #     Popen(['rm', '-r', self.forward_project_old + '/* '])
     #     Popen(['mv', self.forward_project_new + '/*', self.forward_project_old + '/'])
 
-    def save_accepted_model(self, status, model_id):
+    def save_accepted_model(self, status, model_id, save_flag):
         model_dir = self.accept_model_path + '/model_' + str(model_id)
-        os.mkdir(model_dir)
+        files_to_keep = ['full_mesh.inp', 'full_mesh.vtk', '/PFLOTRAN/parsed_vtk/', '/forward_results.csv']
 
-        files_to_keep = ['full_mesh.inp', '/PFLOTRAN/parsed_vtk/', '/forward_results.csv']
-
-        for file in files_to_keep:
-            try:
-                src = self.forward_project + '/' + file
-                if os.path.isdir(src):
-                    shutil.copytree(src, model_dir+'/'+file)
-                else:
-                    shutil.copy2(src, model_dir)
-            except Exception:
-                continue
-        shutil.copy2(self.forward_input_file + '/user_define_fractures.dat', model_dir)
+        if save_flag:
+            os.mkdir(model_dir)
+            for file in files_to_keep:
+                try:
+                    src = self.forward_project + '/' + file
+                    if os.path.isdir(src):
+                        shutil.copytree(src, model_dir+'/'+file)
+                    else:
+                        shutil.copy2(src, model_dir)
+                except Exception:
+                    continue
+            shutil.copy2(self.forward_input_file + '/user_define_fractures.dat', model_dir)
 
         # write mcmc_log
-        fracture_index = list(range(len(status)))
-        model_index = model_id
-        index = pd.MultiIndex.from_product([model_index, fracture_index], names=['model', 'fracture'])
-        df_current = pd.DataFrame(status, columns=['center_x', 'center_y', 'center_z', 'phi', 'psi', 'radius'], index=index)
-        df = pd.read_csv(self.mcmc_log)
-        df = df.append(df_current)
-        df.to_csv(self.mcmc_log)
+        s = status
+        with open(self.mcmc_log, 'a+') as logfile:
+            logfile.write('{0}\n{1}\n{2}\n{3}\n'.format('*'*60, s['model_id'], s['RMS'], s['fractures']))
+
 
 
 def update_progress(i, total, tic):
@@ -309,21 +305,21 @@ def update_progress(i, total, tic):
     sys.stdout.flush()
 
 
-if __name__ == '__main__':
-
-    obs_points = [(0.4, 0.4, 0.2),
-                  (0.4, 0.4, -0.2),
-                  (0.4, -0.4, 0.2),
-                  (0.4, -0.4, -0.2),
-                  (-0.15, -0.08, 0.2)]
-
-    dfninv = DFNINVERSE('/Volumes/SD_Card/Thesis_project/dfn_test',
-                        '/Volumes/SD_Card/Thesis_project/pydfninv/test_fieldobs.txt', obs_points)
-
-    obs_frac = {'obs_1': [-0.4, 0, 0, 0, np.pi/2, np.nan],
-                'obs_2': [0, 0, 0, 0, 0, np.nan],
-                'obs_3': [0.6, 0, 0.2, 0, np.pi/2, np.nan],
-                'obs_4': [0.4, 0, -0.2, 0, np.pi/2., np.nan]}
+# if __name__ == '__main__':
+#
+#     obs_points = [(0.4, 0.4, 0.2),
+#                   (0.4, 0.4, -0.2),
+#                   (0.4, -0.4, 0.2),
+#                   (0.4, -0.4, -0.2),
+#                   (-0.15, -0.08, 0.2)]
+#
+#     dfninv = DFNINVERSE('/Volumes/SD_Card/Thesis_project/dfn_test',
+#                         '/Volumes/SD_Card/Thesis_project/pydfninv/test_fieldobs.txt', obs_points)
+#
+#     obs_frac = {'obs_1': [-0.4, 0, 0, 0, np.pi/2, np.nan],
+#                 'obs_2': [0, 0, 0, 0, 0, np.nan],
+#                 'obs_3': [0.6, 0, 0.2, 0, np.pi/2, np.nan],
+#                 'obs_4': [0.4, 0, -0.2, 0, np.pi/2., np.nan]}
 
     # s = State(obs_frac)
     #
