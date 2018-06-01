@@ -2,17 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="718b2e3d-ee63-4e84-817f-291e05b529b4" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/helper.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model_deprecated.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/parse_mcmc_log.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/path.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dfnWorks_input_templates/dfn_explicit.in" beforeDir="false" afterPath="$PROJECT_DIR$/dfnWorks_input_templates/dfn_explicit.in" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.ipynb_checkpoints/Model-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/.ipynb_checkpoints/Model-checkpoint.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Model.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dfninverse.py" beforeDir="false" afterPath="$PROJECT_DIR$/dfninverse.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dfnworks.py" beforeDir="false" afterPath="$PROJECT_DIR$/dfnworks.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flow.py" beforeDir="false" afterPath="$PROJECT_DIR$/deprecated/flow.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/helper.py" beforeDir="false" afterPath="$PROJECT_DIR$/helper.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model_deprecated.py" beforeDir="false" afterPath="$PROJECT_DIR$/deprecated/model_deprecated.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/model_generator.py" beforeDir="false" afterPath="$PROJECT_DIR$/model_generator.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/playground.py" beforeDir="false" afterPath="$PROJECT_DIR$/playground.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/path.py" beforeDir="false" afterPath="$PROJECT_DIR$/path.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/playground.py" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -26,7 +29,7 @@
     <SUITE FILE_PATH="coverage/pydfninv$model__1_.coverage" NAME="model (1) Coverage Results" MODIFIED="1527682917064" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/pydfninv$playground.coverage" NAME="playground Coverage Results" MODIFIED="1527689909242" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/pydfninv$pydfninv.coverage" NAME="pydfninv Coverage Results" MODIFIED="1526515147583" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/pydfninv$vtkanimation.coverage" NAME="vtkanimation Coverage Results" MODIFIED="1527698356718" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/pydfninv$vtkanimation.coverage" NAME="vtkanimation Coverage Results" MODIFIED="1527870597070" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/pydfninv$drrj_mcmc.coverage" NAME="drrj_mcmc Coverage Results" MODIFIED="1524845932116" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/pydfninv$dfn_inversion.coverage" NAME="dfn_inversion Coverage Results" MODIFIED="1525719945255" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/pydfninv$model_generator.coverage" NAME="model_generator Coverage Results" MODIFIED="1527692541099" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
@@ -54,38 +57,71 @@
       <file leaf-file-name="dfninverse.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dfninverse.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="12" selection-start-line="12" selection-end-line="12" />
+            <state relative-caret-position="510">
+              <caret line="277" lean-forward="true" selection-start-line="277" selection-end-line="277" />
               <folding>
                 <element signature="e#0#27#0" expanded="true" />
+                <element signature="e#308#1017#0" />
+                <element signature="e#1062#2537#0" />
+                <element signature="e#2604#3160#0" />
+                <element signature="e#3221#3743#0" />
+                <element signature="e#3808#5621#0" />
+                <element signature="e#5690#5912#0" />
+                <element signature="e#5988#6939#0" />
+                <element signature="e#6999#7880#0" />
+                <element signature="e#7950#8729#0" />
+                <element signature="e#8790#9438#0" />
+                <element signature="e#9700#10589#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="model.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="path.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/path.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="390">
+              <caret line="29" column="93" selection-start-line="29" selection-start-column="93" selection-end-line="29" selection-end-column="93" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="helper.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/helper.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="285">
+              <caret line="22" column="27" lean-forward="true" selection-start-line="22" selection-start-column="27" selection-end-line="22" selection-end-column="27" />
+              <folding>
+                <element signature="e#0#10#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="model.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/model.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="333">
-              <caret line="199" column="31" selection-start-line="199" selection-start-column="31" selection-end-line="199" selection-end-column="31" />
+            <state relative-caret-position="268">
+              <caret line="104" lean-forward="true" selection-start-line="104" selection-end-line="104" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
-                <element signature="e#1749#2413#0" />
-                <element signature="e#2455#3088#0" />
+                <element signature="e#276#1705#0" />
+                <element signature="e#1762#2426#0" />
+                <element signature="e#2468#3101#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="vtkanimation.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/vtkanimation.py">
+      <file leaf-file-name="model_generator.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/model_generator.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="29" column="37" selection-start-line="29" selection-start-column="37" selection-end-line="29" selection-end-column="37" />
+            <state relative-caret-position="375">
+              <caret line="97" column="28" lean-forward="true" selection-start-line="97" selection-start-column="28" selection-end-line="97" selection-end-column="28" />
               <folding>
-                <element signature="e#0#37#0" expanded="true" />
-                <element signature="e#115#801#0" />
-                <element signature="e#847#4101#0" />
+                <element signature="e#201#896#0" />
+                <element signature="e#964#1680#0" />
+                <element signature="e#1739#2280#0" />
               </folding>
             </state>
           </provider>
@@ -148,16 +184,17 @@
         <option value="$PROJECT_DIR$/pydfninv.py" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/parse_mcmc_log.py" />
-        <option value="$PROJECT_DIR$/path.py" />
-        <option value="$PROJECT_DIR$/dfninverse.py" />
         <option value="$PROJECT_DIR$/model_deprecated.py" />
-        <option value="$PROJECT_DIR$/vtkanimation.py" />
         <option value="$PROJECT_DIR$/obs_reading.py" />
         <option value="$PROJECT_DIR$/playground.py" />
-        <option value="$PROJECT_DIR$/helper.py" />
         <option value="$PROJECT_DIR$/model_generator.py" />
-        <option value="$PROJECT_DIR$/dfnworks.py" />
         <option value="$PROJECT_DIR$/model.py" />
+        <option value="$PROJECT_DIR$/Model.ipynb" />
+        <option value="$PROJECT_DIR$/vtkanimation.py" />
+        <option value="$PROJECT_DIR$/helper.py" />
+        <option value="$PROJECT_DIR$/dfnworks.py" />
+        <option value="$PROJECT_DIR$/dfninverse.py" />
+        <option value="$PROJECT_DIR$/path.py" />
       </list>
     </option>
   </component>
@@ -171,8 +208,10 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds" fullScreen="true">
-    <option name="width" value="1280" />
-    <option name="height" value="800" />
+    <option name="x" value="-348" />
+    <option name="y" value="-1080" />
+    <option name="width" value="1920" />
+    <option name="height" value="1080" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -180,6 +219,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -191,7 +231,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -287,7 +326,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/model_deprecated.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/deprecated/model_deprecated.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -397,23 +436,23 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1280" height="800" extended-state="0" />
+    <frame x="-348" y="-1080" width="1920" height="1080" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="10" weight="0.3287483" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" weight="0.32935324" />
       <window_info anchor="bottom" id="Database Changes" order="1" show_stripe_button="false" />
+      <window_info anchor="right" id="Run" order="8" weight="0.23162939" />
       <window_info anchor="bottom" id="Version Control" order="6" weight="0.32935324" />
       <window_info anchor="bottom" id="Python Console" order="7" weight="0.49154228" />
-      <window_info anchor="right" id="Run" order="8" weight="0.36421725" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.4318408" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.23424879" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.43172413" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15867944" />
       <window_info anchor="bottom" id="Docker" order="0" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="5" weight="0.32960597" />
       <window_info anchor="right" id="SciView" order="0" sideWeight="0.49931034" weight="0.5005325" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Favorites" order="2" side_tool="true" weight="0.32960597" />
       <window_info anchor="right" id="Debug" order="7" weight="0.39776358" />
+      <window_info id="Favorites" order="2" side_tool="true" weight="0.32960597" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="3" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" order="1" weight="0.4" />
@@ -469,13 +508,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/deprecated/dfn_forwards.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="6" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/deprecated/dfn_inversion.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="960">
@@ -547,20 +579,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/run_meshing.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-638">
-          <caret line="153" lean-forward="true" selection-start-line="153" selection-end-line="153" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lagrit_scripts.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="691" column="41" selection-start-line="691" selection-start-column="41" selection-end-line="691" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/deprecated/helper.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="467">
@@ -575,36 +593,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mesh_dfn_helper.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="312">
-          <caret line="111" column="35" lean-forward="true" selection-start-line="111" selection-start-column="35" selection-end-line="111" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/deprecated/drrjmcmc.py" />
-    <entry file="file://$PROJECT_DIR$/dfnWorks_input_templates/define_user_ellipses.i">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" selection-start-line="7" selection-end-line="7" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/dfnWorks_input_templates/define_user_ellipses.i" />
     <entry file="file://$PROJECT_DIR$/dfnWorks_input_templates/write_input_test.dat" />
-    <entry file="file://$PROJECT_DIR$/dfnWorks_input_templates/gen_user_ellipses.i">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="545">
-          <caret line="62" column="16" lean-forward="true" selection-start-line="62" selection-start-column="16" selection-end-line="62" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dfnWorks_input_templates/define_4_user_ellipses.dat">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="704">
-          <caret line="48" column="18" selection-start-line="48" selection-start-column="18" selection-end-line="48" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/dfnWorks_input_templates/gen_user_ellipses.i" />
+    <entry file="file://$PROJECT_DIR$/dfnWorks_input_templates/define_4_user_ellipses.dat" />
     <entry file="file://$PROJECT_DIR$/deprecated/state.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="461">
@@ -626,16 +619,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/flow.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="928">
-          <caret line="141" column="49" selection-start-line="141" selection-start-column="49" selection-end-line="141" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/parse_mcmc_log.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/deprecated/obs_reading.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="542">
@@ -643,20 +626,15 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/path.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="23" selection-start-line="23" selection-end-line="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/model_deprecated.py">
+    <entry file="file://$PROJECT_DIR$/deprecated/model_deprecated.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="763">
           <caret line="213" selection-start-line="213" selection-end-line="213" />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/obs_reading.py" />
+    <entry file="file://$PROJECT_DIR$/parse_mcmc_log.py" />
     <entry file="file://$PROJECT_DIR$/Model.ipynb">
       <provider selected="true" editor-type-id="ipnb-editor">
         <state>
@@ -664,78 +642,139 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/obs_reading.py">
+    <entry file="file://$PROJECT_DIR$/deprecated/flow.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="349">
-          <caret line="122" column="29" lean-forward="true" selection-start-line="122" selection-start-column="29" selection-end-line="122" selection-end-column="29" />
+        <state>
+          <caret column="7" lean-forward="true" selection-start-column="7" selection-end-column="46" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/playground.py">
+    <entry file="file://$PROJECT_DIR$/mesh_dfn_helper.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="19" selection-start-line="14" selection-start-column="19" selection-end-line="14" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/helper.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="81" column="16" lean-forward="true" selection-start-line="81" selection-start-column="16" selection-end-line="81" selection-end-column="16" />
+        <state>
           <folding>
-            <element signature="e#0#10#0" expanded="true" />
-            <element signature="e#132#1688#0" />
-            <element signature="e#1716#2122#0" />
-            <element signature="e#2908#5953#0" />
+            <element signature="e#153#164#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/dfnworks.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="780">
-          <caret line="52" column="22" lean-forward="true" selection-start-line="52" selection-start-column="22" selection-end-line="52" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/model_generator.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="95" column="50" selection-start-line="95" selection-start-column="50" selection-end-line="95" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dfninverse.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="12" selection-start-line="12" selection-end-line="12" />
+        <state relative-caret-position="865">
+          <caret line="825" lean-forward="true" selection-start-line="825" selection-end-line="825" />
           <folding>
-            <element signature="e#0#27#0" expanded="true" />
+            <element signature="e#0#60#0" expanded="true" />
+            <element signature="e#231#422#0" />
+            <element signature="e#902#1711#0" />
+            <element signature="e#1745#3304#0" />
+            <element signature="e#4861#6208#0" />
+            <element signature="e#7025#9067#0" />
+            <element signature="e#9137#14807#0" />
+            <element signature="e#14854#15714#0" />
+            <element signature="e#15832#20801#0" />
+            <element signature="e#20836#21562#0" />
+            <element signature="e#21605#22199#0" />
+            <element signature="e#22243#22908#0" />
+            <element signature="e#22948#24702#0" />
+            <element signature="e#24765#26827#0" />
+            <element signature="e#26881#28719#0" />
+            <element signature="e#28789#30298#0" />
+            <element signature="e#6249#7568#0" />
           </folding>
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lagrit_scripts.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="494" selection-start-line="494" selection-end-line="494" />
+          <folding>
+            <element signature="e#331#4554#0" />
+            <element signature="e#4646#16380#0" />
+            <element signature="e#16416#17309#0" />
+            <element signature="e#17377#22191#0" />
+            <element signature="e#22227#24657#0" />
+            <element signature="e#24714#25830#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/run_meshing.py">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/vtkanimation.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="29" column="37" selection-start-line="29" selection-start-column="37" selection-end-line="29" selection-end-column="37" />
-          <folding>
-            <element signature="e#0#37#0" expanded="true" />
-            <element signature="e#115#801#0" />
-            <element signature="e#847#4101#0" />
-          </folding>
+        <state relative-caret-position="1890">
+          <caret line="130" column="58" selection-start-line="130" selection-start-column="58" selection-end-line="130" selection-end-column="58" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/model.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="333">
-          <caret line="199" column="31" selection-start-line="199" selection-start-column="31" selection-end-line="199" selection-end-column="31" />
+        <state relative-caret-position="268">
+          <caret line="104" lean-forward="true" selection-start-line="104" selection-end-line="104" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
-            <element signature="e#1749#2413#0" />
-            <element signature="e#2455#3088#0" />
+            <element signature="e#276#1705#0" />
+            <element signature="e#1762#2426#0" />
+            <element signature="e#2468#3101#0" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model_generator.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="97" column="28" lean-forward="true" selection-start-line="97" selection-start-column="28" selection-end-line="97" selection-end-column="28" />
+          <folding>
+            <element signature="e#201#896#0" />
+            <element signature="e#964#1680#0" />
+            <element signature="e#1739#2280#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/helper.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="22" column="27" lean-forward="true" selection-start-line="22" selection-start-column="27" selection-end-line="22" selection-end-column="27" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/playground.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dfninverse.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="277" lean-forward="true" selection-start-line="277" selection-end-line="277" />
+          <folding>
+            <element signature="e#0#27#0" expanded="true" />
+            <element signature="e#308#1017#0" />
+            <element signature="e#1062#2537#0" />
+            <element signature="e#2604#3160#0" />
+            <element signature="e#3221#3743#0" />
+            <element signature="e#3808#5621#0" />
+            <element signature="e#5690#5912#0" />
+            <element signature="e#5988#6939#0" />
+            <element signature="e#6999#7880#0" />
+            <element signature="e#7950#8729#0" />
+            <element signature="e#8790#9438#0" />
+            <element signature="e#9700#10589#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/path.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="29" column="93" selection-start-line="29" selection-start-column="93" selection-end-line="29" selection-end-column="93" />
         </state>
       </provider>
     </entry>

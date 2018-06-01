@@ -1,5 +1,6 @@
 import vtk
 from math import sqrt
+from time import time
 import matplotlib as mpl
 SPINE_COLOR = 'gray'
 
@@ -180,3 +181,27 @@ def vtk_meshrender(mesh_file, obs_points, **kwargs):
     renderer.SetBackground(1, 1, 1)  # Set background to white
 
     return renderer
+
+def update_progress(i, total, tic):
+    progress = i / total
+    toc = time()
+    dt = toc - tic
+
+    barLength = 20  # Modify this to change the length of the progress bar
+    status = ""
+    if isinstance(progress, int):
+        progress = float(progress)
+    if not isinstance(progress, float):
+        progress = 0
+        status = "error: progress var must be float\r\n"
+    if progress < 0:
+        progress = 0
+        status = "Halt...\r\n"
+    if progress >= 1:
+        progress = 1
+        status = "Done...\r\n"
+    block = int(round(barLength * progress))
+    text = "\rPercent: [{0}] {1:.2f}% {2}, {3} / {4} finished. Average time: {5:.5f}" \
+        .format("#" * block + "-" * (barLength - block), progress * 100, status, i, total, dt / i)
+    sys.stdout.write(text)
+    sys.stdout.flush()

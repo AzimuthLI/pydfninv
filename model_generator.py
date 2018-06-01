@@ -87,9 +87,9 @@ if __name__ == '__main__':
 
     syn_model_path = '/Volumes/SD_Card/Thesis_project/synthetic_model/output'
 
-    ncpu = 1
-
     input_file_path = '/Volumes/SD_Card/Thesis_project/synthetic_model/inputs'
+
+    ncpu = 1
 
     run_dfnworks_command = ['python3', 'dfnworks.py',
                             '-j', syn_model_path,

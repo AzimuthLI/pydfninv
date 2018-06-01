@@ -37,7 +37,7 @@ def prior_probability(s, **kwargs):
 
         prior = (1 / diff(n_range)) * \
                 (diff(angle_range[0, :]) * diff(angle_range[1, :]) *
-                 diff(center_range[0, :] * center_range[1, :] * center_range[2, :]) *
+                 diff(center_range[0, :]) * diff(center_range[1, :]) * diff(center_range[2, :]) *
                  diff(radius_range)
                  ) ** (-n_total)
     else:

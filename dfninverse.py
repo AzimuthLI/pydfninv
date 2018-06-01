@@ -1,13 +1,10 @@
-import os, shutil, vtk, sys
+import os, shutil, vtk
 from string import Template
-from time import time
 import pandas as pd
 import numpy as np
-from subprocess import DEVNULL, STDOUT, Popen
+from subprocess import STDOUT, Popen
 from path import define_paths
 class DFNINVERSE:
-
-
 
     def __init__(self, project_path, observation_data_path, observe_points, ncpu=1):
 
@@ -57,7 +54,7 @@ class DFNINVERSE:
         shutil.copy2(self.template_files + '/PTDFN_control.dat',
                      self.forward_input_file + '/PTDFN_control.dat')
 
-    def run_forward_simulation(self, input_parameters):
+    def run_forward(self, input_parameters):
 
         self.__write_forward_inputs(input_parameters)
 
@@ -94,7 +91,7 @@ class DFNINVERSE:
 
         n_fracs = parameter_table.shape[0]
 
-        input_param = { }
+        input_param = {}
 
         input_param['nUserEll'] = n_fracs
         input_param['Aspect_Ratio'] = '\n'.join(str(e) for e in (np.ones(n_fracs) * 0.6).tolist())
@@ -140,7 +137,7 @@ class DFNINVERSE:
 
         return None
 
-    def read_simulation_results(self, save_mode=True, **kwargs):
+    def read_forward(self, save_mode=True, **kwargs):
 
         variable_name = kwargs.get('variable_name', 'Liquid_Pressure')
 
@@ -251,10 +248,6 @@ class DFNINVERSE:
         writer.SetInputData(filter.GetOutput())
         writer.SetFileName(forward_project + '/obs_points.vtk')
         writer.Update()
-    #
-    # def swap_states(self):
-    #     Popen(['rm', '-r', self.forward_project_old + '/* '])
-    #     Popen(['mv', self.forward_project_new + '/*', self.forward_project_old + '/'])
 
     def save_accepted_model(self, status, model_id, save_flag):
         model_dir = self.accept_model_path + '/model_' + str(model_id)
@@ -280,29 +273,7 @@ class DFNINVERSE:
 
 
 
-def update_progress(i, total, tic):
-    progress = i / total
-    toc = time()
-    dt = toc - tic
 
-    barLength = 20  # Modify this to change the length of the progress bar
-    status = ""
-    if isinstance(progress, int):
-        progress = float(progress)
-    if not isinstance(progress, float):
-        progress = 0
-        status = "error: progress var must be float\r\n"
-    if progress < 0:
-        progress = 0
-        status = "Halt...\r\n"
-    if progress >= 1:
-        progress = 1
-        status = "Done...\r\n"
-    block = int(round(barLength * progress))
-    text = "\rPercent: [{0}] {1:.2f}% {2}, {3} / {4} finished. Average time: {5:.5f}" \
-        .format("#" * block + "-" * (barLength - block), progress * 100, status, i, total, dt / i)
-    sys.stdout.write(text)
-    sys.stdout.flush()
 
 
 # if __name__ == '__main__':
