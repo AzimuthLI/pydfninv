@@ -2,7 +2,8 @@ import os, vtk, subprocess
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-
+from numpy.random import normal
+from helper import latexify
 
 # Get the id of observation points in mesh file
 def get_observation_ids(mesh_file, obs_points):
@@ -62,7 +63,7 @@ def gen_3d_obs_points_plot(obs_points, save_path):
     sphere = vtk.vtkSphereSource()
     sphere.SetPhiResolution(21)
     sphere.SetThetaResolution(21)
-    sphere.SetRadius(.01)
+    sphere.SetRadius(0.01)
 
     filters = vtk.vtkAppendPolyData()
 
@@ -84,10 +85,10 @@ def gen_3d_obs_points_plot(obs_points, save_path):
 
 
 if __name__ == '__main__':
-
-    syn_model_path = '/Volumes/SD_Card/Thesis_project/synthetic_model/output'
-
-    input_file_path = '/Volumes/SD_Card/Thesis_project/synthetic_model/inputs'
+    #
+    syn_model_path = '/Volumes/SD_Card/Thesis_project/synthetic_model_3/output'
+    #
+    input_file_path = '/Volumes/SD_Card/Thesis_project/synthetic_model_3/inputs'
 
     ncpu = 1
 
@@ -96,10 +97,10 @@ if __name__ == '__main__':
                             '-i', input_file_path,
                             '-n', str(ncpu)
                            ]
-
-    p = subprocess.Popen(run_dfnworks_command)
-    p.wait()
-
+    #
+    # p = subprocess.Popen(run_dfnworks_command)
+    # p.wait()
+    # #
     # Read pressure data from the outputs
     mesh_file_path = syn_model_path + '/full_mesh.vtk'
     flow_files_path = syn_model_path + '/PFLOTRAN/parsed_vtk/'
@@ -109,7 +110,10 @@ if __name__ == '__main__':
                       (0.4, -0.4, 0.2),
                       (0.4, -0.4, -0.2),
                       (-0.15, -0.08, 0.2),
-                      (-0.15, -0.08, 0)]
+                      (-0.15, -0.08, 0)] * 10
+
+    # observe_points = [(-0.05, 0.2, 0.05), (-0.11, 0.4, 0.21), (-0.3, -0.2, 0.1), (0.2, -0.1, 0.4),
+    #                   (-0.4, 0.2, -0.2), (0.2, -0.2, 0.2), (0.3, 0.2, -0.3)]
 
     variable_name = ['Liquid_Pressure']
 
@@ -127,19 +131,26 @@ if __name__ == '__main__':
 
     df_pressure.columns = columns_name
 
+    df_pressure += normal(0, 0.1, size=df_pressure.shape)
+
     df_pressure.to_csv(syn_model_path+"/obs_readings.csv")
-
+    #
     gen_3d_obs_points_plot(observe_points, syn_model_path)
+    # df_pressure = pd.read_csv(syn_model_path+"/obs_readings.csv", index_col=0)
+    df_pressure = df_pressure / 1e6
 
+    # columns_name = df_pressure.columns
     # plot observation
-    fig = plt.figure(figsize=[16, 12])
+    latexify(fig_width=5.1)
+    fig = plt.figure()
 
     for col in columns_name:
-        plt.plot(np.arange(0, len(df_pressure)), df_pressure[col], label=col)
+        plt.plot(np.arange(0, len(df_pressure)), df_pressure[col], label='Station ' + col.split('_')[-1])
 
-    plt.xlabel('time')
-    plt.ylabel(variable_name)
-    plt.legend()
-    plt.savefig(syn_model_path + '/observation.png')
-    plt.close(fig)
+    plt.xlabel('Time Step')
+    plt.ylabel('Pressure(MPa)')
+    plt.title('Synthethic Observation')
+    plt.legend(loc=7, bbox_to_anchor=(1, 0.65))
+    plt.savefig(syn_model_path + '/observation.pdf')
+    # plt.close(fig)
     plt.show()

@@ -1,76 +1,12 @@
 import numpy as np
 from dfninverse import DFNINVERSE
-from numpy.random import randint, uniform, normal, random
-from numpy.linalg import det, inv, norm
-import matplotlib.pyplot as plt
+from numpy.random import randint, normal, random
+from numpy.linalg import det, inv
 from numpy import diff
-from helper import latexify
+from scipy import stats
+import pickle
 
-
-def prior_probability(s, **kwargs):
-    # define the range of the value interval
-    n_range = kwargs.get('n_range', np.asarray([0, 10]))
-    center_range = kwargs.get('x_range', np.asarray([[-0.5, 0.5], [-0.5, 0.5], [-0.5, 0.5]]))
-    angle_range = kwargs.get('angle_range', np.asarray([[0, np.pi], [0, np.pi]]))
-    radius_range = kwargs.get('radius_range', np.asarray([0.5, 1]))
-
-    lower_bound = np.asarray([center_range[0, 0],
-                            center_range[1, 0],
-                            center_range[2, 0],
-                            angle_range[0, 0],
-                            angle_range[1, 0],
-                            radius_range[0]])
-
-    upper_bound = np.asarray([center_range[0, 1],
-                            center_range[1, 1],
-                            center_range[2, 1],
-                            angle_range[0, 1],
-                            angle_range[1, 1],
-                            radius_range[1]])
-
-    n_total = s.shape[0]
-
-    if (n_total < n_range[1]) & \
-            (n_total > n_range[0]) & \
-            np.all((s - lower_bound) >= 0) & \
-            np.all((s - upper_bound) <= 0):
-
-        prior = (1 / diff(n_range)) * \
-                (diff(angle_range[0, :]) * diff(angle_range[1, :]) *
-                 diff(center_range[0, :]) * diff(center_range[1, :]) * diff(center_range[2, :]) *
-                 diff(radius_range)
-                 ) ** (-n_total)
-    else:
-        prior = 0
-
-    return prior
-
-
-def likelihood_ratio(syn1, syn2, obs, **kwargs):
-
-    if syn1 is None:
-        syn1 = np.zeros_like(obs)
-
-    if syn2 is None:
-        syn2 = np.zeros_like(obs)
-
-    n_station = obs.shape[1]
-    n_timestep = obs.shape[0]
-
-    st = kwargs.get('sig_time',  0.01*np.ones(n_timestep))
-    ss = kwargs.get('sig_station', np.ones(n_station))
-
-    sigma_time = np.diag(st)
-    sigma_station = np.diag(ss)
-
-    tr1 = np.trace(inv(sigma_station) @ (syn1 - obs).T @ inv(sigma_time) @ (syn1 - obs)) / (n_station * n_timestep)
-    tr2 = np.trace(inv(sigma_station) @ (syn2 - obs).T @ inv(sigma_time) @ (syn2 - obs)) / (n_station * n_timestep)
-
-    ll_ratio = np.exp(-0.5*(tr2-tr1)) / np.sqrt(2*np.pi)
-    return tr1, tr2, ll_ratio
-
-
-class Matrix_normal_distribution:
+class matrix_normal:
 
     def __init__(self, M, U, V):
 
@@ -79,139 +15,289 @@ class Matrix_normal_distribution:
 
         self.M, self.U, self.V = (M, U, V)
 
-    def get_density(self, X):
+    def pdf(self, X):
 
         denominator = np.sqrt((2 * np.pi) ** (self.n * self.p) * det(self.V) ** self.n * det(self.U) ** self.p)
         tr = np.trace(inv(self.V) @ (X - self.M).T @ inv(self.U) @ (X - self.M))
         numerator = np.exp(-0.5 * tr)
 
-        print(tr)
-
         prob_density = numerator / denominator
         return prob_density
 
-    def get_proposal(self):
 
-        A = normal(0, 1, self.M.shape)
-        X_proposed = self.M + self.U @ A @ self.V
+class mcmc_sampler:
 
-        return X_proposed
+    def __init__(self, inverse_engine, observation, **kwargs):
+
+        self.prior_range = kwargs.get('prior_range', None)
+        self.obs_sigma = kwargs.get('obs_sigma', None)
+        self.move_list = kwargs.get('moves', ['D', 'B', 'K'])
+        var_sigma = kwargs.get('var_sigma', None)
+
+        self.sigma_fracture = np.diag(var_sigma[0])
+        self.sigma_shape = np.diag(var_sigma[1])
+
+        self.observation = observation
+        self.engine = inverse_engine
+
+        self.move = None
+        self.chain_length = None
+        self.dr_scale = None
+        self.state = None
+        self.accept_case = 0
+        self.save_flag = True
+
+    def get_state(self, dfn):
+        return {'dfn_id': self.accept_case,
+                'dfn': dfn,
+                'prior': self.prior_func(dfn),
+                'rms': self.misfit_func(dfn)}
+
+    def prior_func(self, dfn):
+
+        if self.prior_range is None:
+            lower_bound = np.asarray([0, -0.5, -0.5, -0.5, 0, 0, 0.1])
+            upper_bound = np.asarray([10, 0.5, 0.5, 0.5, np.pi, np.pi, 0.9])
+        else:
+            lower_bound = self.prior_range[0]
+            upper_bound = self.prior_range[1]
+
+        prior = stats.uniform.pdf(dfn.shape[0],
+                                  loc=lower_bound[0],
+                                  scale=upper_bound[0])
+
+        if np.all((dfn - lower_bound[1:]) >= 0) &\
+                np.all((dfn - upper_bound[1:]) <= 0):
+            p = diff([lower_bound[1:], upper_bound[1:]], axis=0)
+            prior *= np.prod(p) ** (- dfn.shape[0])
+        else:
+            prior *= 0
+
+        return prior
+
+    def misfit_func(self, dfn):
+
+        n_station = self.observation.shape[1]
+        n_timestep = self.observation.shape[0]
+
+        if self.obs_sigma is None:
+            st = 0.01 * np.ones(n_timestep)
+            ss = np.ones(n_station)
+
+            sigma_time = np.diag(st)
+            sigma_station = np.diag(ss)
+        else:
+            sigma_time = self.obs_sigma['time']
+            sigma_station = self.obs_sigma['station']
+
+        syn = self.engine.run_forward(dfn)
+        obs = self.observation
+        if syn is None:
+            syn = np.zeros_like(obs)
+        rms = np.trace(inv(sigma_station) @ (syn - obs).T @ inv(sigma_time) @ (syn - obs)) / (n_station * n_timestep)
+
+        return rms
+
+    def step(self):
+
+        self.move = self.move_list[randint(0, len(self.move_list))]
+        print('Move Type: {}'.format(self.move))
+        state_1 = self.propose(1)
+        accept_flag = self.acceptance_condition(state_1)
+        if accept_flag:
+            self.state = state_1
+        elif (self.dr_scale != 0) & (self.move == 'D'):
+            state_2 = self.propose(2)
+            state2_1 = self.propose(-1, state_2)
+            accept_flag = self.acceptance_condition(state_1, state_2, state2_1)
+            if accept_flag:
+                self.state = state_2
+        return accept_flag
+
+    def sample(self, initial_dfn, chain_length=100, dr_scale=0):
+
+        self.chain_length = chain_length
+        self.dr_scale = dr_scale
+
+        self.state = self.get_state(initial_dfn)
+        # print(self.state)
+        chain = [self.state]
+        self.save_sample()
+
+        i = 0
+
+        while i < self.chain_length:
+            print('{0}Iteration:{1:d}{0}'.format('*' * 30, i))
+            self.save_flag = self.step()
+            if self.save_flag:
+                self.accept_case += 1
+            self.save_sample()
+            chain.append(self.state)
+            print('Accept: {}'.format(self.save_flag))
+            print('Current RMS={:.2f}'.format(self.state['rms']))
+            i += 1
+
+        return chain
+
+    def acceptance_condition(self, *args):
+
+        if len(args) == 1:
+            state1 = args[0]
+            alp = self.alpha_1(state1)
+        elif len(args) == 3:
+            s1, s2, s2_1 = args
+            alp = self.alpha_2(s1, s2, s2_1)
+        else:
+            raise ValueError('Unresolved arguments')
+        print('Alpha = {:.4f}'.format(alp))
+        if alp > random():
+            accept_flag = True
+        else:
+            accept_flag = False
+
+        return accept_flag
+
+    def alpha_2(self, *args):
+        s1, s2, s2_1 = args
+        a1 = self.alpha_1(s1)
+        a2_1 = self.alpha_1(s2, s2_1)
+        a2 = self.alpha_1(s2)
+
+        q2_1 = matrix_normal(s2['dfn'], self.sigma_fracture, self.sigma_shape).pdf(s2_1['dfn'])
+        q1 = matrix_normal(self.state['dfn'], self.sigma_fracture, self.sigma_shape).pdf(s1['dfn'])
+
+        alpha_2 = min(1, (q2_1/q1) * a2 * (1-a2_1)/(1-a1))
+
+        return alpha_2
+
+    def alpha_1(self, *args):
+
+        if len(args) == 1:
+            s0 = self.state
+            s1 = args[0]
+        elif len(args) == 2:
+            s0, s1 = args
+        else:
+            raise ValueError('Unresolved arguments')
+
+        rms_0 = s0['rms']
+        prior_0 = s0['prior']
+        dfn_0 = s0['dfn']
+
+        rms_1 = s1['rms']
+        prior_1 = s1['prior']
+        dfn_1 = s1['dfn']
+
+        ll_ratio = np.exp(-0.5 * (rms_1 - rms_0)) / np.sqrt(2 * np.pi)
+        prior_ratio = prior_1 / prior_0
+        proposal_ratio = self.proposal_ratio(dfn_0, dfn_1)
+        alpha_1 = min(1, ll_ratio * prior_ratio * proposal_ratio)
+
+        return alpha_1
+
+    def proposal_ratio(self, dfn0, dfn1):
+
+        if self.move == 'D':
+            q = 1
+        else:
+            if dfn1.shape[0] < dfn0.shape[0]:
+                t = dfn1
+                dfn1 = dfn0
+                dfn0 = t
+            n_vars = dfn1.shape[1]
+            n_fractures = dfn1.shape[0]
+
+            coeff = 1/np.sqrt((np.pi * 2) ** n_vars * det(self.sigma_shape))
+            delta = dfn1[-1, :] - np.average(dfn0, axis=0)
+
+            q_birth = np.exp(-0.5 * delta.T @ inv(self.sigma_shape) @ delta) / coeff
+            q_kill = 1 / n_fractures
+            if self.move == 'B':
+                q = q_kill / q_birth
+            elif self.move == 'K':
+                q = q_birth / q_kill
+
+        return q
+
+    def save_sample(self):
+        self.engine.write_inverselog(self.state, model_id=self.accept_case, save_flag=self.save_flag)
+
+    def propose(self, step_stage, *arg):
+        dfn_old = self.state['dfn']
+        n_frac = dfn_old.shape[0]
+        n_var = dfn_old.shape[1]
+
+        if step_stage == 1:
+            if self.move == 'D':
+                A = normal(0, 1, dfn_old.shape)
+                dfn_new = dfn_old + self.sigma_fracture @ A @ self.sigma_shape
+
+            elif self.move == 'B':
+                A = normal(0, 1, [1, n_var])
+                dfn_append = np.average(dfn_old, axis=0) + (A @ self.sigma_shape).T
+                dfn_new = np.hstack((dfn_old, dfn_append))
+
+            elif self.move == 'K':
+                idx = randint(0, n_frac)
+                dfn_new = np.delete(dfn_old, idx, axis=0)
+
+        if step_stage == 2:
+            sig_f = self.sigma_fracture / self.dr_scale
+            sig_v = self.sigma_shape / self.dr_scale
+
+            A = normal(0, 1, dfn_old.shape)
+            dfn_new = dfn_old + sig_f @ A @ sig_v
+
+        if step_stage == -1:
+            state = arg
+            dfn_old = state['dfn']
+            A = - normal(0, 1, dfn_old.shape)
+            dfn_new = dfn_old + self.sigma_fracture @ A @ self.sigma_shape
+
+        s_new = self.get_state(dfn_new)
+        print('RMS of proposal: {:.3f}'.format(s_new['rms']))
+        return s_new
+
 
 if __name__ == '__main__':
+    # Set inverse project information
+    # station_coordinates = [(0.4, 0.4, 0.2), (0.4, 0.4, -0.2), (0.4, -0.4, 0.2),
+    #                        (0.4, -0.4, -0.2), (-0.15, -0.08, 0.2), (-0.15, -0.08, 0)]
+    # observed_fractures = np.asarray([[-0.4, 0, 0, 0, np.pi / 2, 0.8],
+    #                                  [0.3, 0, 0.2, 0, np.pi / 2, 0.8],
+    #                                  [0.4, 0, -0.2, 0, np.pi / 2, 0.8]])
+    # inferred_fractures = np.asarray([[-0.19, 0, 0.2, 0, 0, 0.8]])
 
-    # Define project information
-    station_coordinates = [(0.4, 0.4, 0.2),   (0.4, 0.4, -0.2),    (0.4, -0.4, 0.2),
-                           (0.4, -0.4, -0.2), (-0.15, -0.08, 0.2), (-0.15, -0.08, 0)]
+    station_coordinates = [(-0.05, 0.2, 0.05), (-0.11, 0.4, 0.21), (-0.3, -0.2, 0.1), (0.2, -0.1, 0.4),
+                           (-0.4, 0.2, -0.2), (0.2, -0.2, 0.2), (0.3, 0.2, -0.3)]
+    observed_fractures = np.asarray([[-0.4, 0, 0,  0.7854, 0.6283, 0.8],
+                                     [0.3, 0, 0.2, 0.7854, 0.6283, 0.8],
+                                     [0.4, 0, -0.2, 0.7854, 0.6283, 0.8]])
+    inferred_fractures = np.asarray([[0, 0, 0.2, 0, 2.356, 0.8]])
 
-    project_path = '/Volumes/SD_Card/Thesis_project/dfn_test'
-    field_observation_file = '/Volumes/SD_Card/Thesis_project/synthetic_model/output/obs_readings.csv'
+
+    project_path = '/Volumes/SD_Card/Thesis_project/model_2'
+    field_observation_file = '/Volumes/SD_Card/Thesis_project/synthetic_model_2/output/obs_readings.csv'
     ncpu = 1
 
     dfninv = DFNINVERSE(project_path, field_observation_file, station_coordinates, ncpu)
     field_observation = dfninv.obs_data
 
     # Define the initial fractures
-    observed_fractures = np.asarray([[-0.4, 0, 0, 0, np.pi / 2, 0.85],
-                                     [0.3, 0, 0.2, 0, np.pi / 2, 0.8],
-                                     [0.4, 0, -0.2, 0, np.pi / 2, 0.8]])
-    inferred_fractures = np.asarray([[0, 0, 0, np.pi / 2, 0, 0.6]])
-
     n_inferred_frac = inferred_fractures.shape[0]
     n_observed_frac = observed_fractures.shape[0]
 
-    n_total = n_inferred_frac + n_observed_frac
-
-    s_current = np.vstack((observed_fractures, inferred_fractures))
-
     # Define covariance matrix \Sigma_f, \Sigma_v
-    sig_obs = 0.001
+    sig_obs = 0
     sig_unknown = 1
-    sig_v = 0.05
 
     sig_f = np.hstack((sig_obs * np.ones(n_observed_frac), sig_unknown * np.ones(n_inferred_frac)))
-    sigma_f = np.diag(sig_f)
-    sigma_v = np.diag(sig_v * np.ones(6))
+    sig_v = np.asarray([0.1, 0.1, 0.1, 0, 0, 0])
 
-    # Initialize MCMC
-    prior_current = prior_probability(s_current)
+    mcmc = mcmc_sampler(dfninv, field_observation, var_sigma=[sig_f, sig_v], moves='D')
+    s_initial = np.vstack((observed_fractures, inferred_fractures))
+    chain = mcmc.sample(s_initial, 350)
 
-    dfninv.run_forward_simulation(s_current)
-    syn_data_current = dfninv.read_simulation_results()
-    rms_0, rms_1, ratio_0 = likelihood_ratio(syn_data_current, syn_data_current, field_observation)
-    status = {'model_id': 0, 'RMS': rms_0, 'fractures': s_current}
-    dfninv.save_accepted_model(status, model_id=0, save_flag=True)
-
-    # Start loop
-    max_iteration = 10
-    i_iter = 0
-    accept_case = 0
-
-    while i_iter < max_iteration:
-        print('{0}Iteration:{1:d}{2}'.format('*' * 20, i_iter, '*' * 20))
-        accept_flag = False
-
-        s_proposed = Matrix_normal_distribution(s_current, sigma_f, sigma_v).get_proposal(A)
-        dfninv.run_forward_simulation(s_proposed)
-        syn_data_proposed = dfninv.read_simulation_results()
-        prior_proposed = prior_probability(s_proposed)
-
-        rms_current, rms_proposed, ratio_ll = likelihood_ratio(syn_data_current, syn_data_proposed, field_observation)
-        ratio_prior = prior_proposed / prior_current
-        ratio_proposal = 1
-
-        # calculate acceptance ratio
-        alpha_1 = min(1, ratio_ll * ratio_prior * ratio_proposal)
-        print('Likelihood ratio = {:.2f}'.format(ratio_ll))
-        print(alpha_1)
-        # print('Acceptance Ratio = {:3f}'.format(alpha_1))
-
-        if alpha_1 > random():
-            accept_flag = True
-            accept_case += 1
-
-            s_current = s_proposed
-            prior_current = prior_proposed
-            rms_current = rms_proposed
-            print('### Accept! RMS = {} ###'.format(rms_current))
-
-        status = {'model_id': accept_case, 'RMS': rms_current, 'fractures': s_current}
-        dfninv.save_accepted_model(status, model_id=accept_case, save_flag=accept_flag)
-        i_iter += 1
-
-
-    # Analyze result
-    with open('/Volumes/SD_Card/Thesis_project/dfn_test/mcmc_log.txt', 'r') as logfile:
-        mcmc_log = logfile.readlines()
-        separator = '*' * 60 + '\n'
-        idx_sep = [i for i, j in enumerate(mcmc_log) if j == separator]
-
-        n_fractures = idx_sep[1] - idx_sep[0] - 3
-        n_model = len(idx_sep)
-
-        rms = []
-        for i in idx_sep:
-            rms.append(float(mcmc_log[i+2].replace('\n', '')))
-
-    latexify()
-    fig = plt.figure()
-    plt.plot(rms)
-    plt.xlabel('Iteration')
-    plt.ylabel('RMS')
-    plt.title('Root-Mean-Square Error Evolution as MCMC Iteration')
-    plt.savefig(project_path + '/rms_iteration.png')
-    plt.show()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    with open(project_path+'/mcmc_chain.pkl', 'wb') as f:
+        pickle.dump(chain, f)
 

@@ -54,21 +54,27 @@ class DFNINVERSE:
         shutil.copy2(self.template_files + '/PTDFN_control.dat',
                      self.forward_input_file + '/PTDFN_control.dat')
 
-    def run_forward(self, input_parameters):
+    def run_forward(self, input_parameters, **kwargs):
+
+        variable_name = kwargs.get('variable_name', 'Liquid_Pressure')
 
         self.__write_forward_inputs(input_parameters)
 
         jobname = self.forward_project
 
-        run_dfnworks_command = ['python3', 'dfnworks.py',
+        run_dfnworks_cmd = ['python3', os.environ['PYDFNINV_PATH']+'/dfnworks.py',
                                 '-j', jobname,
                                 '-i', self.forward_input_file,
-                                '-n', str(self.ncpu)
-                                ]
+                                '-n', str(self.ncpu)]
+
         dfnworks_job_report = self.project + '/job_report.txt'
         with open(dfnworks_job_report, "w") as outfile:
-            p = Popen(run_dfnworks_command, stdout=outfile, stderr=STDOUT)
+            p = Popen(run_dfnworks_cmd, stdout=outfile, stderr=STDOUT)
             p.wait()
+
+        syn_data = self.__read_forward(variable_name)
+
+        return syn_data
 
     def __write_forward_inputs(self, parameters):
 
@@ -101,10 +107,10 @@ class DFNINVERSE:
 
         # Parse normal vector
         normal_vectors = np.asarray(
-            [(np.cos(parameter_table['psi']) * np.cos(parameter_table['phi'])).tolist(),
-             (np.cos(parameter_table['psi']) * np.sin(parameter_table['phi'])).tolist(),
-             (np.sin(parameter_table['psi'])).tolist()]
-        ).T
+                                    [(np.cos(parameter_table['psi']) * np.cos(parameter_table['phi'])).tolist(),
+                                     (np.cos(parameter_table['psi']) * np.sin(parameter_table['phi'])).tolist(),
+                                     (np.sin(parameter_table['psi'])).tolist()]
+                                     ).T
         line = []
         for nv in normal_vectors:
             line.append('{' + ', '.join(str(e) for e in nv) + '}')
@@ -137,9 +143,7 @@ class DFNINVERSE:
 
         return None
 
-    def read_forward(self, save_mode=True, **kwargs):
-
-        variable_name = kwargs.get('variable_name', 'Liquid_Pressure')
+    def __read_forward(self, variable_name, save_mode=True):
 
         if os.path.exists(self.mesh_file_path):
 
@@ -249,7 +253,7 @@ class DFNINVERSE:
         writer.SetFileName(forward_project + '/obs_points.vtk')
         writer.Update()
 
-    def save_accepted_model(self, status, model_id, save_flag):
+    def write_inverselog(self, status, model_id, save_flag):
         model_dir = self.accept_model_path + '/model_' + str(model_id)
         files_to_keep = ['full_mesh.inp', 'full_mesh.vtk', '/PFLOTRAN/parsed_vtk/', '/forward_results.csv']
 
@@ -269,7 +273,7 @@ class DFNINVERSE:
         # write mcmc_log
         s = status
         with open(self.mcmc_log, 'a+') as logfile:
-            logfile.write('{0}\n{1}\n{2}\n{3}\n'.format('*'*60, s['model_id'], s['RMS'], s['fractures']))
+            logfile.write('{0}\n{1}\n{2}\n{3}\n'.format('*'*60, s['dfn_id'], s['rms'], s['dfn']))
 
 
 

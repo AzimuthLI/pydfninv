@@ -2,20 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="718b2e3d-ee63-4e84-817f-291e05b529b4" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/paraview_script.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plot_helper.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.ipynb_checkpoints/Model-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/.ipynb_checkpoints/Model-checkpoint.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Model.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Model.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dfninverse.py" beforeDir="false" afterPath="$PROJECT_DIR$/dfninverse.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dfnworks.py" beforeDir="false" afterPath="$PROJECT_DIR$/dfnworks.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flow.py" beforeDir="false" afterPath="$PROJECT_DIR$/deprecated/flow.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/helper.py" beforeDir="false" afterPath="$PROJECT_DIR$/helper.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model_deprecated.py" beforeDir="false" afterPath="$PROJECT_DIR$/deprecated/model_deprecated.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/model_generator.py" beforeDir="false" afterPath="$PROJECT_DIR$/model_generator.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/path.py" beforeDir="false" afterPath="$PROJECT_DIR$/path.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/playground.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vtkanimation.py" beforeDir="false" afterPath="$PROJECT_DIR$/vtkanimation.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -26,14 +22,15 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/pydfninv$state.coverage" NAME="state Coverage Results" MODIFIED="1526589060309" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/pydfninv$model__1_.coverage" NAME="model (1) Coverage Results" MODIFIED="1527682917064" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/pydfninv$model__1_.coverage" NAME="model Coverage Results" MODIFIED="1528059495149" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/pydfninv$playground.coverage" NAME="playground Coverage Results" MODIFIED="1527689909242" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/pydfninv$pydfninv.coverage" NAME="pydfninv Coverage Results" MODIFIED="1526515147583" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/pydfninv$vtkanimation.coverage" NAME="vtkanimation Coverage Results" MODIFIED="1527870597070" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/pydfninv$vtkanimation.coverage" NAME="vtkanimation Coverage Results" MODIFIED="1528387310309" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/pydfninv$drrj_mcmc.coverage" NAME="drrj_mcmc Coverage Results" MODIFIED="1524845932116" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/pydfninv$plot_helper.coverage" NAME="plot_helper Coverage Results" MODIFIED="1528408446901" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/pydfninv$dfn_inversion.coverage" NAME="dfn_inversion Coverage Results" MODIFIED="1525719945255" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/pydfninv$model_generator.coverage" NAME="model_generator Coverage Results" MODIFIED="1527692541099" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/pydfninv$model.coverage" NAME="model Coverage Results" MODIFIED="1527451182898" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/pydfninv$model_generator.coverage" NAME="model_generator Coverage Results" MODIFIED="1528376605188" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/pydfninv$model.coverage" NAME="model Coverage Results" MODIFIED="1528408511257" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="DatabaseView">
     <option name="SHOW_INTERMEDIATE" value="true" />
@@ -54,34 +51,41 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="dfninverse.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/dfninverse.py">
+      <file leaf-file-name="model.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/model.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="510">
-              <caret line="277" lean-forward="true" selection-start-line="277" selection-end-line="277" />
-              <folding>
-                <element signature="e#0#27#0" expanded="true" />
-                <element signature="e#308#1017#0" />
-                <element signature="e#1062#2537#0" />
-                <element signature="e#2604#3160#0" />
-                <element signature="e#3221#3743#0" />
-                <element signature="e#3808#5621#0" />
-                <element signature="e#5690#5912#0" />
-                <element signature="e#5988#6939#0" />
-                <element signature="e#6999#7880#0" />
-                <element signature="e#7950#8729#0" />
-                <element signature="e#8790#9438#0" />
-                <element signature="e#9700#10589#0" />
-              </folding>
+            <state relative-caret-position="207">
+              <caret line="270" selection-start-line="270" selection-end-line="275" selection-end-column="65" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="path.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/path.py">
+      <file leaf-file-name="vtkanimation.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/vtkanimation.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="29" column="93" selection-start-line="29" selection-start-column="93" selection-end-line="29" selection-end-column="93" />
+            <state relative-caret-position="2355">
+              <caret line="161" column="57" selection-start-line="161" selection-start-column="57" selection-end-line="161" selection-end-column="57" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="dfninverse.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/dfninverse.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1455">
+              <caret line="102" column="51" selection-start-line="102" selection-start-column="51" selection-end-line="102" selection-end-column="51" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="model_generator.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/model_generator.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="227">
+              <caret line="99" column="5" lean-forward="true" selection-start-line="99" selection-start-column="5" selection-end-line="99" selection-end-column="5" />
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -89,8 +93,8 @@
       <file leaf-file-name="helper.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/helper.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="22" column="27" lean-forward="true" selection-start-line="22" selection-start-column="27" selection-end-line="22" selection-end-column="27" />
+            <state relative-caret-position="360">
+              <caret line="27" column="38" selection-start-line="27" selection-start-column="38" selection-end-line="27" selection-end-column="38" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
               </folding>
@@ -98,30 +102,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="model.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/model.py">
+      <file leaf-file-name="plot_helper.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/plot_helper.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="268">
-              <caret line="104" lean-forward="true" selection-start-line="104" selection-end-line="104" />
+            <state relative-caret-position="800">
+              <caret line="54" selection-start-line="54" selection-end-line="60" selection-end-column="14" />
               <folding>
-                <element signature="e#0#18#0" expanded="true" />
-                <element signature="e#276#1705#0" />
-                <element signature="e#1762#2426#0" />
-                <element signature="e#2468#3101#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="model_generator.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/model_generator.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="97" column="28" lean-forward="true" selection-start-line="97" selection-start-column="28" selection-end-line="97" selection-end-column="28" />
-              <folding>
-                <element signature="e#201#896#0" />
-                <element signature="e#964#1680#0" />
-                <element signature="e#1739#2280#0" />
+                <element signature="e#0#31#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -145,6 +132,7 @@
       <find>_old</find>
       <find>state</find>
       <find>Accept!</find>
+      <find>var_sigma</find>
     </findStrings>
     <replaceStrings>
       <replace>proposed</replace>
@@ -187,14 +175,16 @@
         <option value="$PROJECT_DIR$/model_deprecated.py" />
         <option value="$PROJECT_DIR$/obs_reading.py" />
         <option value="$PROJECT_DIR$/playground.py" />
-        <option value="$PROJECT_DIR$/model_generator.py" />
-        <option value="$PROJECT_DIR$/model.py" />
         <option value="$PROJECT_DIR$/Model.ipynb" />
-        <option value="$PROJECT_DIR$/vtkanimation.py" />
-        <option value="$PROJECT_DIR$/helper.py" />
         <option value="$PROJECT_DIR$/dfnworks.py" />
-        <option value="$PROJECT_DIR$/dfninverse.py" />
         <option value="$PROJECT_DIR$/path.py" />
+        <option value="$PROJECT_DIR$/helper.py" />
+        <option value="$PROJECT_DIR$/paraview_script.py" />
+        <option value="$PROJECT_DIR$/dfninverse.py" />
+        <option value="$PROJECT_DIR$/vtkanimation.py" />
+        <option value="$PROJECT_DIR$/plot_helper.py" />
+        <option value="$PROJECT_DIR$/model.py" />
+        <option value="$PROJECT_DIR$/model_generator.py" />
       </list>
     </option>
   </component>
@@ -208,10 +198,8 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds" fullScreen="true">
-    <option name="x" value="-348" />
-    <option name="y" value="-1080" />
-    <option name="width" value="1920" />
-    <option name="height" value="1080" />
+    <option name="width" value="1280" />
+    <option name="height" value="800" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -236,7 +224,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="preferences.remoteExternalTools" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -255,7 +243,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.vtkanimation">
+  <component name="RunManager" selected="Python.model">
     <configuration name="dfn_inversion" type="PythonConfigurationType" factoryName="Python">
       <module name="pydfninv" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -275,26 +263,7 @@
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
     </configuration>
-    <configuration name="drrj_mcmc" type="PythonConfigurationType" factoryName="Python">
-      <module name="pydfninv" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="/usr/local/Cellar/python3/3.6.3/Frameworks/Python.framework/Versions/3.6/bin/python3.6" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/deprecated/drrjmcmc.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-    </configuration>
-    <configuration name="model (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="model" type="PythonConfigurationType" factoryName="Python">
       <module name="pydfninv" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -332,6 +301,63 @@
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
     </configuration>
+    <configuration name="model" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="pydfninv" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/model.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
+    <configuration name="model" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="pydfninv" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/model.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
+    <configuration name="model" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="pydfninv" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/model.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
     <configuration name="model_generator" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="pydfninv" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -351,6 +377,25 @@
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
     </configuration>
+    <configuration name="paraview_script" type="PythonConfigurationType" factoryName="Python">
+      <module name="pydfninv" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="/usr/local/Cellar/python3/3.6.3/Frameworks/Python.framework/Versions/3.6/bin/python3.6" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/paraview_script.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
     <configuration name="playground" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="pydfninv" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -365,6 +410,25 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/playground.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
+    <configuration name="plot_helper" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="pydfninv" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/plot_helper.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -390,20 +454,20 @@
       <option name="MODULE_MODE" value="false" />
     </configuration>
     <list>
-      <item itemvalue="Python.drrj_mcmc" />
       <item itemvalue="Python.dfn_inversion" />
       <item itemvalue="Python.model" />
-      <item itemvalue="Python.model_generator" />
+      <item itemvalue="Python.paraview_script" />
       <item itemvalue="Python.playground" />
       <item itemvalue="Python.vtkanimation" />
-      <item itemvalue="Python.model (1)" />
+      <item itemvalue="Python.plot_helper" />
+      <item itemvalue="Python.model_generator" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.plot_helper" />
         <item itemvalue="Python.vtkanimation" />
         <item itemvalue="Python.model_generator" />
-        <item itemvalue="Python.playground" />
-        <item itemvalue="Python.model (1)" />
+        <item itemvalue="Python.model" />
         <item itemvalue="Python.model" />
       </list>
     </recent_temporary>
@@ -436,23 +500,23 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-348" y="-1080" width="1920" height="1080" extended-state="0" />
+    <frame x="0" y="0" width="1280" height="800" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="10" weight="0.3287483" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" weight="0.32935324" />
       <window_info anchor="bottom" id="Database Changes" order="1" show_stripe_button="false" />
-      <window_info anchor="right" id="Run" order="8" weight="0.23162939" />
       <window_info anchor="bottom" id="Version Control" order="6" weight="0.32935324" />
-      <window_info anchor="bottom" id="Python Console" order="7" weight="0.49154228" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.43172413" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15867944" />
+      <window_info anchor="bottom" id="Python Console" order="7" weight="0.72" />
+      <window_info active="true" anchor="bottom" id="Run" order="11" visible="true" weight="0.12827586" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.35448277" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18336026" />
       <window_info anchor="bottom" id="Docker" order="0" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="5" weight="0.32960597" />
-      <window_info anchor="right" id="SciView" order="0" sideWeight="0.49931034" weight="0.5005325" />
+      <window_info anchor="right" id="SciView" order="0" sideWeight="0.49931034" weight="0.21728595" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="right" id="Debug" order="7" weight="0.39776358" />
       <window_info id="Favorites" order="2" side_tool="true" weight="0.32960597" />
+      <window_info anchor="right" id="Debug" order="7" weight="0.36794463" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="3" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" order="1" weight="0.4" />
@@ -504,25 +568,10 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="35" />
+      <option name="time" value="47" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/deprecated/dfn_inversion.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="960">
-          <caret line="64" lean-forward="true" selection-start-line="64" selection-end-line="64" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/run.py" />
-    <entry file="file://$PROJECT_DIR$/deprecated/dfn_forwards.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1320">
-          <caret line="90" selection-start-line="90" selection-end-line="90" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/deprecated/dfn_inversion.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1110">
@@ -650,37 +699,12 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/mesh_dfn_helper.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#153#164#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/dfnworks.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="865">
           <caret line="825" lean-forward="true" selection-start-line="825" selection-end-line="825" />
-          <folding>
-            <element signature="e#0#60#0" expanded="true" />
-            <element signature="e#231#422#0" />
-            <element signature="e#902#1711#0" />
-            <element signature="e#1745#3304#0" />
-            <element signature="e#4861#6208#0" />
-            <element signature="e#7025#9067#0" />
-            <element signature="e#9137#14807#0" />
-            <element signature="e#14854#15714#0" />
-            <element signature="e#15832#20801#0" />
-            <element signature="e#20836#21562#0" />
-            <element signature="e#21605#22199#0" />
-            <element signature="e#22243#22908#0" />
-            <element signature="e#22948#24702#0" />
-            <element signature="e#24765#26827#0" />
-            <element signature="e#26881#28719#0" />
-            <element signature="e#28789#30298#0" />
-            <element signature="e#6249#7568#0" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -688,93 +712,83 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="285">
           <caret line="494" selection-start-line="494" selection-end-line="494" />
-          <folding>
-            <element signature="e#331#4554#0" />
-            <element signature="e#4646#16380#0" />
-            <element signature="e#16416#17309#0" />
-            <element signature="e#17377#22191#0" />
-            <element signature="e#22227#24657#0" />
-            <element signature="e#24714#25830#0" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/test.py" />
     <entry file="file://$PROJECT_DIR$/run_meshing.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/vtkanimation.py">
+    <entry file="file://$PROJECT_DIR$/playground.py" />
+    <entry file="file:///usr/local/Cellar/python3/3.6.3/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/numpy/core/fromnumeric.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1890">
-          <caret line="130" column="58" selection-start-line="130" selection-start-column="58" selection-end-line="130" selection-end-column="58" />
+        <state relative-caret-position="356">
+          <caret line="2047" selection-start-line="2047" selection-end-line="2047" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/model.py">
+    <entry file="file://$PROJECT_DIR$/path.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="268">
-          <caret line="104" lean-forward="true" selection-start-line="104" selection-end-line="104" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-            <element signature="e#276#1705#0" />
-            <element signature="e#1762#2426#0" />
-            <element signature="e#2468#3101#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/model_generator.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="97" column="28" lean-forward="true" selection-start-line="97" selection-start-column="28" selection-end-line="97" selection-end-column="28" />
-          <folding>
-            <element signature="e#201#896#0" />
-            <element signature="e#964#1680#0" />
-            <element signature="e#1739#2280#0" />
-          </folding>
+        <state relative-caret-position="125">
+          <caret line="46" column="35" selection-start-line="46" selection-start-column="8" selection-end-line="46" selection-end-column="35" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/helper.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="22" column="27" lean-forward="true" selection-start-line="22" selection-start-column="27" selection-end-line="22" selection-end-column="27" />
+        <state relative-caret-position="360">
+          <caret line="27" column="38" selection-start-line="27" selection-start-column="38" selection-end-line="27" selection-end-column="38" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/playground.py">
-      <provider selected="true" editor-type-id="text-editor" />
+    <entry file="file://$PROJECT_DIR$/paraview_script.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/dfninverse.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="277" lean-forward="true" selection-start-line="277" selection-end-line="277" />
+        <state relative-caret-position="1455">
+          <caret line="102" column="51" selection-start-line="102" selection-start-column="51" selection-end-line="102" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vtkanimation.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2355">
+          <caret line="161" column="57" selection-start-line="161" selection-start-column="57" selection-end-line="161" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/plot_helper.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="800">
+          <caret line="54" selection-start-line="54" selection-end-line="60" selection-end-column="14" />
           <folding>
-            <element signature="e#0#27#0" expanded="true" />
-            <element signature="e#308#1017#0" />
-            <element signature="e#1062#2537#0" />
-            <element signature="e#2604#3160#0" />
-            <element signature="e#3221#3743#0" />
-            <element signature="e#3808#5621#0" />
-            <element signature="e#5690#5912#0" />
-            <element signature="e#5988#6939#0" />
-            <element signature="e#6999#7880#0" />
-            <element signature="e#7950#8729#0" />
-            <element signature="e#8790#9438#0" />
-            <element signature="e#9700#10589#0" />
+            <element signature="e#0#31#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/path.py">
+    <entry file="file://$PROJECT_DIR$/model.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="29" column="93" selection-start-line="29" selection-start-column="93" selection-end-line="29" selection-end-column="93" />
+        <state relative-caret-position="207">
+          <caret line="270" selection-start-line="270" selection-end-line="275" selection-end-column="65" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model_generator.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="227">
+          <caret line="99" column="5" lean-forward="true" selection-start-line="99" selection-start-column="5" selection-end-line="99" selection-end-column="5" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

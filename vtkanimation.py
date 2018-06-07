@@ -6,21 +6,28 @@ import os
 
 class vtkTimerCallback():
 
-    def __init__(self, mesh_list):
+    def __init__(self, mesh_list, txtActor):
         self.timer_count = 0
         self.mesh_file_list = mesh_list
+        self.txtActor = txtActor
 
     def execute(self, obj, event):
         print(self.timer_count)
+
+        txt_content = "Model ID: {}".format(self.timer_count)
+        self.txtActor.SetInput(txt_content)
+
         reader = vtk.vtkUnstructuredGridReader()
         mesh_file = self.mesh_file_list[self.timer_count]
         reader.SetFileName(mesh_file)
         reader.Update()
         output = reader.GetOutput()
         self.mapper.SetInputData(output)
+
         # self.actor.SetPosition(self.timer_count, self.timer_count, 0)
         iren = obj
         iren.GetRenderWindow().Render()
+
         if self.timer_count >= len(self.mesh_file_list)-1:
             self.timer_count = -1
         self.timer_count += 1
@@ -101,11 +108,21 @@ def animation(mesh_list, obs_points):
     axes.GetYAxisCaptionActor2D().GetCaptionTextProperty().SetColor(colors.GetColor3d("Green"))
     axes.GetZAxisCaptionActor2D().GetCaptionTextProperty().SetColor(colors.GetColor3d("Blue"))
 
+    txtActor = vtk.vtkTextActor()
+    txtprop = txtActor.GetTextProperty()
+    txtprop.SetFontFamilyToArial()
+    txtprop.BoldOn()
+    txtprop.SetFontSize(36)
+    txtprop.SetShadowOffset(4, 4)
+    txtprop.SetColor(colors.GetColor3d("r"))
+    txtActor.SetDisplayPosition(1000, 1200)
+
     # Add the actor to the scene
     renderer.AddActor(actor)
     renderer.AddActor(pointActor)
     renderer.AddActor(lblActor)
     renderer.AddActor(axes)
+    renderer.AddActor(txtActor)
     renderer.SetBackground(1, 1, 1)  # Background color white
 
     # Render and interact
@@ -115,20 +132,34 @@ def animation(mesh_list, obs_points):
     renderWindowInteractor.Initialize()
 
     # Sign up to receive TimerEvent
-    cb = vtkTimerCallback(mesh_list)
+    cb = vtkTimerCallback(mesh_list, txtActor)
     cb.mapper = mapper
     renderWindowInteractor.AddObserver('TimerEvent', cb.execute)
     renderWindowInteractor.CreateRepeatingTimer(500)
 
+    windowToImageFilter = vtk.vtkWindowToImageFilter()
+    windowToImageFilter.SetInput(renderWindow)
+    windowToImageFilter.SetInputBufferTypeToRGBA()
+    windowToImageFilter.ReadFrontBufferOff()
+    windowToImageFilter.Update()
+
+    writer = vtk.vtkOggTheoraWriter()
+    writer.SetInputConnection(windowToImageFilter.GetOutputPort())
+    writer.SetFileName("/Volumes/SD_Card/Thesis_project/test.ogv")
+    writer.Start()
+    # renderWindow.Start()
+
     # start the interaction and timer
     renderWindowInteractor.Start()
 
-
+    windowToImageFilter.Modified()
+    writer.Write()
+    writer.End()
 
 
 if __name__ == '__main__':
 
-    model_path = '/Volumes/SD_Card/Thesis_project/dfn_test/accept_models'
+    model_path = '/Volumes/SD_Card/Thesis_project/model_2/accept_models'
     mesh_list = []
     for root, dirs, files in os.walk(model_path):
         if 'full_mesh.vtk' in files:
