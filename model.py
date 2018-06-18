@@ -261,6 +261,8 @@ class mcmc_sampler:
 
 if __name__ == '__main__':
     # Set inverse project information
+
+    # Model 1 (1X1X1)
     # station_coordinates = [(0.4, 0.4, 0.2), (0.4, 0.4, -0.2), (0.4, -0.4, 0.2),
     #                        (0.4, -0.4, -0.2), (-0.15, -0.08, 0.2), (-0.15, -0.08, 0)]
     # observed_fractures = np.asarray([[-0.4, 0, 0, 0, np.pi / 2, 0.8],
@@ -268,16 +270,35 @@ if __name__ == '__main__':
     #                                  [0.4, 0, -0.2, 0, np.pi / 2, 0.8]])
     # inferred_fractures = np.asarray([[-0.19, 0, 0.2, 0, 0, 0.8]])
 
-    station_coordinates = [(-0.05, 0.2, 0.05), (-0.11, 0.4, 0.21), (-0.3, -0.2, 0.1), (0.2, -0.1, 0.4),
-                           (-0.4, 0.2, -0.2), (0.2, -0.2, 0.2), (0.3, 0.2, -0.3)]
-    observed_fractures = np.asarray([[-0.4, 0, 0,  0.7854, 0.6283, 0.8],
-                                     [0.3, 0, 0.2, 0.7854, 0.6283, 0.8],
-                                     [0.4, 0, -0.2, 0.7854, 0.6283, 0.8]])
-    inferred_fractures = np.asarray([[0, 0, 0.2, 0, 2.356, 0.8]])
+    # Model 2 (1X1X1)
+    # station_coordinates = [(-0.05, 0.2, 0.05), (-0.11, 0.4, 0.21), (-0.3, -0.2, 0.1), (0.2, -0.1, 0.4),
+    #                        (-0.4, 0.2, -0.2), (0.2, -0.2, 0.2), (0.3, 0.2, -0.3)]
+    #
+    # observed_fractures = np.asarray([[-0.4, 0, 0,  0.7854, 0.6283, 0.8],
+    #                                  [0.3, 0, 0.2, 0.7854, 0.6283, 0.8],
+    #                                  [0.4, 0, -0.2, 0.7854, 0.6283, 0.8]])
+    # inferred_fractures = np.asarray([[0, 0, 0.2, 0, 2.356, 0.8]])
 
+    # Model 3 (10X10X10)
+    # station_coordinates = [(-0.5, 2, 0.5), (-1.1, 4, 2.1), (-3, -2, 1), (2, -1, 4),
+    #                        (-4, 2, -2), (2, -2, 2), (3, 2, -3)]
+    #
+    # observed_fractures = np.asarray([[-4, 0, 0, 0.7854, 0.6283, 8],
+    #                                  [3, 0, 2, 0.7854, 0.6283, 8],
+    #                                  [4, 0, -2, 0.7854, 0.6283, 8]])
+    #
+    # inferred_fractures = np.asarray([[0, 0, 2, 0, 2.356, 8]])
 
-    project_path = '/Volumes/SD_Card/Thesis_project/model_2'
-    field_observation_file = '/Volumes/SD_Card/Thesis_project/synthetic_model_2/output/obs_readings.csv'
+    # Model 4 ()
+    station_coordinates = [(-0.1, 0.4, 0.1), (-0.22, 0.8, 0.42), (-0.6, -0.4, 0.2), (0.4, -0.2, 0.8),
+                           (-0.8, 0.4, -0.4), (0.4, -0.4, 0.4), (0.6, 0.4, -0.6)]
+    observed_fractures = np.asarray([[-0.8, 0, 0, 0.7854, 0.6283, 1.6],
+                                     [0.6, 0, 0.4, 0.7854, 0.6283, 1.6],
+                                     [0.8, 0, -0.4, 0.7854, 0.6283, 1.6]])
+    inferred_fractures = np.asarray([[0, 0, 0.4, 0, 2.356, 1.6]])
+
+    project_path = '/Volumes/SD_Card/Thesis_project/model_4'
+    field_observation_file = '/Volumes/SD_Card/Thesis_project/synthetic_model_4/output/obs_readings.csv'
     ncpu = 1
 
     dfninv = DFNINVERSE(project_path, field_observation_file, station_coordinates, ncpu)
@@ -294,9 +315,13 @@ if __name__ == '__main__':
     sig_f = np.hstack((sig_obs * np.ones(n_observed_frac), sig_unknown * np.ones(n_inferred_frac)))
     sig_v = np.asarray([0.1, 0.1, 0.1, 0, 0, 0])
 
-    mcmc = mcmc_sampler(dfninv, field_observation, var_sigma=[sig_f, sig_v], moves='D')
+    mcmc = mcmc_sampler(dfninv, field_observation, var_sigma=[sig_f, sig_v], moves='D',
+                        prior_range=[[0, -1, -1, -1, 0, 0, 0],
+                                     [10, 1, 1, 1, np.pi, np.pi, 2]]
+                        )
+
     s_initial = np.vstack((observed_fractures, inferred_fractures))
-    chain = mcmc.sample(s_initial, 350)
+    chain = mcmc.sample(s_initial, 1000)
 
     with open(project_path+'/mcmc_chain.pkl', 'wb') as f:
         pickle.dump(chain, f)

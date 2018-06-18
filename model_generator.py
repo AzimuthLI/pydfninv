@@ -63,7 +63,7 @@ def gen_3d_obs_points_plot(obs_points, save_path):
     sphere = vtk.vtkSphereSource()
     sphere.SetPhiResolution(21)
     sphere.SetThetaResolution(21)
-    sphere.SetRadius(0.01)
+    sphere.SetRadius(0.02)
 
     filters = vtk.vtkAppendPolyData()
 
@@ -86,9 +86,9 @@ def gen_3d_obs_points_plot(obs_points, save_path):
 
 if __name__ == '__main__':
     #
-    syn_model_path = '/Volumes/SD_Card/Thesis_project/synthetic_model_3/output'
+    syn_model_path = '/Volumes/SD_Card/Thesis_project/synthetic_model_4/output'
     #
-    input_file_path = '/Volumes/SD_Card/Thesis_project/synthetic_model_3/inputs'
+    input_file_path = '/Volumes/SD_Card/Thesis_project/synthetic_model_4/inputs'
 
     ncpu = 1
 
@@ -97,23 +97,24 @@ if __name__ == '__main__':
                             '-i', input_file_path,
                             '-n', str(ncpu)
                            ]
-    #
-    # p = subprocess.Popen(run_dfnworks_command)
-    # p.wait()
+    p = subprocess.Popen(run_dfnworks_command)
+    p.wait()
     # #
     # Read pressure data from the outputs
     mesh_file_path = syn_model_path + '/full_mesh.vtk'
     flow_files_path = syn_model_path + '/PFLOTRAN/parsed_vtk/'
 
-    observe_points = [(0.4, 0.4, 0.2),
-                      (0.4, 0.4, -0.2),
-                      (0.4, -0.4, 0.2),
-                      (0.4, -0.4, -0.2),
-                      (-0.15, -0.08, 0.2),
-                      (-0.15, -0.08, 0)] * 10
+    # Model 1 & 2
+    # observe_points = [(4, 4, 2), (4, 4, -2), (4, -4, 2),
+    #                   (4, -4, -2), (-1.5, -0.8, 2), (-1.5, -0.8, 0)]
 
-    # observe_points = [(-0.05, 0.2, 0.05), (-0.11, 0.4, 0.21), (-0.3, -0.2, 0.1), (0.2, -0.1, 0.4),
-    #                   (-0.4, 0.2, -0.2), (0.2, -0.2, 0.2), (0.3, 0.2, -0.3)]
+    # Model 3
+    # observe_points = [(-0.5, 2, 0.5), (-1.1, 4, 2.1), (-3, -2, 1), (2, -1, 4),
+    #                   (-4, 2, -2), (2, -2, 2), (3, 2, -3)]
+
+    # Model 4
+    observe_points = [(-0.1, 0.4, 0.1), (-0.22, 0.8, 0.42), (-0.6, -0.4, 0.2), (0.4, -0.2, 0.8),
+                      (-0.8, 0.4, -0.4), (0.4, -0.4, 0.4), (0.6, 0.4, -0.6)]
 
     variable_name = ['Liquid_Pressure']
 

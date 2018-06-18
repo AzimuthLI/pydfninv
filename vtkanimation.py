@@ -143,33 +143,36 @@ def animation(mesh_list, obs_points):
     windowToImageFilter.ReadFrontBufferOff()
     windowToImageFilter.Update()
 
-    writer = vtk.vtkOggTheoraWriter()
-    writer.SetInputConnection(windowToImageFilter.GetOutputPort())
-    writer.SetFileName("/Volumes/SD_Card/Thesis_project/test.ogv")
-    writer.Start()
+    # writer = vtk.vtkOggTheoraWriter()
+    # writer.SetInputConnection(windowToImageFilter.GetOutputPort())
+    # writer.SetFileName("/Volumes/SD_Card/Thesis_project/test.ogv")
+    # writer.Start()
     # renderWindow.Start()
 
     # start the interaction and timer
     renderWindowInteractor.Start()
 
-    windowToImageFilter.Modified()
-    writer.Write()
-    writer.End()
+    # windowToImageFilter.Modified()
+    # writer.Write()
+    # writer.End()
 
 
 if __name__ == '__main__':
 
-    model_path = '/Volumes/SD_Card/Thesis_project/model_2/accept_models'
+    model_path = '/Volumes/SD_Card/Thesis_project/model_4/accept_models'
     mesh_list = []
     for root, dirs, files in os.walk(model_path):
         if 'full_mesh.vtk' in files:
             mesh_list.append(os.path.join(root, 'full_mesh.vtk'))
 
-    obs_pt = [(0.4, 0.4, 0.2),
-              (0.4, 0.4, -0.2),
-              (0.4, -0.4, 0.2),
-              (0.4, -0.4, -0.2),
-              (-0.15, -0.08, 0.2),
-              (-0.15, -0.08, 0)]
+    # obs_pt = [(0.4, 0.4, 0.2),
+    #           (0.4, 0.4, -0.2),
+    #           (0.4, -0.4, 0.2),
+    #           (0.4, -0.4, -0.2),
+    #           (-0.15, -0.08, 0.2),
+    #           (-0.15, -0.08, 0)]
+
+    obs_pt = [(-0.5, 2, 0.5), (-1.1, 4, 2.1), (-3, -2, 1), (2, -1, 4),
+              (-4, 2, -2), (2, -2, 2), (3, 2, -3)]
 
     animation(mesh_list, obs_pt)

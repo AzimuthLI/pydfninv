@@ -20,26 +20,26 @@ def define_paths():
         os.environ['PYDFNINV_PATH'] = '/cluster/home/lishi/pydfninv'
 
         # the dfnWorks-Version2.0  repository
-        os.environ['DFNWORKS_PATH'] = '/cluster/project/geg/apps/dfnWorks-Version2.0/'
+        os.environ['DFNWORKS_PATH'] = '/cluster/project/geg/apps/test_apps/env2/dfnWorks-Version2.0/'
         valid('DFNWORKS_PATH')
         if not (os.path.isdir(os.path.abspath(os.environ['DFNWORKS_PATH'] + 'tests/'))):
             print("INVALID VERSION OF DFNWORKS - does not have tests folder of official release 2.0")
             exit()
 
         # PETSC paths
-        os.environ['PETSC_DIR'] = '/cluster/project/geg/apps/petsc/petsc-xsdk-0.2.0/gcc-4.8.2'
+        os.environ['PETSC_DIR'] = '/cluster/project/geg/apps/test_apps/env2/petsc-xsdk-0.2.0'
         os.environ['PETSC_ARCH'] = ''
         valid('PETSC_DIR')
 
         # PFLOTRAN path
-        os.environ['PFLOTRAN_DIR'] = '/cluster/project/geg/apps/pflotran'
+        os.environ['PFLOTRAN_DIR'] = '/cluster/project/geg/apps/test_apps/env2/pflotran'
 
         # Python executable
         os.environ['python_dfn'] = '/cluster/apps/python/2.7.14/x86_64/bin/python'
         valid('python_dfn')
 
         # LaGriT executable
-        os.environ['lagrit_dfn'] = '/cluster/project/geg/apps/LaGriT/src/lagrit'
+        os.environ['lagrit_dfn'] = '/cluster/project/geg/apps/test_apps/env2/LaGriT/src/lagrit'
         valid('lagrit_dfn')
 
     elif ptf.system() == 'Darwin':

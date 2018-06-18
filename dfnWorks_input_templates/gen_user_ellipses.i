@@ -15,7 +15,7 @@ rExpMean: {2}
 printRejectReasons: 0
 raspect: {1, 1}
 RectByCoord_Input_File_Path: ./inputFiles/userPolygons/rectCoords.dat
-layers: {-500, 0} {0, 500} 
+layers: {-500, 0} {0, 500}
 econst: {10,  10,  10}
 rmin: {1, 1}
 rphi: {0, 45}
@@ -60,7 +60,7 @@ ekappa: {8, 8}
 outputFinalRadiiPerFamily: 1
 permOption: 1
 constantAperture: 1e-5
-domainSize: {1.0, 1.0, 1.0}
+domainSize: {2.0, 2.0, 2.0}
 userEllByCoord: 0
 constantPermeability: 1e-12
 visualizationMode: 0

@@ -100,7 +100,7 @@ class DFNINVERSE:
         input_param = {}
 
         input_param['nUserEll'] = n_fracs
-        input_param['Aspect_Ratio'] = '\n'.join(str(e) for e in (np.ones(n_fracs) * 0.6).tolist())
+        input_param['Aspect_Ratio'] = '\n'.join(str(e) for e in (np.ones(n_fracs)).tolist())
         input_param['N_Vertices'] = '\n'.join(str(e) for e in (np.ones(n_fracs, dtype=int) * 5).tolist())
         input_param['AngleOption'] = '\n'.join(str(e) for e in np.ones(n_fracs, dtype=int).tolist())
         input_param['Beta'] = '\n'.join(str(e) for e in np.zeros(n_fracs).tolist())
