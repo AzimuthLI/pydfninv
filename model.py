@@ -120,7 +120,6 @@ class mcmc_sampler:
         self.dr_scale = dr_scale
 
         self.state = self.get_state(initial_dfn)
-        # print(self.state)
         chain = [self.state]
         self.save_sample()
 
@@ -131,8 +130,10 @@ class mcmc_sampler:
             self.save_flag = self.step()
             if self.save_flag:
                 self.accept_case += 1
+
             self.save_sample()
             chain.append(self.state)
+
             print('Accept: {}'.format(self.save_flag))
             print('Current RMS={:.2f}'.format(self.state['rms']))
             i += 1
@@ -221,6 +222,8 @@ class mcmc_sampler:
 
     def save_sample(self):
         self.engine.write_inverselog(self.state, model_id=self.accept_case, save_flag=self.save_flag)
+        with open(self.engine.project + '/mcmc_chain.pkl', 'wb') as f:
+            pickle.dump(self.state, f)
 
     def propose(self, step_stage, *arg):
         dfn_old = self.state['dfn']
@@ -263,6 +266,7 @@ if __name__ == '__main__':
     # Set inverse project information
 
     # Model 1 (1X1X1)
+    # dsize = [1.0, 1.0, 1.0]
     # station_coordinates = [(0.4, 0.4, 0.2), (0.4, 0.4, -0.2), (0.4, -0.4, 0.2),
     #                        (0.4, -0.4, -0.2), (-0.15, -0.08, 0.2), (-0.15, -0.08, 0)]
     # observed_fractures = np.asarray([[-0.4, 0, 0, 0, np.pi / 2, 0.8],
@@ -271,6 +275,7 @@ if __name__ == '__main__':
     # inferred_fractures = np.asarray([[-0.19, 0, 0.2, 0, 0, 0.8]])
 
     # Model 2 (1X1X1)
+    # dsize = [1.0, 1.0, 1.0]
     # station_coordinates = [(-0.05, 0.2, 0.05), (-0.11, 0.4, 0.21), (-0.3, -0.2, 0.1), (0.2, -0.1, 0.4),
     #                        (-0.4, 0.2, -0.2), (0.2, -0.2, 0.2), (0.3, 0.2, -0.3)]
     #
@@ -280,6 +285,7 @@ if __name__ == '__main__':
     # inferred_fractures = np.asarray([[0, 0, 0.2, 0, 2.356, 0.8]])
 
     # Model 3 (10X10X10)
+    # dsize = [10.0, 10.0, 10.0]
     # station_coordinates = [(-0.5, 2, 0.5), (-1.1, 4, 2.1), (-3, -2, 1), (2, -1, 4),
     #                        (-4, 2, -2), (2, -2, 2), (3, 2, -3)]
     #
@@ -290,6 +296,7 @@ if __name__ == '__main__':
     # inferred_fractures = np.asarray([[0, 0, 2, 0, 2.356, 8]])
 
     # Model 4 ()
+    dsize = [2.0, 2.0, 2.0]
     station_coordinates = [(-0.1, 0.4, 0.1), (-0.22, 0.8, 0.42), (-0.6, -0.4, 0.2), (0.4, -0.2, 0.8),
                            (-0.8, 0.4, -0.4), (0.4, -0.4, 0.4), (0.6, 0.4, -0.6)]
     observed_fractures = np.asarray([[-0.8, 0, 0, 0.7854, 0.6283, 1.6],
@@ -297,11 +304,12 @@ if __name__ == '__main__':
                                      [0.8, 0, -0.4, 0.7854, 0.6283, 1.6]])
     inferred_fractures = np.asarray([[0, 0, 0.4, 0, 2.356, 1.6]])
 
-    project_path = '/Volumes/SD_Card/Thesis_project/model_4'
+    # Initialize inverse engine
+    project_path = '/Volumes/SD_Card/Thesis_project/model_5'
     field_observation_file = '/Volumes/SD_Card/Thesis_project/synthetic_model_4/output/obs_readings.csv'
     ncpu = 1
 
-    dfninv = DFNINVERSE(project_path, field_observation_file, station_coordinates, ncpu)
+    dfninv = DFNINVERSE(project_path, field_observation_file, station_coordinates, dsize, ncpu)
     field_observation = dfninv.obs_data
 
     # Define the initial fractures
@@ -315,14 +323,15 @@ if __name__ == '__main__':
     sig_f = np.hstack((sig_obs * np.ones(n_observed_frac), sig_unknown * np.ones(n_inferred_frac)))
     sig_v = np.asarray([0.1, 0.1, 0.1, 0, 0, 0])
 
-    mcmc = mcmc_sampler(dfninv, field_observation, var_sigma=[sig_f, sig_v], moves='D',
-                        prior_range=[[0, -1, -1, -1, 0, 0, 0],
-                                     [10, 1, 1, 1, np.pi, np.pi, 2]]
-                        )
+    prior_range = [[0, -dsize[0]/2, -dsize[1]/2, -dsize[2]/2, 0, 0, 0],
+                   [10, dsize[0]/2, dsize[1]/2, dsize[2]/2, np.pi, np.pi, 2]]
+
+    sp = mcmc_sampler(dfninv, field_observation, var_sigma=[sig_f, sig_v], moves='D', prior_range=prior_range)
 
     s_initial = np.vstack((observed_fractures, inferred_fractures))
-    chain = mcmc.sample(s_initial, 1000)
 
-    with open(project_path+'/mcmc_chain.pkl', 'wb') as f:
-        pickle.dump(chain, f)
+    chain = sp.sample(s_initial, 10)
+
+    # with open(project_path+'/mcmc_chain.pkl', 'wb') as f:
+    #     pickle.dump(chain, f)
 

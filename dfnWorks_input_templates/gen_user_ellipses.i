@@ -60,7 +60,7 @@ ekappa: {8, 8}
 outputFinalRadiiPerFamily: 1
 permOption: 1
 constantAperture: 1e-5
-domainSize: {2.0, 2.0, 2.0}
+domainSize: $domainSize
 userEllByCoord: 0
 constantPermeability: 1e-12
 visualizationMode: 0

@@ -5,6 +5,8 @@ import mesh_dfn_helper as mh
 import lagrit_scripts as lagrit
 import run_meshing as run_mesh
 import numpy as np
+import platform as ptf
+
 
 def commandline_parser(argv):
     jobname = ''
@@ -550,8 +552,12 @@ class DFNWORKS:
             exit()
         print("=" * 80)
         print("--> Running PFLOTRAN")
-        cmd = os.environ['PETSC_DIR'] + '/' + os.environ['PETSC_ARCH'] + '/bin/mpirun -np ' + str(self._ncpu) + \
-              ' ' + os.environ['PFLOTRAN_DIR'] + '/src/pflotran/pflotran -pflotranin ' + self._local_dfnFlow_file
+        if ptf.system() == 'Linux':
+            cmd = '/cluster/apps/openmpi/1.6.5/x86_64/gcc_4.8.2/bin/mpirun -np ' + str(self._ncpu) + \
+                  ' ' + os.environ['PFLOTRAN_DIR'] + '/src/pflotran/pflotran -pflotranin ' + self._local_dfnFlow_file
+        elif ptf.system() == 'Darwin':
+            cmd = os.environ['PETSC_DIR'] + '/' + os.environ['PETSC_ARCH'] + '/bin/mpirun -np ' + str(self._ncpu) + \
+                  ' ' + os.environ['PFLOTRAN_DIR'] + '/src/pflotran/pflotran -pflotranin ' + self._local_dfnFlow_file
         os.system(cmd)
         print('=' * 80)
         print("--> Running PFLOTRAN Complete")

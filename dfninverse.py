@@ -6,7 +6,7 @@ from subprocess import STDOUT, Popen
 from path import define_paths
 class DFNINVERSE:
 
-    def __init__(self, project_path, observation_data_path, observe_points, ncpu=1):
+    def __init__(self, project_path, observation_data_path, observe_points, domain_size, ncpu=1):
 
         define_paths()
 
@@ -21,6 +21,7 @@ class DFNINVERSE:
         self.flow_files_path = self.forward_project + '/PFLOTRAN/parsed_vtk/'
         self.sim_results = self.forward_project + "/forward_results.csv"
         self.mcmc_log = self.project + "/mcmc_log.txt"
+        self.domainSize = '{' + ', '.join(str(e) for e in domain_size) + '}'
         self.__make_project_dir()
 
     def __make_project_dir(self):
@@ -47,8 +48,10 @@ class DFNINVERSE:
         self.template_files = os.environ['PYDFNINV_PATH'] + '/dfnWorks_input_templates'
         self.__write_template_file(self.template_files + '/gen_user_ellipses.i',
                                    self.forward_input_file + '/gen_user_ellipses.dat',
-                                   {'UserEll_Input_File_Path': self.forward_input_file + '/user_define_fractures.dat'}
+                                   {'UserEll_Input_File_Path': self.forward_input_file + '/user_define_fractures.dat',
+                                    'domainSize': self.domainSize}
                                    )
+
         shutil.copy2(self.template_files + '/dfn_explicit.in',
                      self.forward_input_file + '/dfn_explicit.in')
         shutil.copy2(self.template_files + '/PTDFN_control.dat',
