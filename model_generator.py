@@ -86,12 +86,27 @@ def gen_3d_obs_points_plot(obs_points, save_path):
 
 if __name__ == '__main__':
     #
-    syn_model_path = '/Volumes/SD_Card/Thesis_project/synthetic_model_4/output'
+    syn_model_path = '/cluster/home/lishi/model_1x1x1_cx_500/synthetic/output'
     #
-    input_file_path = '/Volumes/SD_Card/Thesis_project/synthetic_model_4/inputs'
+    input_file_path = '/cluster/home/lishi/model_1x1x1_cx_500/synthetic/inputs/'
 
-    ncpu = 1
+    # Model 1 (1x1x1, cx)
+    observe_points = [(0.4, 0.4, 0.2), (0.4, 0.4, -0.2), (0.4, -0.4, 0.2),
+                      (0.4, -0.4, -0.2), (-0.15, -0.08, 0.2), (-0.15, -0.08, 0)]
 
+    # Model 2 (1x1x1, cxyz)
+    # observe_points = [(-0.05, 0.2, 0.05), (-0.11, 0.4, 0.21), (-0.3, -0.2, 0.1), (0.2, -0.1, 0.4),
+    #                   (-0.4, 0.2, -0.2), (0.2, -0.2, 0.2), (0.3, 0.2, -0.3)]
+
+    # Model 3 (5x5x5, cx)
+    # observe_points = [(2, 2, 1), (2, 2, -1), (2, -2, 1),
+    #                   (2, -2, -1), (-0.75, -0.4, 1), (-0.75, -0.4, 0)]
+
+    # Model 4 （5x5x5, cxyz)
+    # observe_points = [(-0.5, 2, 0.5), (-1.1, 4, 2.1), (-3, -2, 1), (2, -1, 4),
+    #                   (-4, 2, -2), (2, -2, 2), (3, 2, -3)]
+
+    ncpu = 4
     run_dfnworks_command = ['python3', 'dfnworks.py',
                             '-j', syn_model_path,
                             '-i', input_file_path,
@@ -99,22 +114,10 @@ if __name__ == '__main__':
                            ]
     p = subprocess.Popen(run_dfnworks_command)
     p.wait()
-    # #
+
     # Read pressure data from the outputs
     mesh_file_path = syn_model_path + '/full_mesh.vtk'
     flow_files_path = syn_model_path + '/PFLOTRAN/parsed_vtk/'
-
-    # Model 1 & 2
-    # observe_points = [(4, 4, 2), (4, 4, -2), (4, -4, 2),
-    #                   (4, -4, -2), (-1.5, -0.8, 2), (-1.5, -0.8, 0)]
-
-    # Model 3
-    # observe_points = [(-0.5, 2, 0.5), (-1.1, 4, 2.1), (-3, -2, 1), (2, -1, 4),
-    #                   (-4, 2, -2), (2, -2, 2), (3, 2, -3)]
-
-    # Model 4
-    observe_points = [(-0.1, 0.4, 0.1), (-0.22, 0.8, 0.42), (-0.6, -0.4, 0.2), (0.4, -0.2, 0.8),
-                      (-0.8, 0.4, -0.4), (0.4, -0.4, 0.4), (0.6, 0.4, -0.6)]
 
     variable_name = ['Liquid_Pressure']
 
@@ -153,5 +156,5 @@ if __name__ == '__main__':
     plt.title('Synthethic Observation')
     plt.legend(loc=7, bbox_to_anchor=(1, 0.65))
     plt.savefig(syn_model_path + '/observation.pdf')
-    # plt.close(fig)
-    plt.show()
+    plt.close(fig)
+    # plt.show()

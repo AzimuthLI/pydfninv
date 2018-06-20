@@ -7,28 +7,93 @@ from scipy.stats import norm
 import matplotlib.mlab as mlab
 from mpl_toolkits.mplot3d import Axes3D
 
+def load_chain(filepath, shape_variables):
+    rms_chain = []
+    # shape_variables = np.zeros([4, 6, 501])
+    id_chain = []
+    nm = 0
+    f = open(filepath, 'rb')
+    while 1:
+        try:
+            state = pickle.load(f)
+            rms_chain.append(state['rms'])
+            shape_variables[:, :, nm] = state['dfn']
+            id_chain.append(state['dfn_id'])
+            nm += 1
+        except EOFError:
+            break
+    return rms_chain, shape_variables, id_chain
 
+def variable_hist(var_idx, shape_vars, save_flag=True, **kwargs):
+
+    var = shape_vars[var_idx[0], var_idx[1], :]
+    bin = kwargs.get('bins', np.arange(var.min(), var.max(), 0.05))
+    (mu, sigma) = norm.fit(var)
+
+    latexify(fig_width=6)
+
+    fig = plt.figure()
+    ax1 = fig.add_subplot(111)
+    n, bins, patches = ax1.hist(var,bins=bin, density=True,
+                                edgecolor='black', linewidth=1.2, histtype='bar')
+
+    y = mlab.normpdf(bins, mu, sigma)
+    l = ax1.plot(bins, y, linewidth=2)
+
+    return ax1
 
 if __name__ == '__main__':
 
-    project_path = '/Volumes/SD_Card/Thesis_project/model_2'
+    project_path = '/Users/shiyili/euler_remote/home/model_1x1x1_cx_500/inverse'
+    # project_path = '/Users/shiyili/euler_remote/home/model_1x1x1_cxyz_1000/inverse'
 
-    with open(project_path+'/mcmc_chain.pkl', 'rb') as f:
-        chain = pickle.load(f)
+    shape_var_size = np.zeros([4, 6, 501])
 
-    n_fractures = chain[0]['dfn'].shape[0]
-    n_model = len(chain)
+    rms_log, shape_var, model_ids = load_chain(project_path+'/mcmc_chain.pkl', shape_var_size)
 
-    rms_log = []
-    shape_variables = np.zeros([n_fractures, 6, n_model])
-    nm = 0
+    del shape_var_size
 
-    for model in chain:
-        rms_log.append(model['rms'])
-        shape_variables[:, :, nm] = model['dfn']
-        nm += 1
-
-    print(rms_log)
+    ax_hist_cx = variable_hist([3, 0], shape_var, bins=np.arange(-0.5, 0.5, 0.02))
+    ax_hist_cx.set_xlabel('X-coordinate of fracture center')
+    ax_hist_cx.set_ylabel('Density')
+    ax_hist_cx.set_title('X-coordinate of fracture center')
+    plt.xticks(np.arange(-0.5, 0.5, 0.1))
+    plt.savefig(project_path + '/mcmc_cluster_cx.pdf')
+    plt.show()
+    #
+    # ax_hist_cy = variable_hist([3, 1], shape_var, bins=np.arange(-0.5, 0.5, 0.02))
+    # ax_hist_cy.set_xlabel('Y-coordinate of fracture center')
+    # ax_hist_cy.set_ylabel('Density')
+    # ax_hist_cy.set_title('Y-coordinate of fracture center')
+    # plt.xticks(np.arange(-0.5, 0.5, 0.1))
+    # plt.savefig(project_path + '/mcmc_cluster_cy.pdf')
+    # plt.show()
+    #
+    # ax_hist_cz = variable_hist([3, 2], shape_var, bins=np.arange(-0.5, 0.5, 0.02))
+    # ax_hist_cz.set_xlabel('Z-coordinate of fracture center')
+    # ax_hist_cz.set_ylabel('Density')
+    # ax_hist_cz.set_title('Z-coordinate of fracture center')
+    # plt.xticks(np.arange(-0.5, 0.5, 0.1))
+    # plt.savefig(project_path + '/mcmc_cluster_cz.pdf')
+    # plt.show()
+    #
+    # fig = plt.figure()
+    # ax = fig.add_subplot(111, projection='3d')
+    # ax.scatter(shape_var[3, 0, :], shape_var[3, 1, :], shape_var[3, 2, :])
+    # ax.set_xlabel('cx')
+    # ax.set_ylabel('cy')
+    # ax.set_zlabel('cz')
+    # ax.set_title('Spatial Distribution of the inferred fracture center')
+    # plt.savefig(project_path + '/center_distribution.pdf')
+    # plt.show()
+    #
+    fig = plt.figure()
+    plt.plot(rms_log)
+    plt.xlabel('Iteration')
+    plt.ylabel('RMS')
+    plt.title('Root-Mean-Square Error Evolution as MCMC Iteration')
+    plt.savefig(project_path + '/rms_iteration.pdf')
+    plt.show()
 
     #
     # Analyze result
@@ -62,44 +127,6 @@ if __name__ == '__main__':
     #             nf += 1
     #         nm += 1
 
-    print(n_model)
-    cx = shape_variables[3, 0, :]
-    cy = shape_variables[3, 1, :]
-    cz = shape_variables[3, 2, :]
-
-    (mu, sigma) = norm.fit(cx)
-    print(mu, sigma)
-    # # print(cx)
-    latexify(fig_width=6)
-    #
-    # for c in [cx, cy, cz]:
-    fig = plt.figure()
-    ax1 = fig.add_subplot(111)
-    n, bins, patches = ax1.hist(cx,
-                                bins=np.arange(-0.3, 0.3, 0.02), density=True,
-                                edgecolor='black', linewidth=1.2, histtype='bar')
-
-    y = mlab.normpdf(bins, mu, sigma)
-    l = plt.plot(bins, y, linewidth=2)
-
-    ax1.set_xlabel('x-coordinate of fracture center')
-    ax1.set_ylabel('Density')
-    ax1.set_title('x-coordinate of fracture center')
-    plt.xticks(np.arange(-0.3, 0.3, 0.1))
-    plt.savefig(project_path + '/mcmc_cluster_cx.pdf')
-    plt.show()
-
-    fig = plt.figure()
-    ax = fig.add_subplot(111, projection='3d')
-    ax.scatter(cx, cy, cz)
-
-    ax.set_xlabel('X Label')
-    ax.set_ylabel('Y Label')
-    ax.set_zlabel('Z Label')
-
-    plt.show()
-
-
     # #
     # fig = plt.figure()
     # ax1 = fig.add_subplot(111)
@@ -122,13 +149,3 @@ if __name__ == '__main__':
     # # plt.xticks(np.arange(-0.5, 0.5, 0.1))
     # plt.savefig(project_path + '/mcmc_cluster_cz.pdf')
     # plt.show()
-
-    fig = plt.figure()
-    plt.plot(rms_log)
-    plt.xlabel('Iteration')
-    plt.ylabel('RMS')
-    plt.title('Root-Mean-Square Error Evolution as MCMC Iteration')
-    plt.savefig(project_path + '/rms_iteration.pdf')
-    plt.show()
-
-

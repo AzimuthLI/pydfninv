@@ -159,7 +159,8 @@ def animation(mesh_list, obs_points):
 
 if __name__ == '__main__':
 
-    model_path = '/Volumes/SD_Card/Thesis_project/model_4/accept_models'
+    # model_path = '/Volumes/SD_Card/Thesis_project/model_4/accept_models'
+    model_path =  '/Users/shiyili/euler_remote/home/model_1x1x1_cxyz_500/inverse/accept_models'
     mesh_list = []
     for root, dirs, files in os.walk(model_path):
         if 'full_mesh.vtk' in files:
@@ -172,7 +173,9 @@ if __name__ == '__main__':
     #           (-0.15, -0.08, 0.2),
     #           (-0.15, -0.08, 0)]
 
-    obs_pt = [(-0.5, 2, 0.5), (-1.1, 4, 2.1), (-3, -2, 1), (2, -1, 4),
-              (-4, 2, -2), (2, -2, 2), (3, 2, -3)]
+    # obs_pt = [(-0.5, 2, 0.5), (-1.1, 4, 2.1), (-3, -2, 1), (2, -1, 4),
+    #           (-4, 2, -2), (2, -2, 2), (3, 2, -3)]
 
+    obs_pt = [(-0.05, 0.2, 0.05), (-0.11, 0.4, 0.21), (-0.3, -0.2, 0.1), (0.2, -0.1, 0.4),
+              (-0.4, 0.2, -0.2), (0.2, -0.2, 0.2), (0.3, 0.2, -0.3)]
     animation(mesh_list, obs_pt)

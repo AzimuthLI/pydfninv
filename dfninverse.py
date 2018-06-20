@@ -258,7 +258,7 @@ class DFNINVERSE:
 
     def write_inverselog(self, status, model_id, save_flag):
         model_dir = self.accept_model_path + '/model_' + str(model_id)
-        files_to_keep = ['full_mesh.inp', 'full_mesh.vtk', '/PFLOTRAN/parsed_vtk/', '/forward_results.csv']
+        files_to_keep = ['full_mesh.inp', 'full_mesh.vtk', '/forward_results.csv']
 
         if save_flag:
             os.mkdir(model_dir)
