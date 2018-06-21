@@ -1,10 +1,12 @@
 import numpy as np
 from dfninverse import DFNINVERSE
 from numpy.random import randint, normal, random
-from numpy.linalg import det, inv
+from numpy.linalg import det, inv, matrix_rank
 from numpy import diff
 from scipy import stats
 import pickle
+
+
 
 class matrix_normal:
 
@@ -21,28 +23,19 @@ class matrix_normal:
         try:
             tr = np.trace(inv(self.V) @ (X - self.M).T @ inv(self.U) @ (X - self.M))
         except:
-            r_idx = np.all(self.V, axis=1)
-            c_idx = np.all(self.U, axis=0)
-            v = self.V[r_idx].T[r_idx]
-            u = self.U[c_idx].T[c_idx]
-            x = X[np.where(r_idx), np.where(c_idx)]
-            m = self.M[np.where(r_idx), np.where(c_idx)]
-            print(v)
-            print(u)
-            if v.shape == 1:
-                v_inv = 1/v
-            else:
-                v_inv = inv(v)
-            if u.ndim == 1:
-                u_inv = 1/u
-            else:
-                u_inv = inv(u)
+            r_idx = np.any(self.U, axis=1)
+            c_idx = np.any(self.V, axis=0)
+            u = self.U[r_idx].T[r_idx]
+            v = self.V[c_idx].T[c_idx]
+            x = X[r_idx].T[c_idx].T
+            m = self.M[r_idx].T[c_idx].T
 
-            tr = np.trace(v_inv @ (x-m).T @ u_inv @ (x-m))
+            tr = np.trace(inv(v) @ (x-m).T @ inv(u) @ (x-m))
 
-        numerator = np.exp(-0.5 * tr)
+        numerator = np.exp(-0.5 * tr / (matrix_rank(self.U) * matrix_rank(self.V)))
 
         prob_density = numerator / denominator
+        print(prob_density)
         return prob_density
 
 
