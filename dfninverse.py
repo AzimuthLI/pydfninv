@@ -4,9 +4,11 @@ import pandas as pd
 import numpy as np
 from subprocess import STDOUT, Popen
 from path import define_paths
+
+
 class DFNINVERSE:
 
-    def __init__(self, project_path, observation_data_path, observe_points, domain_size, ncpu=1):
+    def __init__(self, project_path, observe_points, domain_size, ncpu=1):
 
         define_paths()
 
@@ -14,7 +16,7 @@ class DFNINVERSE:
         self.forward_project = self.project + '/forward_simulation'
         self.accept_model_path = self.project + '/accept_models'
         self.forward_input_file = self.project + '/input_files'
-        self.obs_data = pd.read_csv(observation_data_path, index_col=0).values / 1e6
+        # self.obs_data = pd.read_csv(observation_data_path, index_col=0).values / 1e6
         self.ncpu = ncpu
         self.obs_points = observe_points
         self.mesh_file_path = self.forward_project + '/full_mesh.vtk'
@@ -23,6 +25,7 @@ class DFNINVERSE:
         self.mcmc_log = self.project + "/mcmc_log.txt"
         self.domainSize = '{' + ', '.join(str(e) for e in domain_size) + '}'
         self.__make_project_dir()
+        open(self.project+'/log_file.log', 'a').close()
 
     def __make_project_dir(self):
 
@@ -229,14 +232,14 @@ class DFNINVERSE:
 
         return obs_scalars
 
-    def gen_3d_obs_points_plot(self, obs_points):
+    def gen_3d_obs_points_plot(self, obs_points, radius=0.02):
 
         forward_project = self.forward_project
 
         sphere = vtk.vtkSphereSource()
         sphere.SetPhiResolution(21)
         sphere.SetThetaResolution(21)
-        sphere.SetRadius(.01)
+        sphere.SetRadius(radius)
 
         filter = vtk.vtkAppendPolyData()
 

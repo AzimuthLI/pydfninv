@@ -1,45 +1,47 @@
 import numpy as np
+import pandas as pd
 from dfninverse import DFNINVERSE
 from numpy.random import randint, normal, random
 from numpy.linalg import det, inv, matrix_rank
 from numpy import diff
 from scipy import stats
-import pickle
+import pickle, sys
+import logging
+from logging.config import dictConfig
+
+# class matrix_normal:
+#
+#     def __init__(self, M, U, V):
+#
+#         self.n = M.shape[0]
+#         self.p = M.shape[1]
+#
+#         self.M, self.U, self.V = (M, U, V)
+#
+#     def pdf(self, X):
+#
+#         denominator = np.sqrt((2 * np.pi) ** (self.n * self.p) * det(self.V) ** self.n * det(self.U) ** self.p)
+#
+#         try:
+#             tr = np.trace(inv(self.V) @ (X - self.M).T @ inv(self.U) @ (X - self.M))
+#         except:
+#             r_idx = np.any(self.U, axis=1)
+#             c_idx = np.any(self.V, axis=0)
+#             u = self.U[r_idx].T[r_idx]
+#             v = self.V[c_idx].T[c_idx]
+#             x = X[r_idx].T[c_idx].T
+#             m = self.M[r_idx].T[c_idx].T
+#
+#             tr = np.trace(inv(v) @ (x-m).T @ inv(u) @ (x-m))
+#
+#         numerator = np.exp(-0.5 * tr / (matrix_rank(self.U) * matrix_rank(self.V)))
+#
+#         prob_density = numerator / denominator
+#         print(prob_density)
+#         return prob_density
 
 
-
-class matrix_normal:
-
-    def __init__(self, M, U, V):
-
-        self.n = M.shape[0]
-        self.p = M.shape[1]
-
-        self.M, self.U, self.V = (M, U, V)
-
-    def pdf(self, X):
-
-        denominator = np.sqrt((2 * np.pi) ** (self.n * self.p) * det(self.V) ** self.n * det(self.U) ** self.p)
-        try:
-            tr = np.trace(inv(self.V) @ (X - self.M).T @ inv(self.U) @ (X - self.M))
-        except:
-            r_idx = np.any(self.U, axis=1)
-            c_idx = np.any(self.V, axis=0)
-            u = self.U[r_idx].T[r_idx]
-            v = self.V[c_idx].T[c_idx]
-            x = X[r_idx].T[c_idx].T
-            m = self.M[r_idx].T[c_idx].T
-
-            tr = np.trace(inv(v) @ (x-m).T @ inv(u) @ (x-m))
-
-        numerator = np.exp(-0.5 * tr / (matrix_rank(self.U) * matrix_rank(self.V)))
-
-        prob_density = numerator / denominator
-        print(prob_density)
-        return prob_density
-
-
-class mcmc_sampler:
+class MCMCSampler:
 
     def __init__(self, inverse_engine, observation, **kwargs):
 
@@ -48,6 +50,7 @@ class mcmc_sampler:
         self.move_list = kwargs.get('moves', ['D', 'B', 'K'])
         var_sigma = kwargs.get('var_sigma', None)
 
+        self.reference_dfn = kwargs.get('reference', None)
         self.sigma_fracture = np.diag(var_sigma[0])
         self.sigma_shape = np.diag(var_sigma[1])
 
@@ -60,6 +63,25 @@ class mcmc_sampler:
         self.state = None
         self.accept_case = 0
         self.save_flag = True
+
+        logging_config = dict(
+            version=1,
+            formatters={
+                'f': {'format': '%(asctime)s - %(name)s - %(levelname)s - %(message)s'}},
+            handlers={
+                'h': {'class': 'logging.FileHandler',
+                      'formatter': 'f',
+                      'level': logging.DEBUG,
+                      'filename': (self.engine.project+'/log_file.log')},
+            },
+            root={
+                'handlers': ['h'],
+                'level': logging.DEBUG,
+            },
+        )
+
+        dictConfig(logging_config)
+        self.logger = logging.getLogger()
 
     def get_state(self, dfn):
         return {'dfn_id': self.accept_case,
@@ -86,7 +108,6 @@ class mcmc_sampler:
             prior *= np.prod(p) ** (- dfn.shape[0])
         else:
             prior *= 0
-
         return prior
 
     def misfit_func(self, dfn):
@@ -116,16 +137,33 @@ class mcmc_sampler:
 
         self.move = self.move_list[randint(0, len(self.move_list))]
         print('Move Type: {}'.format(self.move))
+        self.logger.info('Move Type: {}'.format(self.move))
+
         state_1 = self.propose(1)
         accept_flag = self.acceptance_condition(state_1)
+
+
         if accept_flag:
             self.state = state_1
+            if self.move == 'B':
+                frac_diag = self.sigma_fracture.diagonal()
+                frac_diag = np.append(frac_diag, 1)
+                self.sigma_fracture = np.diag(frac_diag)
+            if self.move == 'K':
+                frac_diag = self.sigma_fracture.diagonal()
+                frac_diag = np.delete(frac_diag, self.kill_idx)
+                self.sigma_fracture = np.diag(frac_diag)
+
         elif (self.dr_scale != 0) & (self.move == 'D'):
+            print('stage 2 - Move Type: {}'.format(self.move))
+            self.logger.info('stage 2 - Move Type: {}'.format(self.move))
+
             state_2 = self.propose(2)
-            state2_1 = self.propose(-1, st = state_2)
+            state2_1 = self.propose(-1, st=state_2)
             accept_flag = self.acceptance_condition(state_1, state_2, state2_1)
             if accept_flag:
                 self.state = state_2
+
         return accept_flag
 
     def sample(self, initial_dfn, chain_length=100, dr_scale=0):
@@ -141,6 +179,8 @@ class mcmc_sampler:
 
         while i < self.chain_length:
             print('{0}Iteration:{1:d}{0}'.format('*' * 30, i))
+            self.logger.info('{0}Iteration:{1:d}{0}'.format('*' * 30, i))
+
             self.save_flag = self.step()
             if self.save_flag:
                 self.accept_case += 1
@@ -149,7 +189,9 @@ class mcmc_sampler:
             chain.append(self.state)
 
             print('Accept: {}'.format(self.save_flag))
+            self.logger.info('Accept: {}'.format(self.save_flag))
             print('Current RMS={:.2f}'.format(self.state['rms']))
+            self.logger.info('Current RMS={:.2f}'.format(self.state['rms']))
             i += 1
 
         return chain
@@ -165,6 +207,7 @@ class mcmc_sampler:
         else:
             raise ValueError('Unresolved arguments')
         print('Alpha = {:.4f}'.format(alp))
+        self.logger.info('Alpha = {:.4f}'.format(alp))
         if alp > random():
             accept_flag = True
         else:
@@ -181,12 +224,35 @@ class mcmc_sampler:
         sig_f = self.sigma_fracture / self.dr_scale
         sig_v = self.sigma_shape / self.dr_scale
 
-        q2_1 = matrix_normal(s2['dfn'], sig_f, sig_v).pdf(s2_1['dfn'])
-        q1 = matrix_normal(self.state['dfn'], self.sigma_fracture, self.sigma_shape).pdf(s1['dfn'])
+        q2_1 = self.matrix_normal_pdf(s2['dfn'], sig_f, sig_v, s2_1['dfn'])
+        q1 = self.matrix_normal_pdf(self.state['dfn'], self.sigma_fracture, self.sigma_shape, s1['dfn'])
 
         alpha_2 = min(1, (q2_1/q1) * a2 * (1-a2_1)/(1-a1))
 
         return alpha_2
+
+    def matrix_normal_pdf(self, M, U, V, X):
+
+        r_idx = np.any(U, axis=1)
+        c_idx = np.any(V, axis=0)
+        u = U[r_idx].T[r_idx]
+        v = V[c_idx].T[c_idx]
+        x = X[r_idx].T[c_idx].T
+        m = M[r_idx].T[c_idx].T
+
+        n = M.shape[0]
+        p = M.shape[1]
+
+        denominator = np.sqrt((2 * np.pi) ** (n * p) * det(v) ** n * det(u) ** p)
+
+        tr = np.trace(inv(v) @ (x - m).T @ inv(u) @ (x - m))
+
+        numerator = np.exp(-0.5 * tr / (matrix_rank(u) * matrix_rank(v)))
+
+        prob_density = numerator / denominator
+
+        # print(prob_density)
+        return prob_density
 
     def alpha_1(self, *args):
 
@@ -225,14 +291,17 @@ class mcmc_sampler:
             n_vars = dfn1.shape[1]
             n_fractures = dfn1.shape[0]
 
-            coeff = 1/np.sqrt((np.pi * 2) ** n_vars * det(self.sigma_shape))
-            delta = dfn1[-1, :] - np.average(dfn0, axis=0)
+            var_idx = np.any(self.sigma_shape, axis=0)
+            sigv = self.sigma_shape[var_idx].T[var_idx]
 
-            q_birth = np.exp(-0.5 * delta.T @ inv(self.sigma_shape) @ delta) / coeff
+            coeff = 1/np.sqrt((np.pi * 2) ** n_vars * det(sigv))
+            delta = (dfn1[-1, :] - np.average(dfn0, axis=0))[var_idx]
+
+            q_birth = np.exp(-0.5 * delta.T @ inv(sigv) @ delta) / coeff
             q_kill = 1 / n_fractures
             if self.move == 'B':
                 q = q_kill / q_birth
-            elif self.move == 'K':
+            if self.move == 'K':
                 q = q_birth / q_kill
 
         return q
@@ -254,12 +323,17 @@ class mcmc_sampler:
 
             elif self.move == 'B':
                 A = normal(0, 1, [1, n_var])
-                dfn_append = np.average(dfn_old, axis=0) + (A @ self.sigma_shape).T
-                dfn_new = np.hstack((dfn_old, dfn_append))
+
+                if self.reference_dfn is None:
+                    dfn_append = np.average(dfn_old, axis=0) + A @ self.sigma_shape
+                else:
+                    dfn_append = self.reference_dfn + A @ self.sigma_shape
+
+                dfn_new = np.vstack((dfn_old, dfn_append))
 
             elif self.move == 'K':
-                idx = randint(0, n_frac)
-                dfn_new = np.delete(dfn_old, idx, axis=0)
+                self.kill_idx = randint(0, n_frac)
+                dfn_new = np.delete(dfn_old, self.kill_idx, axis=0)
 
         if step_stage == 2:
             sig_f = self.sigma_fracture / self.dr_scale
@@ -276,20 +350,20 @@ class mcmc_sampler:
 
         s_new = self.get_state(dfn_new)
         print('RMS of proposal: {:.3f}'.format(s_new['rms']))
+        self.logger.info('RMS of proposal: {:.3f}'.format(s_new['rms']))
         return s_new
 
 
 if __name__ == '__main__':
-    # Set inverse project information
 
-    # Model 1 (1X1X1， cx)
+    # Model 1 (1X1X1, cx)
     # dsize = [1.0, 1.0, 1.0]
     # station_coordinates = [(0.4, 0.4, 0.2), (0.4, 0.4, -0.2), (0.4, -0.4, 0.2),
     #                        (0.4, -0.4, -0.2), (-0.15, -0.08, 0.2), (-0.15, -0.08, 0)]
     # observed_fractures = np.asarray([[-0.4, 0, 0, 0, np.pi / 2, 0.8],
     #                                  [0.3, 0, 0.2, 0, np.pi / 2, 0.8],
     #                                  [0.4, 0, -0.2, 0, np.pi / 2, 0.8]])
-    # inferred_fractures = np.asarray([[-0.2, 0, 0.2, 0, 0, 0.8]])
+    # inferred_fractures = np.asarray([[-0.2, 0.3, 0, 0, 0, 0.8]])
 
     # Model 2 (1X1X1, cxyz)
     dsize = [1.0, 1.0, 1.0]
@@ -300,7 +374,7 @@ if __name__ == '__main__':
                                      [0.4, 0, -0.2, 0.7854, 0.6283, 0.8]])
     inferred_fractures = np.asarray([[0, 0, 0.2, 0, 2.356, 0.8]])
 
-    # Model 3 (5X5X5， cx)
+    # Model 3 (5X5X5, cx)
     # dsize = [5.0, 5.0, 5.0]
     # station_coordinates = [(2, 2, 1), (2, 2, -1), (2, -2, 1),
     #                        (2, -2, -1), (-0.75, -0.4, 1), (-0.75, -0.4, 0)]
@@ -311,7 +385,7 @@ if __name__ == '__main__':
     #
     # inferred_fractures = np.asarray([[1.5, 0, 1, 0, 0, 4]])
 
-    # Model 4 (5X5X5， cxyz)
+    # Model 4 (5X5X5, cxyz)
     # dsize = [2.0, 2.0, 2.0]
     # station_coordinates = [(-0.1, 0.4, 0.1), (-0.22, 0.8, 0.42), (-0.6, -0.4, 0.2), (0.4, -0.2, 0.8),
     #                        (-0.8, 0.4, -0.4), (0.4, -0.4, 0.4), (0.6, 0.4, -0.6)]
@@ -321,12 +395,12 @@ if __name__ == '__main__':
     # inferred_fractures = np.asarray([[0, 0, 0.4, 0, 2.356, 1.6]])
 
     # Initialize inverse engine
-    project_path = '/cluster/home/lishi/model_1x1x1_cxyz_1000/inverse_2'
-    field_observation_file = '/cluster/home/lishi/model_1x1x1_cxyz_1000/synthetic/output/obs_readings.csv'
+    project_path = '/cluster/scratch/lishi/model_1x1x1_cxyz_1000/inverse_2'
+    field_observation_file = '/cluster/scratch/lishi/model_1x1x1_cxyz_1000/synthetic/output/obs_readings.csv'
     ncpu = 4
 
-    dfninv = DFNINVERSE(project_path, field_observation_file, station_coordinates, dsize, ncpu)
-    field_observation = dfninv.obs_data
+    dfninv = DFNINVERSE(project_path, station_coordinates, dsize, ncpu)
+    field_observation = pd.read_csv(field_observation_file, index_col=0).values / 1e6
 
     # Define the initial fractures
     n_inferred_frac = inferred_fractures.shape[0]
@@ -337,16 +411,16 @@ if __name__ == '__main__':
     sig_unknown = 1
 
     sig_f = np.hstack((sig_obs * np.ones(n_observed_frac), sig_unknown * np.ones(n_inferred_frac)))
-    sig_v = np.asarray([0.01, 0.01, 0.01, 0, 0, 0])
+    sig_v = np.asarray([0.1, 0, 0, 0, 0, 0])
 
     prior_range = [[0, -dsize[0]/2, -dsize[1]/2, -dsize[2]/2, 0, 0, 0],
                    [10, dsize[0]/2, dsize[1]/2, dsize[2]/2, np.pi, np.pi, 2]]
 
-    sp = mcmc_sampler(dfninv, field_observation, var_sigma=[sig_f, sig_v], moves='D', prior_range=prior_range)
+    sp = MCMCSampler(dfninv, field_observation, var_sigma=[sig_f, sig_v], moves='D', prior_range=prior_range)
 
     s_initial = np.vstack((observed_fractures, inferred_fractures))
 
-    chain = sp.sample(s_initial, chain_length=2000, dr_scale=1)
+    chain = sp.sample(s_initial, chain_length=2000, dr_scale=2)
 
     # with open(project_path+'/mcmc_chain.pkl', 'wb') as f:
     #     pickle.dump(chain, f)

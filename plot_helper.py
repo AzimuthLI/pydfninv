@@ -9,7 +9,7 @@ from mpl_toolkits.mplot3d import Axes3D
 
 def load_chain(filepath, shape_variables):
     rms_chain = []
-    # shape_variables = np.zeros([4, 6, 501])
+    # shape_variables = np.zeros([4, 6, 1])
     id_chain = []
     nm = 0
     f = open(filepath, 'rb')
@@ -44,10 +44,10 @@ def variable_hist(var_idx, shape_vars, save_flag=True, **kwargs):
 
 if __name__ == '__main__':
 
-    project_path = '/Users/shiyili/euler_remote/home/model_1x1x1_cx_500/inverse'
+    project_path = '/Users/shiyili/euler_remote/scratch/Case3_1x1x1_cxyz_2/inverse'
     # project_path = '/Users/shiyili/euler_remote/home/model_1x1x1_cxyz_1000/inverse'
 
-    shape_var_size = np.zeros([4, 6, 501])
+    shape_var_size = np.zeros([4, 6, 1001])
 
     rms_log, shape_var, model_ids = load_chain(project_path+'/mcmc_chain.pkl', shape_var_size)
 
@@ -61,31 +61,31 @@ if __name__ == '__main__':
     plt.savefig(project_path + '/mcmc_cluster_cx.pdf')
     plt.show()
     #
-    # ax_hist_cy = variable_hist([3, 1], shape_var, bins=np.arange(-0.5, 0.5, 0.02))
-    # ax_hist_cy.set_xlabel('Y-coordinate of fracture center')
-    # ax_hist_cy.set_ylabel('Density')
-    # ax_hist_cy.set_title('Y-coordinate of fracture center')
-    # plt.xticks(np.arange(-0.5, 0.5, 0.1))
-    # plt.savefig(project_path + '/mcmc_cluster_cy.pdf')
-    # plt.show()
-    #
-    # ax_hist_cz = variable_hist([3, 2], shape_var, bins=np.arange(-0.5, 0.5, 0.02))
-    # ax_hist_cz.set_xlabel('Z-coordinate of fracture center')
-    # ax_hist_cz.set_ylabel('Density')
-    # ax_hist_cz.set_title('Z-coordinate of fracture center')
-    # plt.xticks(np.arange(-0.5, 0.5, 0.1))
-    # plt.savefig(project_path + '/mcmc_cluster_cz.pdf')
-    # plt.show()
-    #
-    # fig = plt.figure()
-    # ax = fig.add_subplot(111, projection='3d')
-    # ax.scatter(shape_var[3, 0, :], shape_var[3, 1, :], shape_var[3, 2, :])
-    # ax.set_xlabel('cx')
-    # ax.set_ylabel('cy')
-    # ax.set_zlabel('cz')
-    # ax.set_title('Spatial Distribution of the inferred fracture center')
-    # plt.savefig(project_path + '/center_distribution.pdf')
-    # plt.show()
+    ax_hist_cy = variable_hist([3, 1], shape_var, bins=np.arange(-0.5, 0.5, 0.02))
+    ax_hist_cy.set_xlabel('Y-coordinate of fracture center')
+    ax_hist_cy.set_ylabel('Density')
+    ax_hist_cy.set_title('Y-coordinate of fracture center')
+    plt.xticks(np.arange(-0.5, 0.5, 0.1))
+    plt.savefig(project_path + '/mcmc_cluster_cy.pdf')
+    plt.show()
+
+    ax_hist_cz = variable_hist([3, 2], shape_var, bins=np.arange(-0.5, 0.5, 0.02))
+    ax_hist_cz.set_xlabel('Z-coordinate of fracture center')
+    ax_hist_cz.set_ylabel('Density')
+    ax_hist_cz.set_title('Z-coordinate of fracture center')
+    plt.xticks(np.arange(-0.5, 0.5, 0.1))
+    plt.savefig(project_path + '/mcmc_cluster_cz.pdf')
+    plt.show()
+
+    fig = plt.figure()
+    ax = fig.add_subplot(111, projection='3d')
+    ax.scatter(shape_var[3, 0, :], shape_var[3, 1, :], shape_var[3, 2, :])
+    ax.set_xlabel('cx')
+    ax.set_ylabel('cy')
+    ax.set_zlabel('cz')
+    ax.set_title('Spatial Distribution of the inferred fracture center')
+    plt.savefig(project_path + '/center_distribution.pdf')
+    plt.show()
     #
     fig = plt.figure()
     plt.plot(rms_log)
@@ -95,6 +95,8 @@ if __name__ == '__main__':
     plt.savefig(project_path + '/rms_iteration.pdf')
     plt.show()
 
+    print(len(rms_log))
+    print(rms_log[0:5])
     #
     # Analyze result
     # with open(project_path + '/mcmc_log.txt', 'r') as logfile:
