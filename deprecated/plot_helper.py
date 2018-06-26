@@ -1,7 +1,6 @@
 import matplotlib.pyplot as plt
 from helper import latexify
 import numpy as np
-import re
 import pickle
 from scipy.stats import norm
 import matplotlib.mlab as mlab

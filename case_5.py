@@ -44,12 +44,16 @@ if __name__ == '__main__':
 
     mv = ['B']#, 'B', 'K']
 
+    # define flow condition: [inflow_boundary, inflow_pressure, outflow_bounday, outflow_pressure]
+    # Unit: MPa
+    flow_condition = ['front', 5, 'right', 1]
+
     reference_dfn = np.asarray([0, 0, -0.4, 0, 0, 0.8])
     # Run synthetic model
 
     synthetic_job = case_dir + '/synthetic'
 
-    syn_engine = DFNINVERSE(synthetic_job, stations, domainSize, ncpu)
+    syn_engine = DFNINVERSE(synthetic_job, stations, domainSize, flow_condition, ncpu)
     syn_data = syn_engine.run_forward(dfn_synthetic)
     # print(syn_data)
     syn_engine.gen_3d_obs_points_plot(stations, radius=np.average(domainSize) / 50)
@@ -58,7 +62,7 @@ if __name__ == '__main__':
 
     inverse_job = case_dir + '/inverse'
 
-    dfninv = DFNINVERSE(inverse_job, stations, domainSize, ncpu)
+    dfninv = DFNINVERSE(inverse_job, stations, domainSize, flow_condition, ncpu)
 
     sp = MCMCSampler(dfninv, syn_data,
                      var_sigma=[sig_f, sig_v], moves=mv,

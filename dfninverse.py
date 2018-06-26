@@ -8,7 +8,7 @@ from path import define_paths
 
 class DFNINVERSE:
 
-    def __init__(self, project_path, observe_points, domain_size, ncpu=1):
+    def __init__(self, project_path, observe_points, domain_size, flow_condition=None, ncpu=1):
 
         define_paths()
 
@@ -24,10 +24,10 @@ class DFNINVERSE:
         self.sim_results = self.forward_project + "/forward_results.csv"
         self.mcmc_log = self.project + "/mcmc_log.txt"
         self.domainSize = '{' + ', '.join(str(e) for e in domain_size) + '}'
-        self.__make_project_dir()
+        self.__make_project_dir(flow_condition)
         open(self.project+'/log_file.log', 'a').close()
 
-    def __make_project_dir(self):
+    def __make_project_dir(self, flow_condition):
 
         # create project directory
         if os.path.isdir(self.project):
@@ -48,15 +48,29 @@ class DFNINVERSE:
         if not os.path.isdir(self.forward_input_file):
             os.mkdir(self.forward_input_file)
 
+        # get dfnGen input file
         self.template_files = os.environ['PYDFNINV_PATH'] + '/dfnWorks_input_templates'
         self.__write_template_file(self.template_files + '/gen_user_ellipses.i',
                                    self.forward_input_file + '/gen_user_ellipses.dat',
                                    {'UserEll_Input_File_Path': self.forward_input_file + '/user_define_fractures.dat',
                                     'domainSize': self.domainSize}
                                    )
-
-        shutil.copy2(self.template_files + '/dfn_explicit.in',
-                     self.forward_input_file + '/dfn_explicit.in')
+        # get dfnFlow input file
+        if flow_condition is None:
+            shutil.copy2(self.template_files + '/dfn_explicit.in',
+                         self.forward_input_file + '/dfn_explicit.in')
+        else:
+            zone_files = ['pboundary_front_s.zone', 'pboundary_back_n.zone', 'pboundary_left_w.zone', \
+                          'pboundary_right_e.zone', 'pboundary_top.zone', 'pboundary_bottom.zone']
+            face_names = ['front', 'back', 'left', 'right', 'top', 'bottom']
+            fc = {'inflow_region': zone_files[face_names.index(flow_condition[0])],
+                  'inflow_pressure': str(flow_condition[1])+'.d6',
+                  'outflow_region': zone_files[face_names.index(flow_condition[2])],
+                  'outflow_pressure': str(flow_condition[3]) + '.d6',}
+            self.__write_template_file(self.template_files + '/dfn_explicit.i',
+                                       self.forward_input_file + '/dfn_explicit.in',
+                                       fc)
+        # get dfnTrans input file
         shutil.copy2(self.template_files + '/PTDFN_control.dat',
                      self.forward_input_file + '/PTDFN_control.dat')
 

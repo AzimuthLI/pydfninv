@@ -1,4 +1,4 @@
-import vtk
+import vtk, sys
 from math import sqrt
 from time import time
 import matplotlib as mpl

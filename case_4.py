@@ -24,14 +24,14 @@ if __name__ == '__main__':
          [2, 0, -1, 0, np.pi / 2, 4],[1.5, 0, 1, 0, 0, 4]])
 
     sig_f = np.asarray([0, 0, 0, 1])
-    sig_v = np.asarray([0.1, 0, 0, 0, 0, 0])
+    sig_v = np.asarray([1, 0, 0, 0, 0, 0])
 
     low_bound = [0, -domainSize[0]/2, -domainSize[1]/2, -domainSize[2]/2, 0, 0, 0]
     high_bound = [10, domainSize[0]/2, domainSize[1]/2, domainSize[2]/2, np.pi, np.pi, 10]
 
     max_iter = 1000
 
-    dodr = 2
+    dodr = 5
 
     mv = 'D'
 
