@@ -1,40 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8a6d9625-3ffc-43a5-9138-2fb016122a99" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/deprecated/helper_2.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dfn1_size2_xyz_dr0.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dfn1_size2_xyz_dr2.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dfn1_size5_xyz_dr0.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dfn1_size5_xyz_dr2.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dfn2_size2_n.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dfn3_size1_xyz_dr0.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dfn3_size1_xyz_dr0_2.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dfn3_size1_xyz_dr2.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/paravie_script.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/._lsf.o66794103" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model_plot.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Model_plot.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model_plot.slides.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/case_1.py" beforeDir="false" afterPath="$PROJECT_DIR$/Case_Stage_1/case_1.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/case_2.py" beforeDir="false" afterPath="$PROJECT_DIR$/Case_Stage_1/case_2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/case_3.py" beforeDir="false" afterPath="$PROJECT_DIR$/Case_Stage_1/case_3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/case_4.py" beforeDir="false" afterPath="$PROJECT_DIR$/Case_Stage_1/case_4.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/case_5.py" beforeDir="false" afterPath="$PROJECT_DIR$/Case_Stage_1/case_5.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/deprecated/helper.py" beforeDir="false" afterPath="$PROJECT_DIR$/deprecated/helper.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/deprecated/plot_helper.py" beforeDir="false" afterPath="$PROJECT_DIR$/deprecated/plot_helper.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dfnWorks_input_templates/._gen_user_ellipses.i" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dfnWorks_input_templates/gen_user_ellipses.i" beforeDir="false" afterPath="$PROJECT_DIR$/dfnWorks_input_templates/gen_user_ellipses.i" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dfninverse.py" beforeDir="false" afterPath="$PROJECT_DIR$/dfninverse.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dfnworks.py" beforeDir="false" afterPath="$PROJECT_DIR$/dfnworks.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/helper.py" beforeDir="false" afterPath="$PROJECT_DIR$/helper.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model_generator.py" beforeDir="false" afterPath="$PROJECT_DIR$/deprecated/model_generator.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nbhelper.py" beforeDir="false" afterPath="$PROJECT_DIR$/nbhelper.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/paraview_script.py" beforeDir="false" afterPath="$PROJECT_DIR$/deprecated/paraview_script.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/path.py" beforeDir="false" afterPath="$PROJECT_DIR$/path.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result_visulization.py" beforeDir="false" afterPath="$PROJECT_DIR$/visulization.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sampler.py" beforeDir="false" afterPath="$PROJECT_DIR$/sampler.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vtkanimation.py" beforeDir="false" afterPath="$PROJECT_DIR$/vtkanimation.py" afterDir="false" />
+    <list default="true" id="8a6d9625-3ffc-43a5-9138-2fb016122a99" name="Default" comment="before defense">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -51,13 +19,59 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="dfn2_size2_n.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="dfn2_size2_n.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dfn2_size2_n.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="780">
+            <state relative-caret-position="202">
               <caret line="57" column="121" selection-start-line="57" selection-start-column="121" selection-end-line="57" selection-end-column="121" />
             </state>
           </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="lsf.o67797016" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lsf.o67797016">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-12" />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="90">
+              <caret line="6" column="9" lean-forward="true" selection-start-line="6" selection-start-column="9" selection-end-line="6" selection-end-column="9" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="lsf.o69291435" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lsf.o69291435">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file leaf-file-name="lsf.o67863887" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lsf.o67863887">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file leaf-file-name="lsf.o67863848" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lsf.o67863848">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file leaf-file-name="lsf.o67845097" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lsf.o67845097">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file leaf-file-name="lsf.o67845046" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lsf.o67845046">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file leaf-file-name="lsf.o67829732" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lsf.o67829732">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
     </leaf>
@@ -96,7 +110,6 @@
         <option value="$PROJECT_DIR$/case_1.py" />
         <option value="$PROJECT_DIR$/case_2.py" />
         <option value="$PROJECT_DIR$/case_3.py" />
-        <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/dfnWorks_input_templates/dfn_explicit.i" />
         <option value="$PROJECT_DIR$/plot_helper.py" />
         <option value="$PROJECT_DIR$/playground.py" />
@@ -126,6 +139,7 @@
         <option value="$PROJECT_DIR$/paravie_script.py" />
         <option value="$PROJECT_DIR$/sampler.py" />
         <option value="$PROJECT_DIR$/dfn2_size2_n.py" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -305,24 +319,42 @@
       <option name="presentableId" value="Default" />
       <updated>1529659924514</updated>
     </task>
+    <task id="LOCAL-00001" summary="before defense">
+      <created>1532632576472</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1532632576472</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
   </component>
   <component name="ToolWindowManager">
     <frame x="-348" y="-1080" width="1920" height="1080" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.3299389" />
       <window_info anchor="bottom" id="Event Log" order="12" side_tool="true" weight="0.32942432" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" />
+      <window_info anchor="bottom" id="Version Control" order="8" visible="true" weight="0.3299389" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.28464818" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.15376782" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.5" />
       <window_info anchor="right" id="Remote Host" order="3" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15335463" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15495208" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="5" />
-      <window_info active="true" anchor="right" id="SciView" order="4" visible="true" weight="0.17518637" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.33975348" />
+      <window_info anchor="right" id="SciView" order="4" visible="true" weight="0.17518637" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.22097759" />
@@ -332,38 +364,67 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.33975348" />
     </layout>
     <layout-to-restore>
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Remote Host" order="3" />
+      <window_info id="Favorites" order="2" side_tool="true" />
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19137466" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.29022405" />
-      <window_info anchor="bottom" id="Python Console" order="10" visible="true" weight="0.2857143" />
-      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.33975348" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="right" id="Database" order="5" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.5010799" />
       <window_info anchor="bottom" id="Event Log" order="12" side_tool="true" weight="0.32942432" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="right" id="SciView" order="4" weight="0.17990468" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.33975348" />
-      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Python Console" order="10" visible="true" weight="0.2857143" />
     </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+              <option name="COLUMN_ORDER">
+                <list>
+                  <option value="0" />
+                  <option value="1" />
+                  <option value="2" />
+                  <option value="3" />
+                </list>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="before defense" />
+    <option name="LAST_COMMIT_MESSAGE" value="before defense" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -377,21 +438,7 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/lsf.o66790968" />
-    <entry file="file://$PROJECT_DIR$/lsf.o66791202" />
-    <entry file="file://$PROJECT_DIR$/lsf.o66791582" />
-    <entry file="file://$PROJECT_DIR$/lsf.o66791119" />
-    <entry file="file://$PROJECT_DIR$/lsf.o66789230" />
-    <entry file="file://$PROJECT_DIR$/lsf.o66789986" />
-    <entry file="file://$PROJECT_DIR$/lsf.o66790452" />
     <entry file="file://$PROJECT_DIR$/lsf.o66791420" />
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="4" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lsf.o66790118" />
     <entry file="file://$PROJECT_DIR$/Model_plot.slides.html" />
     <entry file="file://$PROJECT_DIR$/deprecated/plot_helper.py">
@@ -647,8 +694,38 @@
     <entry file="file://$PROJECT_DIR$/sampler.py" />
     <entry file="file://$PROJECT_DIR$/dfn2_size2_n.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="780">
+        <state relative-caret-position="202">
           <caret line="57" column="121" selection-start-line="57" selection-start-column="121" selection-end-line="57" selection-end-column="121" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lsf.o69291435">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lsf.o67863887">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lsf.o67863848">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lsf.o67845097">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lsf.o67845046">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lsf.o67829732">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lsf.o67797016">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-12" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="9" lean-forward="true" selection-start-line="6" selection-start-column="9" selection-end-line="6" selection-end-column="9" />
         </state>
       </provider>
     </entry>
