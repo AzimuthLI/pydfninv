@@ -1,9 +1,0 @@
-# test folder
-test_creat_dfn/
-dfn_inverse/
-*.pyc
-lsf*
-._logging_config.ini
-._.DS_Store
-.idea
-.ipynb_checkpoints
