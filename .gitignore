@@ -5,3 +5,5 @@ dfn_inverse/
 lsf*
 ._logging_config.ini
 ._.DS_Store
+.idea
+.ipynb_checkpoints
