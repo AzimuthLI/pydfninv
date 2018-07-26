@@ -23,13 +23,13 @@ if __name__ == '__main__':
          [0.8, 0, -0.8, 0, np.pi / 2, 1.6],
          [0.2, 0, 0.4, 0, 0, 1.6],
          [-0.2, 0, -0.4, 0, 0, 0.8],
-         [0, 0, -0.4, 0, np.pi/2, 0.5]])
+         [0, 0, -0.4, 0, np.pi/2, 2]])
 
     dfn_initial = np.asarray(
         [[-0.8, 0, 0, 0, np.pi / 2, 1.6],
          [0.6, 0, 0.4, 0, np.pi / 2, 1.6],
          [0.8, 0, -0.8, 0, np.pi / 2, 1.6],
-         [0, 0, -0.4, 0, np.pi / 2, 0.5],
+         [0, 0, -0.4, 0, np.pi / 2, 2],
          [0.2, 0, 0.4, 0, 0, 1.6]])
 
     sig_f = np.asarray([0, 0, 0, 1, 1])
@@ -46,7 +46,7 @@ if __name__ == '__main__':
 
     # define flow condition: [inflow_boundary, inflow_pressure, outflow_bounday, outflow_pressure]
     # Unit: MPa
-    flow_condition = ['front', 5, 'right', 1]
+    flow_condition = ['front', 5, 'back', 1]
 
     reference_dfn = np.asarray([0, 0, -0.4, 0, 0, 0.8])
     # Run synthetic model

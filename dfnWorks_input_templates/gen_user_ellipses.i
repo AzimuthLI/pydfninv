@@ -41,7 +41,7 @@ rLogMean: {1.6}
 meanAperture: -3
 etheta: {-45,  45, }
 ralpha: {2.4, 2.5}
-boundaryFaces: {1, 1, 0, 0, 0, 0}
+boundaryFaces: $boundaryFaces
 eExpMax: {3}
 outputAllRadii: 0
 apertureFromTransmissivity: {1.6e-9,  0.8}
@@ -68,7 +68,7 @@ insertUserRectanglesFirst: 1
 nFamRect: 0
 emin: {1}
 userRectanglesOnOff: 0
-h: 0.01
+h: $h
 radiiListIncrease: 0.1
 edistr: {2, 3}
 rejectsPerFracture: 10

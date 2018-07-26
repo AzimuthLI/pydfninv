@@ -3,7 +3,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from numpy.random import normal
-from helper import latexify
+from deprecated.helper_2 import latexify
 
 # Get the id of observation points in mesh file
 def get_observation_ids(mesh_file, obs_points):

@@ -1,6 +1,6 @@
-import os, shutil, subprocess, sys, getopt, glob, h5py
+import os, shutil, subprocess, sys, getopt, glob, h5py, re
 from time import time
-from path import define_paths
+from helper import define_paths
 import mesh_dfn_helper as mh
 import lagrit_scripts as lagrit
 import run_meshing as run_mesh
@@ -581,6 +581,12 @@ class DFNWORKS:
         for fl in glob.glob(self._local_dfnFlow_file[:-3] + '-darcyvel*.dat'):
             os.remove(fl)
 
+        # pflotran_list = ['dfn_explicit', 'dfn_properties.h5', 'full_mesh.uge',
+        #                  'full_mesh_viz.inp', 'full_mesh_vol_area', 'materialid.dat', 'parsed_vtk', 'perm.dat',
+        #                  'pboundary_', 'convert_uge_params.txt']
+        # print('PFLOTRAN result is saved in {}'.format('PFLOTRAN_'+dir))
+        # move_files(['parsed_vtk'], 'PFLOTRAN_'+dir)
+
     def create_dfn_flow_links():
         os.symlink('../full_mesh.uge', 'full_mesh.uge')
         os.symlink('../full_mesh_vol_area.uge', 'full_mesh_vol_area.uge')
@@ -801,8 +807,8 @@ class DFNWORKS:
                        'full_mesh.gmv', 'full_mesh.lg', 'intersections',
                        'lagrit_logs', '3dgen', 'parameters', 'polys']
         pflotran_list = ['dfn_explicit', 'dfn_properties.h5', 'full_mesh.uge',
-                         'full_mesh_viz.inp', 'full_mesh_vol_area', 'materialid.dat', 'parsed_vtk', 'perm.dat',
-                         'pboundary_', 'convert_uge_params.txt']
+                         'full_mesh_viz.inp', 'full_mesh_vol_area', 'materialid.dat','parsed_vtk', 'perm.dat',
+                         'pboundary_', 'convert_uge_params.txt'] #
         move_files(gen_list, 'DFN_generator')
         move_files(lagrit_list, 'LaGriT')
         move_files(pflotran_list, 'PFLOTRAN')
@@ -815,18 +821,30 @@ if __name__ == '__main__':
     dfn = DFNWORKS(jobname=jobname, ncpu=int(ncpu))
     dfn._dfnGen_file = forward_input_file + '/gen_user_ellipses.dat'
     dfn._local_dfnGen_file = 'gen_user_ellipses.dat'
-
-    dfn._dfnFlow_file = forward_input_file + '/dfn_explicit.in'
-    dfn._local_dfnFlow_file = 'dfn_explicit.in'
-
-    dfn._dfnTrans_file = forward_input_file + '/PTDFN_control.dat'
-    dfn._local_dfnTrans_file = 'PTDFN_control.dat'
-
     dfn._aper_file = 'aperture.dat'
     dfn._perm_file = 'perm.dat'
 
-    # Run forward simulation
     dfn.dfn_gen()
-    dfn.dfn_flow()
+    dfn.lagrit2pflotran()
+    flow_inputs = [f for f in os.listdir(forward_input_file) if re.match(r'dfn_explicit_.*.in', f)]
+    tic_flow = time()
+    for f in flow_inputs:
+        tic = time()
+        print('{0}\nProcessing PFLOTRAN input file: {1}\n{0}'.format('='*60, f))
+        dfn._dfnFlow_file = forward_input_file + '/' + f
+        dfn._local_dfnFlow_file = f
+        bc = f.split('.')[0].split('_')
+        save_path = '_'.join(bc[2:])
+
+        dfn.pflotran()
+        dfn.parse_pflotran_vtk_python()
+        dfn.pflotran_cleanup()
+        toc = time()
+        with open(dfn._jobname + '/run_time_log.txt', 'a') as run_time_log:
+            run_time_log.write('PFLOTRAN On Boundary {0} - {1} finished within {2:.4f} sec\n'.format(bc[2], bc[3], toc-tic))
+    toc_flow = time()
+    with open(dfn._jobname + '/run_time_log.txt', 'a') as run_time_log:
+        run_time_log.write('Process: dfnFlow: ' + str(toc_flow - tic_flow) + ' seconds\n')
+    # dfn.dfn_flow()
     dfn.clean_up_files()
 

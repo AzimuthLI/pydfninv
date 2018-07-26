@@ -1,5 +1,5 @@
 """
-.. module:: helper.py
+.. module:: helper_2.py
    :synopsis: helper methods
 .. moduleauthor:: Shiyi Li
 

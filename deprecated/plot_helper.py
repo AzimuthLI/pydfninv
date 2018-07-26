@@ -1,10 +1,10 @@
 import matplotlib.pyplot as plt
-from helper import latexify
+from deprecated.helper_2 import latexify
 import numpy as np
 import pickle
 from scipy.stats import norm
 import matplotlib.mlab as mlab
-from mpl_toolkits.mplot3d import Axes3D
+
 
 def load_chain(filepath, shape_variables):
     rms_chain = []

@@ -1,4 +1,3 @@
-from paraview.simple import *
 
 # Create a new sphere proxy on the active connection and register it
 # in the sources group.

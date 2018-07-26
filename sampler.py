@@ -46,7 +46,7 @@ class MCMCSampler:
     def __init__(self, inverse_engine, observation, **kwargs):
 
         self.prior_range = kwargs.get('prior_range', None)
-        self.obs_sigma = kwargs.get('obs_sigma', None)
+        self.obs_sigma = kwargs.get('obs_sigma', 0.1)
         self.move_list = kwargs.get('moves', ['D', 'B', 'K'])
         var_sigma = kwargs.get('var_sigma', None)
 
@@ -84,13 +84,18 @@ class MCMCSampler:
         self.logger = logging.getLogger()
 
     def get_state(self, dfn):
+
+        ll, rms = self.likelihood_func(dfn)
+
         return {'dfn_id': self.accept_case,
                 'dfn': dfn,
                 'prior': self.prior_func(dfn),
-                'rms': self.misfit_func(dfn)}
+                'likelihood': ll,
+                'rms':rms}
 
     def prior_func(self, dfn):
 
+        dfn = dfn[:, 0:6]
         if self.prior_range is None:
             lower_bound = np.asarray([0, -0.5, -0.5, -0.5, 0, 0, 0.1])
             upper_bound = np.asarray([10, 0.5, 0.5, 0.5, np.pi, np.pi, 0.9])
@@ -110,28 +115,60 @@ class MCMCSampler:
             prior *= 0
         return prior
 
-    def misfit_func(self, dfn):
+    def likelihood_func(self, dfn):
 
-        n_station = self.observation.shape[1]
-        n_timestep = self.observation.shape[0]
-
-        if self.obs_sigma is None:
-            st = 0.01 * np.ones(n_timestep)
-            ss = np.ones(n_station)
-
-            sigma_time = np.diag(st)
-            sigma_station = np.diag(ss)
-        else:
-            sigma_time = self.obs_sigma['time']
-            sigma_station = self.obs_sigma['station']
-
+        # n_station = self.observation.shape[1]
+        # n_timestep = self.observation.shape[0]
+        #
+        # if self.obs_sigma is None:
+        #     st = 0.01 * np.ones(n_timestep)
+        #     ss = np.ones(n_station)
+        #     sigma_time = np.diag(st)
+        #     sigma_station = np.diag(ss)
+        # else:
+        #     sigma_time = self.obs_sigma['time']
+        #     sigma_station = self.obs_sigma['station']
+        #
+        # rms = np.trace(inv(sigma_station) @ (syn - obs).T @ inv(sigma_time) @ (syn - obs)) / (n_station * n_timestep)
         syn = self.engine.run_forward(dfn)
         obs = self.observation
-        if syn is None:
-            syn = np.zeros_like(obs)
-        rms = np.trace(inv(sigma_station) @ (syn - obs).T @ inv(sigma_time) @ (syn - obs)) / (n_station * n_timestep)
 
-        return rms
+        if (syn is None) or (syn.size < obs.size):
+            syn_result = np.zeros_like(obs)
+        else:
+            syn_result = syn
+        # print(syn_result)
+        # square_error = np.sum((syn_result - obs)**2) / self.obs_sigma
+        # print(square_error)
+        # n_st = syn_result.shape[1]
+        # n_tt = syn_result.shape[0]
+
+        # likelihood = self.matrix_normal_pdf(obs, np.diag(0.1*np.ones(n_tt)), np.diag(np.ones(n_st)), syn_result)
+        square_error = np.sum((syn_result-obs)**2/self.obs_sigma)
+        # likelihood = np.exp(- 0.5 * square_error) / (self.obs_sigma*np.sqrt(2*np.pi)) ** (obs.size)
+        # likelihood = np.prod(np.exp(0.5*(syn_result-obs)**2/self.obs_sigma)/np.sqrt(np.pi*2))
+        rms = np.sqrt(square_error / obs.size)
+        print('square error:{0}, rms: {1}'.format(square_error, rms))
+        return square_error, rms
+
+    def matrix_normal_pdf(self, M, U, V, X):
+
+        r_idx = np.any(U, axis=1)
+        c_idx = np.any(V, axis=0)
+        u = U[r_idx].T[r_idx]
+        v = V[c_idx].T[c_idx]
+        x = X[r_idx].T[c_idx].T
+        m = M[r_idx].T[c_idx].T
+
+        n = M.shape[0]
+        p = M.shape[1]
+
+        denominator = np.sqrt((2 * np.pi) ** (n * p) * det(v) ** n * det(u) ** p)
+        tr = np.trace(inv(v) @ (x - m).T @ inv(u) @ (x - m))
+        numerator = np.exp(-0.5*tr)
+        # numerator = np.exp(-0.5 * tr / (matrix_rank(u) * matrix_rank(v)))
+        prob_density = numerator / denominator
+        return prob_density
 
     def step(self):
 
@@ -141,7 +178,6 @@ class MCMCSampler:
 
         state_1 = self.propose(1)
         accept_flag = self.acceptance_condition(state_1)
-
 
         if accept_flag:
             self.state = state_1
@@ -174,7 +210,7 @@ class MCMCSampler:
         self.state = self.get_state(initial_dfn)
         chain = [self.state]
         self.save_sample()
-
+        self.logger.info('Inversion Start with rms = {0:.4f}, likelihood={1:.2f}%'.format(self.state['rms'], self.state['likelihood']))
         i = 0
 
         while i < self.chain_length:
@@ -215,6 +251,32 @@ class MCMCSampler:
 
         return accept_flag
 
+    def alpha_1(self, *args):
+
+        if len(args) == 1:
+            s0 = self.state
+            s1 = args[0]
+        elif len(args) == 2:
+            s0, s1 = args
+        else:
+            raise ValueError('Unresolved arguments')
+
+        ll_0 = s0['likelihood']
+        prior_0 = s0['prior']
+        dfn_0 = s0['dfn']
+
+        ll_1 = s1['likelihood']
+        prior_1 = s1['prior']
+        dfn_1 = s1['dfn']
+
+        # ll_ratio = ll_1/ll_0
+        ll_ratio = np.exp(-0.5 * (ll_1 - ll_0)) #/ np.sqrt(2 * np.pi)
+        prior_ratio = prior_1 / prior_0
+        proposal_ratio = self.proposal_ratio(dfn_0, dfn_1)
+        alpha_1 = min(1, ll_ratio * prior_ratio * proposal_ratio)
+        print('likelihood ratio: {}'.format(ll_ratio))
+        return alpha_1
+
     def alpha_2(self, *args):
         s1, s2, s2_1 = args
         a1 = self.alpha_1(s1)
@@ -230,54 +292,6 @@ class MCMCSampler:
         alpha_2 = min(1, (q2_1/q1) * a2 * (1-a2_1)/(1-a1))
 
         return alpha_2
-
-    def matrix_normal_pdf(self, M, U, V, X):
-
-        r_idx = np.any(U, axis=1)
-        c_idx = np.any(V, axis=0)
-        u = U[r_idx].T[r_idx]
-        v = V[c_idx].T[c_idx]
-        x = X[r_idx].T[c_idx].T
-        m = M[r_idx].T[c_idx].T
-
-        n = M.shape[0]
-        p = M.shape[1]
-
-        denominator = np.sqrt((2 * np.pi) ** (n * p) * det(v) ** n * det(u) ** p)
-
-        tr = np.trace(inv(v) @ (x - m).T @ inv(u) @ (x - m))
-
-        numerator = np.exp(-0.5 * tr / (matrix_rank(u) * matrix_rank(v)))
-
-        prob_density = numerator / denominator
-
-        # print(prob_density)
-        return prob_density
-
-    def alpha_1(self, *args):
-
-        if len(args) == 1:
-            s0 = self.state
-            s1 = args[0]
-        elif len(args) == 2:
-            s0, s1 = args
-        else:
-            raise ValueError('Unresolved arguments')
-
-        rms_0 = s0['rms']
-        prior_0 = s0['prior']
-        dfn_0 = s0['dfn']
-
-        rms_1 = s1['rms']
-        prior_1 = s1['prior']
-        dfn_1 = s1['dfn']
-
-        ll_ratio = np.exp(-0.5 * (rms_1 - rms_0)) / np.sqrt(2 * np.pi)
-        prior_ratio = prior_1 / prior_0
-        proposal_ratio = self.proposal_ratio(dfn_0, dfn_1)
-        alpha_1 = min(1, ll_ratio * prior_ratio * proposal_ratio)
-
-        return alpha_1
 
     def proposal_ratio(self, dfn0, dfn1):
 
@@ -305,11 +319,6 @@ class MCMCSampler:
                 q = q_birth / q_kill
 
         return q
-
-    def save_sample(self):
-        self.engine.write_inverselog(self.state, model_id=self.accept_case, save_flag=self.save_flag)
-        with open(self.engine.project + '/mcmc_chain.pkl', 'ab') as f:
-            pickle.dump(self.state, f)
 
     def propose(self, step_stage, **kwargs):
         dfn_old = self.state['dfn']
@@ -353,74 +362,78 @@ class MCMCSampler:
         self.logger.info('RMS of proposal: {:.3f}'.format(s_new['rms']))
         return s_new
 
+    def save_sample(self):
+        self.engine.write_inverselog(self.state, model_id=self.accept_case, save_flag=self.save_flag)
+        with open(self.engine.project + '/mcmc_chain.pkl', 'ab') as f:
+            pickle.dump(self.state, f)
 
-if __name__ == '__main__':
-
-    # Model 1 (1X1X1, cx)
-    # dsize = [1.0, 1.0, 1.0]
-    # station_coordinates = [(0.4, 0.4, 0.2), (0.4, 0.4, -0.2), (0.4, -0.4, 0.2),
-    #                        (0.4, -0.4, -0.2), (-0.15, -0.08, 0.2), (-0.15, -0.08, 0)]
-    # observed_fractures = np.asarray([[-0.4, 0, 0, 0, np.pi / 2, 0.8],
-    #                                  [0.3, 0, 0.2, 0, np.pi / 2, 0.8],
-    #                                  [0.4, 0, -0.2, 0, np.pi / 2, 0.8]])
-    # inferred_fractures = np.asarray([[-0.2, 0.3, 0, 0, 0, 0.8]])
-
-    # Model 2 (1X1X1, cxyz)
-    dsize = [1.0, 1.0, 1.0]
-    station_coordinates = [(-0.05, 0.2, 0.05), (-0.11, 0.4, 0.21), (-0.3, -0.2, 0.1), (0.2, -0.1, 0.4),
-                           (-0.4, 0.2, -0.2), (0.2, -0.2, 0.2), (0.3, 0.2, -0.3)]
-    observed_fractures = np.asarray([[-0.4, 0, 0,  0.7854, 0.6283, 0.8],
-                                     [0.3, 0, 0.2, 0.7854, 0.6283, 0.8],
-                                     [0.4, 0, -0.2, 0.7854, 0.6283, 0.8]])
-    inferred_fractures = np.asarray([[0, 0, 0.2, 0, 2.356, 0.8]])
-
-    # Model 3 (5X5X5, cx)
-    # dsize = [5.0, 5.0, 5.0]
-    # station_coordinates = [(2, 2, 1), (2, 2, -1), (2, -2, 1),
-    #                        (2, -2, -1), (-0.75, -0.4, 1), (-0.75, -0.4, 0)]
-    #
-    # observed_fractures = np.asarray([[-2, 0, 0, 0, np.pi / 2, 4],
-    #                                  [1.5, 0, 1, 0, np.pi / 2, 4],
-    #                                  [2, 0, -1, 0, np.pi / 2, 4]])
-    #
-    # inferred_fractures = np.asarray([[1.5, 0, 1, 0, 0, 4]])
-
-    # Model 4 (5X5X5, cxyz)
-    # dsize = [2.0, 2.0, 2.0]
-    # station_coordinates = [(-0.1, 0.4, 0.1), (-0.22, 0.8, 0.42), (-0.6, -0.4, 0.2), (0.4, -0.2, 0.8),
-    #                        (-0.8, 0.4, -0.4), (0.4, -0.4, 0.4), (0.6, 0.4, -0.6)]
-    # observed_fractures = np.asarray([[-0.8, 0, 0, 0.7854, 0.6283, 1.6],
-    #                                  [0.6, 0, 0.4, 0.7854, 0.6283, 1.6],
-    #                                  [0.8, 0, -0.4, 0.7854, 0.6283, 1.6]])
-    # inferred_fractures = np.asarray([[0, 0, 0.4, 0, 2.356, 1.6]])
-
-    # Initialize inverse engine
-    project_path = '/cluster/scratch/lishi/model_1x1x1_cxyz_1000/inverse_2'
-    field_observation_file = '/cluster/scratch/lishi/model_1x1x1_cxyz_1000/synthetic/output/obs_readings.csv'
-    ncpu = 4
-
-    dfninv = DFNINVERSE(project_path, station_coordinates, dsize, ncpu)
-    field_observation = pd.read_csv(field_observation_file, index_col=0).values / 1e6
-
-    # Define the initial fractures
-    n_inferred_frac = inferred_fractures.shape[0]
-    n_observed_frac = observed_fractures.shape[0]
-
-    # Define covariance matrix \Sigma_f, \Sigma_v
-    sig_obs = 0
-    sig_unknown = 1
-
-    sig_f = np.hstack((sig_obs * np.ones(n_observed_frac), sig_unknown * np.ones(n_inferred_frac)))
-    sig_v = np.asarray([0.1, 0, 0, 0, 0, 0])
-
-    prior_range = [[0, -dsize[0]/2, -dsize[1]/2, -dsize[2]/2, 0, 0, 0],
-                   [10, dsize[0]/2, dsize[1]/2, dsize[2]/2, np.pi, np.pi, 2]]
-
-    sp = MCMCSampler(dfninv, field_observation, var_sigma=[sig_f, sig_v], moves='D', prior_range=prior_range)
-
-    s_initial = np.vstack((observed_fractures, inferred_fractures))
-
-    chain = sp.sample(s_initial, chain_length=2000, dr_scale=2)
-
-    # with open(project_path+'/mcmc_chain.pkl', 'wb') as f:
-    #     pickle.dump(chain, f)
+# if __name__ == '__main__':
+#
+#     # Model 1 (1X1X1, cx)
+#     # dsize = [1.0, 1.0, 1.0]
+#     # station_coordinates = [(0.4, 0.4, 0.2), (0.4, 0.4, -0.2), (0.4, -0.4, 0.2),
+#     #                        (0.4, -0.4, -0.2), (-0.15, -0.08, 0.2), (-0.15, -0.08, 0)]
+#     # observed_fractures = np.asarray([[-0.4, 0, 0, 0, np.pi / 2, 0.8],
+#     #                                  [0.3, 0, 0.2, 0, np.pi / 2, 0.8],
+#     #                                  [0.4, 0, -0.2, 0, np.pi / 2, 0.8]])
+#     # inferred_fractures = np.asarray([[-0.2, 0.3, 0, 0, 0, 0.8]])
+#
+#     # Model 2 (1X1X1, cxyz)
+#     dsize = [1.0, 1.0, 1.0]
+#     station_coordinates = [(-0.05, 0.2, 0.05), (-0.11, 0.4, 0.21), (-0.3, -0.2, 0.1), (0.2, -0.1, 0.4),
+#                            (-0.4, 0.2, -0.2), (0.2, -0.2, 0.2), (0.3, 0.2, -0.3)]
+#     observed_fractures = np.asarray([[-0.4, 0, 0,  0.7854, 0.6283, 0.8],
+#                                      [0.3, 0, 0.2, 0.7854, 0.6283, 0.8],
+#                                      [0.4, 0, -0.2, 0.7854, 0.6283, 0.8]])
+#     inferred_fractures = np.asarray([[0, 0, 0.2, 0, 2.356, 0.8]])
+#
+#     # Model 3 (5X5X5, cx)
+#     # dsize = [5.0, 5.0, 5.0]
+#     # station_coordinates = [(2, 2, 1), (2, 2, -1), (2, -2, 1),
+#     #                        (2, -2, -1), (-0.75, -0.4, 1), (-0.75, -0.4, 0)]
+#     #
+#     # observed_fractures = np.asarray([[-2, 0, 0, 0, np.pi / 2, 4],
+#     #                                  [1.5, 0, 1, 0, np.pi / 2, 4],
+#     #                                  [2, 0, -1, 0, np.pi / 2, 4]])
+#     #
+#     # inferred_fractures = np.asarray([[1.5, 0, 1, 0, 0, 4]])
+#
+#     # Model 4 (5X5X5, cxyz)
+#     # dsize = [2.0, 2.0, 2.0]
+#     # station_coordinates = [(-0.1, 0.4, 0.1), (-0.22, 0.8, 0.42), (-0.6, -0.4, 0.2), (0.4, -0.2, 0.8),
+#     #                        (-0.8, 0.4, -0.4), (0.4, -0.4, 0.4), (0.6, 0.4, -0.6)]
+#     # observed_fractures = np.asarray([[-0.8, 0, 0, 0.7854, 0.6283, 1.6],
+#     #                                  [0.6, 0, 0.4, 0.7854, 0.6283, 1.6],
+#     #                                  [0.8, 0, -0.4, 0.7854, 0.6283, 1.6]])
+#     # inferred_fractures = np.asarray([[0, 0, 0.4, 0, 2.356, 1.6]])
+#
+#     # Initialize inverse engine
+#     project_path = '/cluster/scratch/lishi/model_1x1x1_cxyz_1000/inverse_2'
+#     field_observation_file = '/cluster/scratch/lishi/model_1x1x1_cxyz_1000/synthetic/output/obs_readings.csv'
+#     ncpu = 4
+#
+#     dfninv = DFNINVERSE(project_path, station_coordinates, dsize, ncpu)
+#     field_observation = pd.read_csv(field_observation_file, index_col=0).values / 1e6
+#
+#     # Define the initial fractures
+#     n_inferred_frac = inferred_fractures.shape[0]
+#     n_observed_frac = observed_fractures.shape[0]
+#
+#     # Define covariance matrix \Sigma_f, \Sigma_v
+#     sig_obs = 0
+#     sig_unknown = 1
+#
+#     sig_f = np.hstack((sig_obs * np.ones(n_observed_frac), sig_unknown * np.ones(n_inferred_frac)))
+#     sig_v = np.asarray([0.1, 0, 0, 0, 0, 0])
+#
+#     prior_range = [[0, -dsize[0]/2, -dsize[1]/2, -dsize[2]/2, 0, 0, 0],
+#                    [10, dsize[0]/2, dsize[1]/2, dsize[2]/2, np.pi, np.pi, 2]]
+#
+#     sp = MCMCSampler(dfninv, field_observation, var_sigma=[sig_f, sig_v], moves='D', prior_range=prior_range)
+#
+#     s_initial = np.vstack((observed_fractures, inferred_fractures))
+#
+#     chain = sp.sample(s_initial, chain_length=2000, dr_scale=2)
+#
+#     # with open(project_path+'/mcmc_chain.pkl', 'wb') as f:
+#     #     pickle.dump(chain, f)
