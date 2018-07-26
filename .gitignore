@@ -4,4 +4,4 @@ dfn_inverse/
 *.pyc
 lsf*
 ._logging_config.ini
-._.DS_Stc
+._.DS_Store
